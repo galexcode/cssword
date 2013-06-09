@@ -39,7 +39,7 @@ class File {
 	}
 	
 	function getSavePath() {
-		return dirname(__FILE__) . "/../temp/$file.html.part";	
+		return dirname(__FILE__) . "/../temp/{$this->name}.html.part";	
 	}
 }
 

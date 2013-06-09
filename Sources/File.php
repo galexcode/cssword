@@ -53,10 +53,10 @@ if (isset($file) && isset($action)) {
 	$file = new File($file);
 	$path = $file->getSavePath();
 	
-	switch (action) {
+	switch ($action) {
 		case FileAction::Open: {
 				/* Open the file for reading */
-				$fh = fopen($myFile, 'r');
+				$fh = fopen($path, 'r');
 				if ($fh == FALSE) {
 					$json['error'] = FileError::OpenError;
 					goto print_json;
