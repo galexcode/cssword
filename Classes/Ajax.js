@@ -88,7 +88,7 @@ function Ajax(method, url, postParams, _callback) {
 		this.request.open(this.method, this.url, true);
 		
 		if (this.method == Ajax.Method.POST)
-			this.request.setRequestHeader("Content-type", "text/html");
+			this.request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		
 		this.send(this.postParams);
 	}
