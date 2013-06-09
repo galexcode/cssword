@@ -43,8 +43,8 @@ function File(action, name) {
 		console.log("Response was: " + ajax.responseText());
 	}
 	
-	this.connect = function() {
-		this.ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=' + this.action + '&file=' + this.name, this.callback);
+	function connect() {
+		this.ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=' + action + '&file=' + name, this.callback);
 	}
 }
 
