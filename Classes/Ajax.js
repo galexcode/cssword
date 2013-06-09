@@ -45,14 +45,14 @@ function Ajax(method, url, callback, fireImmediately) {
 	/**
 	 * send();
 	 */
-	 function send() {
+	this.send = function() {
 		 this.request.send(null);
 	 }
 	 
 	/**
 	 * construct(); 
 	 */
-	function construct(){
+	this.construct = function(){
 		//Browser Support Code
 		try{
 			// Opera 8.0+, Firefox, Safari

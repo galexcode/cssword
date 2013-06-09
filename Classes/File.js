@@ -33,18 +33,18 @@ function File(action, name) {
 	
 	connect();
 	
-	var callback = function(ajax) {
+	this.callback = function(ajax) {
 		if (action == File.Action.SAVE)
-			console.log("Saved " + fileName + "...");
+			console.log("Saved " + this.name + "...");
 		else if (action == File.Action.OPEN)
-			console.log("Opened " + fileName + "...");
+			console.log("Opened " + this.name + "...");
 		
 		console.log('State is now: ' + ajax.readyState);
 		console.log("Response was: " + ajax.responseText());
 	}
 	
-	function connect() {
-		this.ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=' + this.action + '&file=' + name, callback);
+	this.connect = function() {
+		this.ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=' + this.action + '&file=' + this.name, this.callback);
 	}
 }
 
