@@ -34,7 +34,7 @@ Ajax.Method = {
 
 /* Ajax Object */
 function Ajax(method, url, _callback) {
-	var request = null;
+	this.request = null;
 	
 	/**
 	 * this.send();

@@ -26,10 +26,10 @@ File.Action = {
 };
 
 function File(action, name) {
-	var name = name;
-	var action = action;
+	this.name = name;
+	this.action = action;
 	
-	var ajax = null;
+	this.ajax = null;
 	
 	this.callback = function(ajax) {
 		if (action == File.Action.SAVE)
@@ -37,8 +37,7 @@ function File(action, name) {
 		else if (action == File.Action.OPEN)
 			console.log("Opened " + this.name + "...");
 		
-		console.log('State is now: ' + ajax.readyState);
-		console.log("Response was: " + ajax.responseText());
+		console.log("Response was: " + ajax.responseText);
 	}
 	
 	/* Connect */
