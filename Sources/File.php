@@ -72,7 +72,7 @@ if (isset($file) && isset($action)) {
 				$json['payload'] = base64_encode(fread($fh, filesize($path)));
 				fclose($fh);
 				
-				$json['message'] = "Opened <b>$file</b>";
+				$json['message'] = "Opened <b>{$file->name}</b>";
 			}
 			break;
 		case FileAction::Save: {
@@ -93,7 +93,7 @@ if (isset($file) && isset($action)) {
 				fwrite($fh, base64_decode($payload));
 				fclose($fh);
 				
-				$json['message'] = "Saved <b>$file</b>";
+				$json['message'] = "Saved <b>{$file->name}</b>";
 			}
 			break;
 		default: {
