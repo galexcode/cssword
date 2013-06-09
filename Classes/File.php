@@ -20,8 +20,27 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+class FileAction {
+	const Open = 'open';
+	const Save = 'save';
+}
+								   
+class FileError {
+	const MissingPayload = 'Save action is missing payload.';
+	const OpenError 	 = 'Unable to open file.';
+	const SaveError		 = 'Unable to save file.';
+}
+	
 class File {
 	public $name;
+	
+	function __construct($name) {
+		$this->name = $name;
+	}
+	
+	function getSavePath() {
+		return dirname(__FILE__) . "/../temp/$file.html.part";	
+	}
 }
 
 ?>

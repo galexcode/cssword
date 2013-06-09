@@ -33,11 +33,12 @@ Ajax.Method = {
 	};
 
 /* Ajax Object */
-function Ajax(method, url, _callback) {
+function Ajax(method, url, postParams, _callback) {
 	this.request = null;
 	
 	this.method = method;
 	this.url = url;
+	this.postParams = postParams;
 	this.callback = _callback;
 	
 	/**
@@ -85,7 +86,7 @@ function Ajax(method, url, _callback) {
 		/* Open the connection */
 		this.request.open(this.method, this.url, true);
 		
-		this.send();
+		this.send(this.postParams);
 	}
 	
 	this.construct();

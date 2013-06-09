@@ -25,17 +25,38 @@ File.Action = {
 	OPEN : 'open',
 };
 
-function File(action, name, callback) {	
+function File(obj, callback) {	
 	this.ajax = null;
+	
+	var action = obj.action;
 	
 	/**
 	 * callback(jsonObject);
 	 */
 	this.callback = callback;
 	
+	/* Choose an HTTP Request method */
+	var requestMethod = (action == File.Action.SAVE) ? requestMethod = Ajax.Method.POST : Ajax.Method.GET;
+	
+	/* Compile params */
+	var getParams = [];
+	var postParams = [];
+	
+	/* Action is always sent through GET */
+	getParams.push(action + '=' + obj.action);
+	
+	for (var key in obj) {
+		if (key == 'action') continue;
+		
+		if (action == File.Action.SAVE)
+			postParams.push(key + '=' + obj[key]);
+		else
+			getParams.push(key + '=' + obj[key]);
+	}
+	
 	/* Connect */
 	var self = this;
-	this.ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=' + action + '&file=' + name, function(ajax) {
+	this.ajax = new Ajax(requestMethod, 'Sources/File.php?' + getParams.join('&'), (postParams.length > 0) ? postParams.join('&') : null, function(ajax) {
 		if (ajax.readyState == Ajax.State.READY) {
 			var obj = JSON.parse(ajax.responseText);
 			
@@ -47,15 +68,25 @@ function File(action, name, callback) {
 File.save = function (elementId) {
 	var fileName = document.getElementById(elementId).value;
 	
-	new File(File.Action.SAVE, fileName, function(obj) {
-		document.getElementById('tools-output').innerHTML = "Saved '" + obj.file + "'...";
+	var fileObj = { "action"  : File.Action.SAVE,
+					"file"	  : fileName,
+					"payload" : btoa("some data") };
+	
+	new File(fileObj, function(obj) {
+		console.log("Object: ", obj);
+		document.getElementById('tools-output').innerHTML = obj.message;
 	});
 }
 
 File.open = function (elementId) {
 	var fileName = document.getElementById(elementId).value;
 	
-	new File(File.Action.OPEN, fileName, function(obj) {
-		document.getElementById('tools-output').innerHTML = "Opened '" + obj.file + "'...";
+	var fileObj = { "action"  : File.Action.OPEN,
+					"file"	  : fileName };
+	
+	new File(fileObj, function(obj) {
+		obj.payload = atob(obj.payload);
+		console.log("Object: ", obj);
+		document.getElementById('tools-output').innerHTML = obj.message;
 	});
 }

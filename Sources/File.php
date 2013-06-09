@@ -18,21 +18,88 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ **
+ *  This REST endpoitn returns a JSON object of the following:
+ *
+ *  { 	// Classes/File.php
+ *   	action: [open/save],
+ *		file: [file name],
+ *		success: [true/false],
+ *		message: (optional message),
+ *		error: (optional error message),
+ *		payload: (optional payload)
+ *	}
 */
 
 require_once(dirname(__FILE__) . '/../Classes/File.php');
 
-$action = $_GET['action'];
-$file = $_GET['file'];
+$action 	 = $_GET['action'];
 
-$jsonDict = array( 'action' => $action,
-				   'file'   => $file 
+if (FileAction::Open) { /* GET request */
+	$file 	 = $_GET['file'];
+}
+else if (FileAction::Save) { /* POST request */
+	$file	 = $_POST['file'];
+	$payload = $_POST['payload'];
+}
+
+$json = array( 'action' => $action,
+				   'file'   => $file,
+				   'success' => false
 				  );
 
 if (isset($file) && isset($action)) {
-	echo json_encode($jsonDict);
-} else {
-	echo "{action:false}";	
+	$file = new File($file);
+	$path = $file->getSavePath();
+	
+	switch (action) {
+		case FileAction::Open: {
+				/* Open the file for reading */
+				$fh = fopen($myFile, 'r');
+				if ($fh == FALSE) {
+					$json['error'] = FileError::OpenError;
+					goto print_json;
+				}
+				
+				/* Get the payload */
+				$json['payload'] = base64_encode(fread($fh, filesize($path)));
+				fclose($fh);
+				
+				$json['message'] = "Opened <b>$file</b>";
+			}
+			break;
+		case FileAction::Save: {
+				/* Can't save if there's nothing to save */
+				if (!isset($payload)) {
+					$json['error'] = FileError::MissingPayload;
+					goto print_json;
+				}
+				
+				/* Open the file for writing */
+				$fh = fopen($path, 'w');
+				if ($fh == FALSE) {
+					$json['error'] = FileError::SaveError;
+					goto print_json;
+				}
+				
+				/* Write the payload */
+				fwrite($fh, base64_decode($payload));
+				fclose($fh);
+				
+				$json['message'] = "Saved <b>$file</b>";
+			}
+			break;
+		default: {
+			$json['error'] = 'Unknown action type.';
+			goto print_json;
+		}
+	}
+	
+	$json['success'] = true;
 }
+
+print_json:
+echo json_encode($json);	
 
 ?>
