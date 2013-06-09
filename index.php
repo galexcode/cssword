@@ -473,8 +473,8 @@ window.onresize = onResize;
 	  <form id="file-form" name="file-form">
 	    <label for="file-name"></label>
 	    <input type="text" name="file-name" id="file-name" />
-	    <input type="submit" name="button" id="button" value="Save File" onClick="File.save('file-name');" />
-        <input type="submit" name="open-file" id="open-file" value="Open File" onClick="File.open('file-name');" />
+	    <input type="button" name="save-file" id="save-file" value="Save File" onClick="File.save('file-name');" />
+        <input type="button" name="open-file" id="open-file" value="Open File" onClick="File.open('file-name');" />
 	  </form>
 </div>
     <div id="html-input-header" class="input-header">&lt;/html&gt;</div>
