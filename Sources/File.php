@@ -36,10 +36,10 @@ require_once(dirname(__FILE__) . '/../Classes/File.php');
 
 $action 	 = $_GET['action'];
 
-if (FileAction::Open) { /* GET request */
+if ($action == FileAction::Open) { /* GET request */
 	$file 	 = $_GET['file'];
 }
-else if (FileAction::Save) { /* POST request */
+else if ($action == FileAction::Save) { /* POST request */
 	$file	 = $_POST['file'];
 	$payload = $_POST['payload'];
 }
