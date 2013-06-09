@@ -25,22 +25,18 @@ File.Action = {
 	OPEN : 'open',
 };
 
-function File(action, name) {
-	this.name = name;
-	this.action = action;
-	
+function File(action, name) {	
 	this.ajax = null;
 	
 	this.callback = function(ajax) {
 		if (ajax.readyState == Ajax.State.READY) {
-			if (action == File.Action.SAVE)
-				console.log("Saved '" + this.name + "'...");
-			else if (action == File.Action.OPEN)
-				console.log("Opened '" + this.name + "'...");
+			var obj = JSON.parse(ajax.responseText);
+			console.log("Response: ", obj);
 			
-			console.log("String: " + ajax.responseText);
-			var myObject = eval('(' + ajax.responseText + ')');
-			console.log("Response: " + myObject);
+			if (action == File.Action.SAVE)
+				console.log("Saved '" + obj.name + "'...");
+			else if (action == File.Action.OPEN)
+				console.log("Opened '" + obj.name + "'...");
 		}
 	}
 	
