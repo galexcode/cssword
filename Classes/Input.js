@@ -41,6 +41,7 @@ function Input (inputs, formatting, callback) {
 	this.callback = callback;
 	
 	this.selectedIndex = 0;
+	this.lastHealthyIndex = 0;
 	
 	this.CallbackIntent = {
 		SELECTED : 0,
@@ -156,6 +157,8 @@ function Input (inputs, formatting, callback) {
 		if (shouldNotify == null) shouldNotify = true;
 		
 		this.selectedIndex = i;
+		if (i >= 0)
+			this.lastHealthyIndex = i;
 		
 		/* Callback */
 		if (shouldNotify)
@@ -163,13 +166,26 @@ function Input (inputs, formatting, callback) {
 	};
 	
 	/**
+	 * getHealthy(shouldNotify);
+	 */
+	 this.getHealthy = function(shouldNotify) {
+		if (shouldNotify == null) shouldNotify = true;
+		
+		this.select(this.lastHealthyIndex, shouldNotify);
+	};
+	
+	/**
 	 * selectedInput(); 
 	 */
 	this.selected = function() {
+		if (this.selectedIndex < 0) return null;
+		
 		return this.names[this.selectedIndex];
 	};
 	
 	this.indexOf = function(name) {
+		if (this.selectedIndex < 0) return -1;
+		
 		return this.names.indexOf(name);
 	};
 	
@@ -178,6 +194,8 @@ function Input (inputs, formatting, callback) {
 	 * data(); 
 	 */
 	this.data = function() {
+		if (this.selectedIndex < 0) return null;
+		
 		return this.datas[this.selectedIndex];	
 	};
 	
@@ -185,6 +203,8 @@ function Input (inputs, formatting, callback) {
 	 * setData(d); 
 	 */
 	this.setData = function(d) {
+		if (this.selectedIndex < 0) return false;
+		
 		if (this.allowsFormatting[this.selectedIndex]) {
 			//d = d.replace(/([^\s])</g, '$1 <')
 		}
@@ -196,6 +216,8 @@ function Input (inputs, formatting, callback) {
 	 * appendData(d); 
 	 */
 	this.appendData = function(d) {
+		if (this.selectedIndex < 0) return false;
+		
 		var pos = this.pos() + this.skip(0, this.pos());
 		
 		this.datas[this.selectedIndex] = this.data().substr(0, pos) + d + this.data().substr(pos);
@@ -209,6 +231,8 @@ function Input (inputs, formatting, callback) {
 	 * removeData(i); 
 	 */
 	this.removeData = function(i) {
+		if (this.selectedIndex < 0) return false;
+		
 		if (this.datas[this.selectedIndex].length < i)
 			i = this.datas[this.selectedIndex].length;
 		
@@ -229,36 +253,40 @@ function Input (inputs, formatting, callback) {
 	 * Returns the number of characters belong to a tag when progressing 'i' characters either forward or backward.
 	 */
 	this.skip = function(base, offset) {
-			if (!this.allowsFormatting[this.selectedIndex]) return 0;
-			if (offset < 0) return 0;
-			
-			var skip = 0;
-			var i = 0;
-			while (base + skip < this.data().length && base < offset) {
-				if (this.data()[base + skip + i] == '<') {
-					i = 1;
-					
-					while(this.data()[base + skip + i++] != '>'); /* loop until the tag is closed */
-					
-					skip += i - 1;
-					i = 0;
-				} else
-					base++;
-			}
-			
-			if (this.data()[base + skip] == '>')
-				skip--;
-			
-			/*if (this.data()[base + skip] == '<')
-				return this.skip(base, offset + 1);
-			else*/
-				return skip;
+		if (this.selectedIndex < 0) return 0;
+		
+		if (!this.allowsFormatting[this.selectedIndex]) return 0;
+		if (offset < 0) return 0;
+		
+		var skip = 0;
+		var i = 0;
+		while (base + skip < this.data().length && base < offset) {
+			if (this.data()[base + skip + i] == '<') {
+				i = 1;
+				
+				while(this.data()[base + skip + i++] != '>'); /* loop until the tag is closed */
+				
+				skip += i - 1;
+				i = 0;
+			} else
+				base++;
+		}
+		
+		if (this.data()[base + skip] == '>')
+			skip--;
+		
+		/*if (this.data()[base + skip] == '<')
+			return this.skip(base, offset + 1);
+		else*/
+			return skip;
 	}
 	
 	/**
 	 * move(i); 
 	 */
 	this.move = function(i) {
+		if (this.selectedIndex < 0) return false;
+		
 		var data = null;
 		
 		/* Formatting Allowed */
@@ -291,6 +319,8 @@ function Input (inputs, formatting, callback) {
 	 * seek(i); 
 	 */
 	this.seek = function(i) {
+		if (this.selectedIndex < 0) return false;
+		
 		var diff = i - this.pos();
 		
 		return this.move(diff);
@@ -301,6 +331,8 @@ function Input (inputs, formatting, callback) {
 	 * refreshSpecificInput(inputIndex, shouldNotify = true); 
 	 */
 	this.refreshSpecific = function(i, shouldNotify) {
+		if (i < 0) return false;
+		
 		if (shouldNotify == null) shouldNotify = true;
 		
 		var hiddenSpace = '';
@@ -345,6 +377,8 @@ function Input (inputs, formatting, callback) {
 	 * refresh(shouldNotify = true); 
 	 */
 	this.refresh = function(shouldNotify) {
+		if (this.selectedIndex < 0) return false;
+		
 		if (shouldNotify == null) shouldNotify = true;
 		
 		this.refreshSpecific(this.selectedIndex, shouldNotify);
