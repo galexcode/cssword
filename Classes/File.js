@@ -43,7 +43,7 @@ function File(obj, callback) {
 	var postParams = [];
 	
 	/* Action is always sent through GET */
-	getParams.push(action + '=' + obj.action);
+	getParams.push('action=' + obj.action);
 	
 	for (var key in obj) {
 		if (key == 'action') continue;
