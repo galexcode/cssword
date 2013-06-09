@@ -34,10 +34,11 @@ function File(action, name) {
 	this.callback = function(ajax) {
 		if (ajax.readyState == Ajax.State.READY) {
 			if (action == File.Action.SAVE)
-				console.log("Saved " + this.name + "...");
+				console.log("Saved '" + this.name + "'...");
 			else if (action == File.Action.OPEN)
-				console.log("Opened " + this.name + "...");
+				console.log("Opened '" + this.name + "'...");
 			
+			console.log("String: " + ajax.responseText);
 			var myObject = eval('(' + ajax.responseText + ')');
 			console.log("Response: " + myObject);
 		}
