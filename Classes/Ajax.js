@@ -35,6 +35,7 @@ Ajax.Method = {
 /* Ajax Object */
 function Ajax(method, url, _callback) {
 	this.request = null;
+	this.callback = _callback;
 	
 	/**
 	 * this.send();
@@ -43,45 +44,47 @@ function Ajax(method, url, _callback) {
 		 this.request.send(null);
 	 }
 	 
-	//Browser Support Code
-	try{
-		// Opera 8.0+, Firefox, Safari
-		this.request = new XMLHttpRequest();
-	} catch (e){
-		// Internet Explorer Browsers
+	function construct() {
+		//Browser Support Code
 		try{
-			this.request = new ActiveXObject("Msxml2.XMLHTTP");
-		} catch (e) {
+			// Opera 8.0+, Firefox, Safari
+			this.request = new XMLHttpRequest();
+		} catch (e){
+			// Internet Explorer Browsers
 			try{
-				this.request = new ActiveXObject("Microsoft.XMLHTTP");
-			} catch (e){
-				console.log("Unable to create an Ajax object.");
-				return false;
+				this.request = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				try{
+					this.request = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e){
+					console.log("Unable to create an Ajax object.");
+					return false;
+				}
 			}
 		}
+		
+		/**
+		* Example Callback Function:
+		* function() {
+		*		switch (ajaxRequest.readyState) {
+		*			case State.READY:
+		*				var response = ajaxRequest.responseText;
+		*				console.log('Ajax Response: ' + response);
+		*				break;	
+		*		}
+		* }
+		*/
+		var callback = this.callback;
+		this.request.onreadystatechange = function() {
+			console.log(callback);
+			callback(this);	
+		};
+		
+		/* Open the connection */
+		this.request.open(method, url, true);
+		
+		this.send();
 	}
-	
-	/**
-	* Example Callback Function:
-	* function() {
-	*		switch (ajaxRequest.readyState) {
-	*			case State.READY:
-	*				var response = ajaxRequest.responseText;
-	*				console.log('Ajax Response: ' + response);
-	*				break;	
-	*		}
-	* }
-	*/
-	var __callback = _callback;
-	this.request.onreadystatechange = function() {
-	console.log(__callback);
-	__callback(this);	
-	};
-	
-	/* Open the connection */
-	this.request.open(method, url, true);
-	
-	this.send();
 	
 	construct();
 }

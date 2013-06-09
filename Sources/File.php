@@ -20,7 +20,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-require_once(dirname(__FILE__) . '../Classes/File.php');
+require_once(dirname(__FILE__) . '/../Classes/File.php');
 
 $action = $_GET['action'];
 $file = $_GET['file'];
