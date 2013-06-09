@@ -26,10 +26,18 @@ function File () {
 
 File.save = function (elementId) {
 	var fileName = document.getElementById(elementId).value;
-	console.log("Saving " + fileName + "...");
+	
+	var ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=save&file=' + fileName, function() {
+		console.log("Saved " + fileName + "...");
+		console.log("Response was: " + ajax.responseText());
+	});
 }
 
 File.open = function (elementId) {
 	var fileName = document.getElementById(elementId).value;
-	console.log("Opening " + fileName + "...");
+	
+	var ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=open&file=' + fileName, function() {
+		console.log("Opened " + fileName + "...");
+		console.log("Response was: " + ajax.responseText());
+	});
 }

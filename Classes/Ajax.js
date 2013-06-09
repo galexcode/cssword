@@ -19,18 +19,25 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+Ajax.State = {
+		UNINITIALIZED : 0,
+		CONNECTED : 1,
+		RECEIVED : 2,
+		PROCESSING : 3,
+		READY : 4,
+	};
+	
+Ajax.Method = {
+		GET : 'GET',
+		POST : 'POST',
+	};
+
 /* Ajax Object */
 function Ajax (method, url, callback, fireImmediately) {
 	var request = null;
 	
-	State = {
-		READY : 4,
-	};
-	
-	Method = {
-		GET : 'GET',
-		POST : 'POST',
-	};
+	/* Default Variables */
+	if (fireImmediately == null) fireImmediately = true;
 	
 	construct();
 	
@@ -72,9 +79,15 @@ function Ajax (method, url, callback, fireImmediately) {
 		/* Open the connection */
 		this.request.open(method, url, true);
 		
-		if (fireImmediately != null && fireImmediately == true) {
+		if (fireImmediately)
 			this.send();
-		}
+	}
+	
+	/**
+	 * responseText();
+	 */
+	function responseText() {
+		return this.request.responseText;	
 	}
 	
 	/**

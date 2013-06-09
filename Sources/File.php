@@ -22,6 +22,17 @@
 
 require_once(dirname(__FILE__) . '../Classes/File.php');
 
+$action = $_GET['action'];
+$file = $_GET['file'];
 
+$jsonDict = array( 'action' => $action,
+				   'file'   => $file 
+				  );
+
+if (isset($file) && isset($action)) {
+	echo json_encode($jsonDict, JSON_PRETTY_PRINT);
+} else {
+	echo "{action:false}";	
+}
 
 ?>
