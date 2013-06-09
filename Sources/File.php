@@ -30,7 +30,7 @@ $jsonDict = array( 'action' => $action,
 				  );
 
 if (isset($file) && isset($action)) {
-	echo json_encode($jsonDict, JSON_PRETTY_PRINT);
+	echo json_encode($jsonDict);
 } else {
 	echo "{action:false}";	
 }
