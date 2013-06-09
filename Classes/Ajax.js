@@ -44,8 +44,8 @@ function Ajax(method, url, postParams, _callback) {
 	/**
 	 * this.send();
 	 */
-	this.send = function() {
-		 this.request.send(null);
+	this.send = function(params) {
+		 this.request.send(params);
 	 }
 	 
 	this.construct = function () {
@@ -87,7 +87,7 @@ function Ajax(method, url, postParams, _callback) {
 		this.request.open(this.method, this.url, true);
 		
 		if (this.method == Ajax.Method.POST)
-			this.request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			this.request.setRequestHeader("Content-type", "application/form-data");
 		
 		this.send(this.postParams);
 	}
