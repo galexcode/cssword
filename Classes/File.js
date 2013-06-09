@@ -41,11 +41,8 @@ function File(action, name) {
 		console.log("Response was: " + ajax.responseText());
 	}
 	
-	function connect() {
-		this.ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=' + action + '&file=' + name, this.callback);
-	}
-	
-	connect();
+	/* Connect */
+	this.ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=' + File.Action[action] + '&file=' + name, this.callback);
 }
 
 File.save = function (elementId) {
