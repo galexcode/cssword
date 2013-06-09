@@ -39,6 +39,9 @@ function File(action, name, callback) {
 		if (ajax.readyState == Ajax.State.READY) {
 			var obj = JSON.parse(ajax.responseText);
 			
+			console.log(self);
+			console.log("Obj", obj);
+			console.log(self.callback);
 			self.callback(obj);
 		}
 	});
