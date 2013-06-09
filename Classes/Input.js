@@ -407,8 +407,11 @@ function Input (inputs, formatting, callback) {
 	 * invokeCallback(intent, i); 
 	 */
 	this.invokeCallback = function(intent, i) {
+		var name = "null";
+		if (i >= 0) name = this.names[i];
+		
 		if (this.callback)
-			this.callback(intent, this.names[i]);
+			this.callback(intent, name);
 	};
 	
 	/** Initialize **/
