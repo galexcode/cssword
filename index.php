@@ -475,8 +475,8 @@ window.onresize = onResize;
           	<input type="text" name="file-name" id="file-name" onFocus="input.select(-1);" onBlur="input.getHealthy();" />
           	<input type="button" name="save-file" id="save-file" value="Save File" onClick="File.save('file-name');" />
         	<input type="button" name="open-file" id="open-file" value="Open File" onClick="File.open('file-name');" />
+            <span id="tools-output"></span>
         </form>
-     	<span id="tools-output"></span>
 	</div>
     <div id="html-input-header" class="input-header">&lt;/html&gt;</div>
     <div id="html-input" class="input" style="min-height: 120px; background-color: #ccc; font-family:monospace;" onClick="input.select(0)"><div class="center"><h1>Page Title</h1></div>
