@@ -82,7 +82,7 @@ function Ajax(method, url, callback, fireImmediately) {
 		 */
 		 var callback = this.callback;
 		 this.request.onreadystatechange = function() {
-			console.log(this);
+			console.log(callback);
 		 	callback(this);	
 		 };
 		
@@ -90,7 +90,7 @@ function Ajax(method, url, callback, fireImmediately) {
 		 this.request.open(method, url, true);
 		
 		 if (fireImmediately)
-		 	this.send();
+		 	send();
 	}
 	
 	construct();
