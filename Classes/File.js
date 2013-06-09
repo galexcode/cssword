@@ -25,18 +25,19 @@ File.Action = {
 	OPEN : 'open',
 };
 
-function File(action, name) {	
+function File(action, name, myCallback) {	
 	this.ajax = null;
+	
+	/**
+	 * myCallback(jsonObject);
+	 */
+	this.myCallback = myCallback;
 	
 	this.callback = function(ajax) {
 		if (ajax.readyState == Ajax.State.READY) {
 			var obj = JSON.parse(ajax.responseText);
-			console.log("Response: ", obj);
 			
-			if (action == File.Action.SAVE)
-				console.log("Saved '" + obj.file + "'...");
-			else if (action == File.Action.OPEN)
-				console.log("Opened '" + obj.file + "'...");
+			this.myCallback(obj);
 		}
 	}
 	
@@ -47,11 +48,15 @@ function File(action, name) {
 File.save = function (elementId) {
 	var fileName = document.getElementById(elementId).value;
 	
-	var file = new File(File.Action.SAVE, fileName);
+	new File(File.Action.SAVE, fileName, function() {
+		document.getElementById('tools-output').value = "Saved '" + obj.file + "'...";
+	});
 }
 
 File.open = function (elementId) {
 	var fileName = document.getElementById(elementId).value;
 	
-	var file = new File(File.Action.OPEN, fileName);
+	new File(File.Action.OPEN, fileName, function() {
+		document.getElementById('tools-output').value = "Opened '" + obj.file + "'...";
+	});
 }

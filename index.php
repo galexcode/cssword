@@ -470,13 +470,14 @@ window.onresize = onResize;
 <body>
 <div id="left-pane" class="pane left max-height">
 	<div id="tools">
-	  <form id="file-form" name="file-form">
-	    <label for="file-name"></label>
-	    <input type="text" name="file-name" id="file-name" onFocus="input.select(-1);" onBlur="input.getHealthy();" />
-	    <input type="button" name="save-file" id="save-file" value="Save File" onClick="File.save('file-name');" />
-        <input type="button" name="open-file" id="open-file" value="Open File" onClick="File.open('file-name');" />
-	  </form>
-</div>
+        <form id="file-form" name="file-form">
+          	<label for="file-name"></label>
+          	<input type="text" name="file-name" id="file-name" onFocus="input.select(-1);" onBlur="input.getHealthy();" />
+          	<input type="button" name="save-file" id="save-file" value="Save File" onClick="File.save('file-name');" />
+        	<input type="button" name="open-file" id="open-file" value="Open File" onClick="File.open('file-name');" />
+        </form>
+     	<span id="tools-output"></span>
+	</div>
     <div id="html-input-header" class="input-header">&lt;/html&gt;</div>
     <div id="html-input" class="input" style="min-height: 120px; background-color: #ccc; font-family:monospace;" onClick="input.select(0)"><div class="center"><h1>Page Title</h1></div>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus erat diam, molestie ut euismod ut, convallis vitae augue. Duis nulla dolor, gravida ac luctus in, malesuada sed diam.</p>
