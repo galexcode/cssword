@@ -43,7 +43,7 @@ function Ajax(method, url, callback, fireImmediately) {
 	construct();
 	
 	/**
-	 * send();
+	 * this.send();
 	 */
 	this.send = function() {
 		 this.request.send(null);
@@ -52,7 +52,7 @@ function Ajax(method, url, callback, fireImmediately) {
 	/**
 	 * construct(); 
 	 */
-	this.construct = function(){
+	function construct(){
 		//Browser Support Code
 		try{
 			// Opera 8.0+, Firefox, Safari
