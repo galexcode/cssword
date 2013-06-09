@@ -35,6 +35,9 @@ Ajax.Method = {
 /* Ajax Object */
 function Ajax(method, url, _callback) {
 	this.request = null;
+	
+	this.method = method;
+	this.url = url;
 	this.callback = _callback;
 	
 	/**
@@ -44,7 +47,7 @@ function Ajax(method, url, _callback) {
 		 this.request.send(null);
 	 }
 	 
-	function construct() {
+	this.construct = function () {
 		//Browser Support Code
 		try{
 			// Opera 8.0+, Firefox, Safari
@@ -74,6 +77,7 @@ function Ajax(method, url, _callback) {
 		*		}
 		* }
 		*/
+		console.log(this.callback);
 		var callback = this.callback;
 		this.request.onreadystatechange = function() {
 			console.log(callback);
@@ -81,10 +85,10 @@ function Ajax(method, url, _callback) {
 		};
 		
 		/* Open the connection */
-		this.request.open(method, url, true);
+		this.request.open(this.method, this.url, true);
 		
 		this.send();
 	}
 	
-	construct();
+	this.construct();
 }
