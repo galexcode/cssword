@@ -55,6 +55,12 @@ if (isset($file) && isset($action)) {
 	
 	switch ($action) {
 		case FileAction::Open: {
+				/* Can't open if it doesn't exist */
+				if (!file_exists($path)) {
+					$json['error'] = FileError::MissingFile;
+					goto print_json;
+				}
+			
 				/* Open the file for reading */
 				$fh = fopen($path, 'r');
 				if ($fh == FALSE) {

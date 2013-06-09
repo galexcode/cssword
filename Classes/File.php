@@ -27,6 +27,7 @@ class FileAction {
 								   
 class FileError {
 	const MissingPayload = 'Save action is missing payload.';
+	const MissingFile	 = 'The file does not exist.';
 	const OpenError 	 = 'Unable to open file.';
 	const SaveError		 = 'Unable to save file.';
 }
