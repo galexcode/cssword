@@ -38,7 +38,7 @@ function File(action, name) {
 			else if (action == File.Action.OPEN)
 				console.log("Opened " + this.name + "...");
 			
-			var myObject = JSON.parse(ajax.responseText);
+			var myObject = eval('(' + ajax.responseText + ')');
 			console.log("Response: " + myObject);
 		}
 	}
