@@ -32,16 +32,19 @@ function File(action, name) {
 	this.ajax = null;
 	
 	this.callback = function(ajax) {
-		if (action == File.Action.SAVE)
-			console.log("Saved " + this.name + "...");
-		else if (action == File.Action.OPEN)
-			console.log("Opened " + this.name + "...");
-		
-		console.log("Response was: " + ajax.responseText);
+		if (ajax.readyState == Ajax.State.READY) {
+			if (action == File.Action.SAVE)
+				console.log("Saved " + this.name + "...");
+			else if (action == File.Action.OPEN)
+				console.log("Opened " + this.name + "...");
+			
+			var myObject = JSON.parse(ajax.responseText);
+			console.log("Response: " + myObject);
+		}
 	}
 	
 	/* Connect */
-	this.ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=' + File.Action[action] + '&file=' + name, this.callback);
+	this.ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=' + action + '&file=' + name, this.callback);
 }
 
 File.save = function (elementId) {

@@ -77,10 +77,8 @@ function Ajax(method, url, _callback) {
 		*		}
 		* }
 		*/
-		console.log(this.callback);
 		var callback = this.callback;
 		this.request.onreadystatechange = function() {
-			console.log(callback);
 			callback(this);	
 		};
 		
