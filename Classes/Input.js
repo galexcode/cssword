@@ -65,7 +65,8 @@ function Input (inputs, formatting, callback) {
 	
 	this._isBlinking = false;
 	
-	/* String.safewrap(wrapper);
+	/**
+	 * String.safewrap(wrapper);
 	 * Wraps a 'wrapper' around the string.
 	 * The string is inserted wherever a $0 is present.
 	 * Spaces in the wrapper will be replaced with an escaped space.
@@ -74,7 +75,8 @@ function Input (inputs, formatting, callback) {
 		return wrapper.replace(/\s/g, EscapeString.SPACE).replace(/\$0/g, this);
 	};
 	
-	/* String.equivalent();
+	/**
+	 * String.equivalent();
 	 * Creates and returns a new string made from replacing all escapes with their equivalent.
 	 */
 	String.prototype.equivalent = function() {
@@ -85,21 +87,24 @@ function Input (inputs, formatting, callback) {
 		return str;
 	};
 	
-	/* String.elength();
+	/**
+	 * String.elength();
 	 * Returns the length of a string undergone the equivalent transformation.
 	 */
 	String.prototype.elength = function() {
 		return String.prototype.equivalent.call(this).length;
 	};
 	
-	/* String.ediff();
+	/**
+	 * String.ediff();
 	 * Returns the increase in length due to an equivalent transformation.
 	 */
 	String.prototype.ediff = function() {
 		return Number(String.prototype.elength.call(this)) - this.length;
 	};
 	
-	/* String.clean();
+	/**
+	 * String.clean();
 	 * Creates and returns a new string made from stripping all HTML tags.
 	 */
 	String.prototype.clean = function() {
@@ -119,14 +124,16 @@ function Input (inputs, formatting, callback) {
 		return str;
 	};
 	
-	/* String.clength();
+	/**
+	 * String.clength();
 	 * Returns the length of a string undergone the clean transformation.
 	 */
 	String.prototype.clength = function() {
 		return String.prototype.clean.call(this).length;
 	};
 	
-	/* String.cdiff();
+	/**
+	 * String.cdiff();
 	 * Returns the increase in length due to an clean transformation.
 	 */
 	String.prototype.cdiff = function() {
@@ -142,7 +149,9 @@ function Input (inputs, formatting, callback) {
 	}
 	
 	/** Changing input **/
-	/* selectInput(inputIndex, shouldNotify = true); */
+	/**
+	 * selectInput(inputIndex, shouldNotify = true); 
+	 */
 	this.select = function(i, shouldNotify) {
 		if (shouldNotify == null) shouldNotify = true;
 		
@@ -153,7 +162,9 @@ function Input (inputs, formatting, callback) {
 			this.invokeCallback(this.CallbackIntent.SELECTED, i);
 	};
 	
-	/* selectedInput(); */
+	/**
+	 * selectedInput(); 
+	 */
 	this.selected = function() {
 		return this.names[this.selectedIndex];
 	};
@@ -163,12 +174,16 @@ function Input (inputs, formatting, callback) {
 	};
 	
 	/* Changing data */
-	/* data(); */
+	/**
+	 * data(); 
+	 */
 	this.data = function() {
 		return this.datas[this.selectedIndex];	
 	};
 	
-	/* setData(d); */
+	/**
+	 * setData(d); 
+	 */
 	this.setData = function(d) {
 		if (this.allowsFormatting[this.selectedIndex]) {
 			//d = d.replace(/([^\s])</g, '$1 <')
@@ -177,7 +192,9 @@ function Input (inputs, formatting, callback) {
 		this.datasPos[this.selectedIndex] = (this.allowsFormatting[this.selectedIndex]) ? d.clean().length : d.length;
 	};
 	
-	/* appendData(d); */
+	/**
+	 * appendData(d); 
+	 */
 	this.appendData = function(d) {
 		var pos = this.pos() + this.skip(0, this.pos());
 		
@@ -188,7 +205,9 @@ function Input (inputs, formatting, callback) {
 		return true;
 	};
 	
-	/* removeData(i); */
+	/**
+	 * removeData(i); 
+	 */
 	this.removeData = function(i) {
 		if (this.datas[this.selectedIndex].length < i)
 			i = this.datas[this.selectedIndex].length;
@@ -205,7 +224,8 @@ function Input (inputs, formatting, callback) {
 	};
 	
 	/** Navigating the data **/
-	/* skip(base, offset); 
+	/**
+	 * skip(base, offset); 
 	 * Returns the number of characters belong to a tag when progressing 'i' characters either forward or backward.
 	 */
 	this.skip = function(base, offset) {
@@ -235,7 +255,9 @@ function Input (inputs, formatting, callback) {
 				return skip;
 	}
 	
-	/* move(i); */
+	/**
+	 * move(i); 
+	 */
 	this.move = function(i) {
 		var data = null;
 		
@@ -265,7 +287,9 @@ function Input (inputs, formatting, callback) {
 		return true;
 	};
 	
-	/* seek(i); */
+	/**
+	 * seek(i); 
+	 */
 	this.seek = function(i) {
 		var diff = i - this.pos();
 		
@@ -273,7 +297,9 @@ function Input (inputs, formatting, callback) {
 	};
 	
 	/** Propagating data changes **/
-	/* refreshSpecificInput(inputIndex, shouldNotify = true); */
+	/**
+	 * refreshSpecificInput(inputIndex, shouldNotify = true); 
+	 */
 	this.refreshSpecific = function(i, shouldNotify) {
 		if (shouldNotify == null) shouldNotify = true;
 		
@@ -315,14 +341,18 @@ function Input (inputs, formatting, callback) {
 		}
 	};
 	
-	/* refresh(shouldNotify = true); */
+	/**
+	 * refresh(shouldNotify = true); 
+	 */
 	this.refresh = function(shouldNotify) {
 		if (shouldNotify == null) shouldNotify = true;
 		
 		this.refreshSpecific(this.selectedIndex, shouldNotify);
 	};
 	
-	/* refreshAllInputs(shouldNotify = true); */
+	/**
+	 * refreshAllInputs(shouldNotify = true); 
+	 */
 	this.refreshAll = function(shouldNotify) {
 		if (shouldNotify == null) shouldNotify = true;
 		
@@ -331,14 +361,17 @@ function Input (inputs, formatting, callback) {
 	};
 	
 	/** Callbacks **/
-	/* setCallback(func);
+	/**
+	 * setCallback(func);
 	 * Callbacks must conform to callback(Input.CallbackIntent, String inputName);
 	 */
 	this.setCallback = function(func) {
 		this.callback = func;
 	};
 	
-	/* invokeCallback(intent, i); */
+	/**
+	 * invokeCallback(intent, i); 
+	 */
 	this.invokeCallback = function(intent, i) {
 		if (this.callback)
 			this.callback(intent, this.names[i]);
