@@ -70,7 +70,7 @@ File.save = function (elementId) {
 	
 	var fileObj = { "action"  : File.Action.SAVE,
 					"file"	  : fileName,
-					"payload" : btoa("some data") };
+					"payload" : window.btoa("some data") };
 	
 	new File(fileObj, function(obj) {
 		console.log("Object: ", obj);
@@ -85,7 +85,7 @@ File.open = function (elementId) {
 					"file"	  : fileName };
 	
 	new File(fileObj, function(obj) {
-		obj.payload = atob(obj.payload);
+		obj.payload = window.atob(obj.payload);
 		console.log("Object: ", obj);
 		document.getElementById('tools-output').innerHTML = obj.message;
 	});
