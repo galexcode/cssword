@@ -25,24 +25,23 @@ File.Action = {
 	OPEN : 'open',
 };
 
-function File(action, name, myCallback) {	
+function File(action, name, callback) {	
 	this.ajax = null;
 	
 	/**
-	 * myCallback(jsonObject);
+	 * callback(jsonObject);
 	 */
-	this.myCallback = myCallback;
+	this.callback = callback;
 	
-	this.callback = function(ajax) {
+	/* Connect */
+	var self = this;
+	this.ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=' + action + '&file=' + name, function(ajax) {
 		if (ajax.readyState == Ajax.State.READY) {
 			var obj = JSON.parse(ajax.responseText);
 			
-			this.myCallback(obj);
+			self.callback(obj);
 		}
-	}
-	
-	/* Connect */
-	this.ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=' + action + '&file=' + name, this.callback);
+	});
 }
 
 File.save = function (elementId) {
