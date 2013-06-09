@@ -205,7 +205,7 @@ callback = function(intent, inputName) {
 		
 		if (inputName == 'paper-input') {
 			$.getElementById(inputName).style.opacity = 1.0;
-		} else {
+		} else if ($.getElementById(inputName)) {
 			var themeColor = ['indianRed', 'dodgerBlue'];
 			
 			$.getElementById(inputName).style.color = 'black';
