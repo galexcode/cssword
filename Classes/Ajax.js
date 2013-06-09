@@ -33,12 +33,9 @@ Ajax.Method = {
 	};
 
 /* Ajax Object */
-function Ajax(method, url, callback, fireImmediately) {
+function Ajax(method, url, callback) {
 	var request = null;
 	var callback = callback;
-	
-	/* Default Variables */
-	if (fireImmediately == null) fireImmediately = true;
 	
 	/**
 	 * this.send();
@@ -90,7 +87,7 @@ function Ajax(method, url, callback, fireImmediately) {
 		 this.request.open(method, url, true);
 		
 		 if (fireImmediately)
-		 	send();
+		 	this.send();
 	}
 	
 	construct();
