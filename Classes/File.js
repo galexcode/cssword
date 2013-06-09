@@ -31,8 +31,6 @@ function File(action, name) {
 	
 	var ajax = null;
 	
-	connect();
-	
 	this.callback = function(ajax) {
 		if (action == File.Action.SAVE)
 			console.log("Saved " + this.name + "...");
@@ -46,6 +44,8 @@ function File(action, name) {
 	function connect() {
 		this.ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=' + action + '&file=' + name, this.callback);
 	}
+	
+	connect();
 }
 
 File.save = function (elementId) {

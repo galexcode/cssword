@@ -40,8 +40,6 @@ function Ajax(method, url, callback, fireImmediately) {
 	/* Default Variables */
 	if (fireImmediately == null) fireImmediately = true;
 	
-	construct();
-	
 	/**
 	 * this.send();
 	 */
@@ -94,4 +92,6 @@ function Ajax(method, url, callback, fireImmediately) {
 		 if (fireImmediately)
 		 	this.send();
 	}
+	
+	construct();
 }
