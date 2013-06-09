@@ -39,6 +39,7 @@ function File(action, name) {
 		else if (action == File.Action.OPEN)
 			console.log("Opened " + fileName + "...");
 		
+		console.log('State is now: ' + ajax.readyState);
 		console.log("Response was: " + ajax.responseText());
 	}
 	

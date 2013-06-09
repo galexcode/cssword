@@ -35,18 +35,12 @@ Ajax.Method = {
 /* Ajax Object */
 function Ajax(method, url, callback, fireImmediately) {
 	var request = null;
+	var callback = callback;
 	
 	/* Default Variables */
 	if (fireImmediately == null) fireImmediately = true;
 	
 	construct();
-	
-	/**
-	 * responseText();
-	 */
-	function responseText() {
-		return this.request.responseText;	
-	}
 	
 	/**
 	 * send();
@@ -88,15 +82,16 @@ function Ajax(method, url, callback, fireImmediately) {
 		 *		}
 		 * }
 		 */
-		this.request.onreadystatechange = function() {
+		 var callback = this.callback;
+		 this.request.onreadystatechange = function() {
 			console.log(this);
-			callback(this);	
-		};
+		 	callback(this);	
+		 };
 		
-		/* Open the connection */
-		this.request.open(method, url, true);
+		 /* Open the connection */
+		 this.request.open(method, url, true);
 		
-		if (fireImmediately)
-			this.send();
+		 if (fireImmediately)
+		 	this.send();
 	}
 }
