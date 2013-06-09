@@ -48,7 +48,7 @@ File.save = function (elementId) {
 	var fileName = document.getElementById(elementId).value;
 	
 	new File(File.Action.SAVE, fileName, function(obj) {
-		document.getElementById('tools-output').value = "Saved '" + obj.file + "'...";
+		document.getElementById('tools-output').innerHTML = "Saved '" + obj.file + "'...";
 	});
 }
 
@@ -56,6 +56,6 @@ File.open = function (elementId) {
 	var fileName = document.getElementById(elementId).value;
 	
 	new File(File.Action.OPEN, fileName, function(obj) {
-		document.getElementById('tools-output').value = "Opened '" + obj.file + "'...";
+		document.getElementById('tools-output').innerHTML = "Opened '" + obj.file + "'...";
 	});
 }
