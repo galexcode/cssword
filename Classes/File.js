@@ -34,9 +34,9 @@ function File(action, name) {
 			console.log("Response: ", obj);
 			
 			if (action == File.Action.SAVE)
-				console.log("Saved '" + obj.name + "'...");
+				console.log("Saved '" + obj.file + "'...");
 			else if (action == File.Action.OPEN)
-				console.log("Opened '" + obj.name + "'...");
+				console.log("Opened '" + obj.file + "'...");
 		}
 	}
 	
