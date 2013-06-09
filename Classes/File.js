@@ -47,7 +47,7 @@ function File(action, name, callback) {
 File.save = function (elementId) {
 	var fileName = document.getElementById(elementId).value;
 	
-	new File(File.Action.SAVE, fileName, function() {
+	new File(File.Action.SAVE, fileName, function(obj) {
 		document.getElementById('tools-output').value = "Saved '" + obj.file + "'...";
 	});
 }
@@ -55,7 +55,7 @@ File.save = function (elementId) {
 File.open = function (elementId) {
 	var fileName = document.getElementById(elementId).value;
 	
-	new File(File.Action.OPEN, fileName, function() {
+	new File(File.Action.OPEN, fileName, function(obj) {
 		document.getElementById('tools-output').value = "Opened '" + obj.file + "'...";
 	});
 }
