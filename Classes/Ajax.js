@@ -35,7 +35,6 @@ Ajax.Method = {
 /* Ajax Object */
 function Ajax(method, url, callback, fireImmediately) {
 	var request = null;
-	var callback = callback;
 	
 	/* Default Variables */
 	if (fireImmediately == null) fireImmediately = true;
@@ -90,8 +89,8 @@ function Ajax(method, url, callback, fireImmediately) {
 		 * }
 		 */
 		this.request.onreadystatechange = function() {
-			console.log(this.request);
-			this.callback(this.request);	
+			console.log(this);
+			callback(this);	
 		};
 		
 		/* Open the connection */
