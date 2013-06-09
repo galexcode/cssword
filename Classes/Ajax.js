@@ -77,17 +77,16 @@ function Ajax(method, url, callback) {
 		 *		}
 		 * }
 		 */
-		 var callback = this.callback;
+		 var __callback = this.callback;
 		 this.request.onreadystatechange = function() {
-			console.log(callback);
-		 	callback(this);	
+			console.log(__callback);
+		 	__callback(this);	
 		 };
 		
 		 /* Open the connection */
 		 this.request.open(method, url, true);
-		
-		 if (fireImmediately)
-		 	this.send();
+		 
+		 this.send();
 	}
 	
 	construct();
