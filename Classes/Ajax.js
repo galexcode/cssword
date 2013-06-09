@@ -33,7 +33,7 @@ Ajax.Method = {
 	};
 
 /* Ajax Object */
-function Ajax (method, url, callback, fireImmediately) {
+function Ajax(method, url, callback, fireImmediately) {
 	var request = null;
 	
 	/* Default Variables */
@@ -41,6 +41,20 @@ function Ajax (method, url, callback, fireImmediately) {
 	
 	construct();
 	
+	/**
+	 * responseText();
+	 */
+	function responseText() {
+		return this.request.responseText;	
+	}
+	
+	/**
+	 * send();
+	 */
+	 function send() {
+		 this.request.send(null);
+	 }
+	 
 	/**
 	 * construct(); 
 	 */
@@ -74,7 +88,9 @@ function Ajax (method, url, callback, fireImmediately) {
 		 *		}
 		 * }
 		 */
-		this.request.onreadystatechange = callback;
+		this.request.onreadystatechange = function() {
+			callback(this.request);	
+		};
 		
 		/* Open the connection */
 		this.request.open(method, url, true);
@@ -82,18 +98,4 @@ function Ajax (method, url, callback, fireImmediately) {
 		if (fireImmediately)
 			this.send();
 	}
-	
-	/**
-	 * responseText();
-	 */
-	function responseText() {
-		return this.request.responseText;	
-	}
-	
-	/**
-	 * send();
-	 */
-	 function send() {
-		 this.request.send(null);
-	 }
 }

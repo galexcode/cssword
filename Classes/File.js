@@ -20,24 +20,41 @@
 */
 
 /* File Object */
-function File () {
+File.Action = {
+	SAVE : 'save',
+	OPEN : 'open',
+};
+
+function File(action, name) {
+	var name = name;
+	var action = action;
 	
+	var ajax = null;
+	
+	connect();
+	
+	var callback = function(ajax) {
+		if (action == File.Action.SAVE)
+			console.log("Saved " + fileName + "...");
+		else if (action == File.Action.OPEN)
+			console.log("Opened " + fileName + "...");
+		
+		console.log("Response was: " + ajax.responseText());
+	}
+	
+	function connect() {
+		this.ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=' + this.action + '&file=' + name, callback);
+	}
 }
 
 File.save = function (elementId) {
 	var fileName = document.getElementById(elementId).value;
 	
-	var ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=save&file=' + fileName, function() {
-		console.log("Saved " + fileName + "...");
-		console.log("Response was: " + ajax.responseText());
-	});
+	var file = new File(File.Action.SAVE, fileName);
 }
 
 File.open = function (elementId) {
 	var fileName = document.getElementById(elementId).value;
 	
-	var ajax = new Ajax(Ajax.Method.GET, 'Sources/File.php?action=open&file=' + fileName, function() {
-		console.log("Opened " + fileName + "...");
-		console.log("Response was: " + ajax.responseText());
-	});
+	var file = new File(File.Action.OPEN, fileName);
 }
