@@ -45,8 +45,9 @@ function Ajax(method, url, postParams, _callback) {
 	 * this.send();
 	 */
 	this.send = function(params) {
-		 this.request.send(params);
-	 }
+		console.log("Sending with params: " + params);
+		this.request.send(params);
+	}
 	 
 	this.construct = function () {
 		//Browser Support Code
