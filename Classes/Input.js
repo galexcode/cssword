@@ -385,7 +385,7 @@ function Input (inputs, formatting, callback) {
 	};
 	
 	/**
-	 * refreshAllInputs(shouldNotify = true); 
+	 * refreshAll(shouldNotify = true); 
 	 */
 	this.refreshAll = function(shouldNotify) {
 		if (shouldNotify == null) shouldNotify = true;

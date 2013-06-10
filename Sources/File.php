@@ -34,14 +34,15 @@
 
 require_once(dirname(__FILE__) . '/../Classes/File.php');
 
-$action 	 = $_GET['action'];
+$action 	 		= $_GET['action'];
 
 if ($action == FileAction::Open) { /* GET request */
-	$file 	 = $_GET['file'];
+	$file 	 		= $_GET['file'];
 }
 else if ($action == FileAction::Save) { /* POST request */
-	$file	 = $_POST['file'];
-	$payload = $_POST['payload'];
+	$file	 		= $_POST['file'];
+	// html_payload
+	// css_payload
 }
 
 $json = array( 'action' => $action,
@@ -51,47 +52,59 @@ $json = array( 'action' => $action,
 
 if (isset($file) && isset($action)) {
 	$file = new File($file);
-	$path = $file->getSavePath();
+	
+	$paths = $file->getPaths();
+	$payloads = $file->getPayloads();
 	
 	switch ($action) {
 		case FileAction::Open: {
-				/* Can't open if it doesn't exist */
-				if (!file_exists($path)) {
-					$json['error'] = FileError::MissingFile;
-					goto print_json;
-				}
-			
-				/* Open the file for reading */
-				$fh = fopen($path, 'r');
-				if ($fh == FALSE) {
-					$json['error'] = FileError::OpenError;
-					goto print_json;
-				}
+				for ($i = 0; $i < count($paths); $i++)) {
+					$path = $paths[$i];
+					$payload = $payloads[$i];
+					
+					/* Can't open if it doesn't exist */
+					if (!file_exists($path)) {
+						$json['error'] = FileError::MissingFile;
+						goto print_json;
+					}
 				
-				/* Get the payload */
-				$json['payload'] = base64_encode(fread($fh, filesize($path)));
-				fclose($fh);
+					/* Open the file for reading */
+					$fh = fopen($path, 'r');
+					if ($fh == FALSE) {
+						$json['error'] = FileError::OpenError;
+						goto print_json;
+					}
+					
+					/* Get the payload */
+					$json[$payload] = base64_encode(fread($fh, filesize($path)));
+					fclose($fh);
+				}
 				
 				$json['message'] = "Opened <b>{$file->name}</b>";
 			}
 			break;
 		case FileAction::Save: {
-				/* Can't save if there's nothing to save */
-				if (!isset($payload)) {
-					$json['error'] = FileError::MissingPayload;
-					goto print_json;
+				for ($i = 0; $i < count($paths); $i++)) {
+					$path = $paths[$i];
+					$payload = $payloads[$i];
+					
+					/* Can't save if there's nothing to save */
+					if (!isset($_POST[$payload])) {
+						$json['error'] = FileError::MissingPayload;
+						goto print_json;
+					}
+					
+					/* Open the file for writing */
+					$fh = fopen($path, 'w');
+					if ($fh == FALSE) {
+						$json['error'] = FileError::SaveError;
+						goto print_json;
+					}
+					
+					/* Write the payload */
+					fwrite($fh, base64_decode($_POST[$payload]));
+					fclose($fh);
 				}
-				
-				/* Open the file for writing */
-				$fh = fopen($path, 'w');
-				if ($fh == FALSE) {
-					$json['error'] = FileError::SaveError;
-					goto print_json;
-				}
-				
-				/* Write the payload */
-				fwrite($fh, base64_decode($payload));
-				fclose($fh);
 				
 				$json['message'] = "Saved <b>{$file->name}</b>";
 			}

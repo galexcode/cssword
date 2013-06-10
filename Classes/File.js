@@ -67,12 +67,16 @@ function File(obj, callback) {
 	});
 }
 
-File.save = function (elementId) {
-	var fileName = document.getElementById(elementId).value;
+/**
+ * File.Save(elementId, payload);
+ */
+File.Save = function (name, payload) {
+	if (payload == null) return;
 	
-	var fileObj = { "action"  : File.Action.SAVE,
-					"file"	  : fileName,
-					"payload" : window.btoa("some data") };
+	var fileObj = { "action"  		: File.Action.SAVE,
+					"file"	  		: name,
+					"html_payload"  : window.btoa(payload.html),
+					"css_payload"   : window.btoa(payload.css) };
 	
 	new File(fileObj, function(obj) {
 		console.log("Object: ", obj);
@@ -80,16 +84,21 @@ File.save = function (elementId) {
 	});
 }
 
-File.open = function (elementId) {
-	var fileName = document.getElementById(elementId).value;
+/**
+ * File.Open(elementId, callback);
+ *  --> callback(payload);
+ */
+File.Open = function (name, callback) {
+	if (callback == null) return;
 	
 	var fileObj = { "action"  : File.Action.OPEN,
-					"file"	  : fileName };
+					"file"	  : name };
 	
 	new File(fileObj, function(obj) {
-		if (obj.payload != null) obj.payload = window.atob(obj.payload);
+		if (obj.html_payload != null) obj.html_payload = window.atob(obj.html_payload);
+		if (obj.css_payload != null) obj.css_payload = window.atob(obj.css_payload);
 		
-		console.log("Object: ", obj);
-		document.getElementById('tools-output').innerHTML = obj.message;
+		console.log(callback);
+		callback(new Payload(obj.html_payload, obj.css_payload));
 	});
 }

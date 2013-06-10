@@ -133,6 +133,7 @@ body {
 </style>
 <style id="parent-css" type="text/css">
 </style>
+<script type="text/javascript" src="Classes/Payload.js"></script>
 <script type="text/javascript" src="Classes/Ajax.js"></script>
 <script type="text/javascript" src="Classes/Input.js"></script>
 <script type="text/javascript" src="Classes/File.js"></script>
@@ -440,6 +441,41 @@ onResize = function(e) {
 	console.log('8.5" x 11" : Height: ' + paperHeight + 'px, Width: ' + paperWidth + 'px');
 }
 
+function saveDocument() {
+	var temp = input.selectedIndex;
+	
+	/* Get HTML and CSS data */
+	input.select(input.indexOf('html-input'), false);
+	var html = input.getData();
+	
+	input.select(input.indexOf('css-input'), false);
+	var css = input.getData();
+	
+	input.select(temp, false);
+	
+	var payload = new Payload(html, css);
+	File.Save(document.getElementById('file-name').value, payload);
+}
+
+function openDocument() {
+	File.Open(document.getElementById('file-name').value, 
+		function(payload) {
+			var temp = input.selectedIndex;
+	
+			/* Set HTML and CSS data */
+			input.select(input.indexOf('html-input'), false);
+			var html = input.setData(payload.html);
+			
+			input.select(input.indexOf('css-input'), false);
+			var css = input.setData(payload.css);
+			
+			input.select(temp, false);
+			
+			input.refreshAll();
+		}
+	);	
+}
+
 function onLoad() {
 	input = new Input(['html-input', 'css-input', 'paper-input'], [false, false, true], callback);
 	
@@ -473,8 +509,8 @@ window.onresize = onResize;
         <form id="file-form" name="file-form">
           	<label for="file-name"></label>
           	<input type="text" name="file-name" id="file-name" onFocus="input.select(-1);" onBlur="input.getHealthy();" />
-          	<input type="button" name="save-file" id="save-file" value="Save File" onClick="File.save('file-name');" />
-        	<input type="button" name="open-file" id="open-file" value="Open File" onClick="File.open('file-name');" />
+          	<input type="button" name="save-file" id="save-file" value="Save File" onClick="saveDocument();" />
+        	<input type="button" name="open-file" id="open-file" value="Open File" onClick="openDocument();" />
             <span id="tools-output"></span>
         </form>
 	</div>
