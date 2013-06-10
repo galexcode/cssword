@@ -70,6 +70,19 @@ body {
 	color: gainsboro;
 	opacity:0.4;
 }
+
+.input-header.active {
+	
+}
+
+.input-header.active.indianRed {
+	color: 'indianRed';
+}
+
+.input-header.active.dodgerBlue {
+	color: 'dodgerBlue';
+}
+
 .input {
 	/* Some styles are changed dynamically */
 	padding: 8px;
@@ -77,6 +90,22 @@ body {
 	
 	cursor: pointer;
 	font-weight: bold;
+
+	border-left: 8px solid 'dimGray'; 
+	color: 'dimGray';
+	background-color: 'floralWhite';
+}
+
+.input.active {
+	color: 'black';
+}
+
+.input.active.indianRed {
+	border-left: 8px solid 'indianRed'; 
+}
+
+.input.active.dodgerBlue {
+	border-left: 8px solid 'dodgerBlue'; 
 }
 
 /* Panes */
@@ -197,15 +226,14 @@ callback = function(intent, inputName) {
 			
 			if (input.names[key] == 'paper-input') {
 				$.getElementById('paper-frame').className = 'paper-container';
-				$.getElementById('right-pane').style.backgroundColor = '#222';
+				$.getElementById('right-pane').className= 'pane right';
 			} else {
 				/* Input Box */
-				$.getElementById(input.names[key]).style.color = 'dimGray';
-				$.getElementById(input.names[key]).style.backgroundColor = 'floralWhite';
-				$.getElementById(input.names[key]).style.borderLeft = '8px solid gainsboro';
-				
+				$.getElementById(input.names[key]).className = 'input';
+
 				/* Input Box Header */
-				$.getElementById(input.names[key] + '-header').style.color = 'gainsboro';
+				$.getElementById(input.names[key] + '-header').className = 'input-header';
+				
 			}
 			
 			/* Remove blinking cursor */
@@ -214,15 +242,14 @@ callback = function(intent, inputName) {
 		
 		if (inputName == 'paper-input') {
 			$.getElementById('paper-frame').className = 'paper-container active';
-			$.getElementById('right-pane').style.backgroundColor = '#333';
+			$.getElementById('right-pane').className = 'pane right active';
 		} else if ($.getElementById(inputName)) {
 			var themeColor = ['indianRed', 'dodgerBlue'];
-			
-			$.getElementById(inputName).style.color = 'black';
-			$.getElementById(inputName).style.borderLeft = '8px solid ' + themeColor[input.selectedIndex];
-			
+			/* Input Box */
+			$.getElementById(inputName).className = 'input active ' + themeColor[input.selectedIndex];
+
 			/* Input Box Header */
-			$.getElementById(inputName + '-header').style.color = themeColor[input.selectedIndex];
+			$.getElementById(inputName + '-header').className = 'input-header active ' + themeColor[input.selectedIndex];
 		}
 	}
 }
