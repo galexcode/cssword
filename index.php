@@ -103,7 +103,7 @@ body {
 	overflow: hidden;
 	
 	/* Style */
-	background-color: #333;
+	background-color: #222;
 }
 
 /* Paper (WYSIWYG) */
@@ -125,7 +125,7 @@ body {
 }
 
 .paper-container.active {
-	box-shadow: 0 4px 4px #fff;
+	box-shadow: 0 4px 4px #666;
 }
 
 .paper {
@@ -195,7 +195,7 @@ callback = function(intent, inputName) {
 			
 			if (input.names[key] == 'paper-input') {
 				$.getElementById('paper-frame').className = 'paper-container';
-				//document.querySelector(".paper-container").style.WebKitBoxShadow = "0x 4px 4px #000;";
+				$.getElementById('right-pane').style.backgroundColor = '#222';
 			} else {
 				/* Input Box */
 				$.getElementById(input.names[key]).style.color = 'dimGray';
@@ -212,6 +212,7 @@ callback = function(intent, inputName) {
 		
 		if (inputName == 'paper-input') {
 			$.getElementById('paper-frame').className = 'paper-container active';
+			$.getElementById('right-pane').style.backgroundColor = '#333';
 		} else if ($.getElementById(inputName)) {
 			var themeColor = ['indianRed', 'dodgerBlue'];
 			
