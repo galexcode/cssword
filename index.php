@@ -101,7 +101,7 @@ button:active {
 }*/
 
 /* Scroll bars */
-::-webkit-scrollbar {
+/*::-webkit-scrollbar {
     width: 16px;
 }
  
@@ -116,7 +116,7 @@ button:active {
 	opacity: 0.5;
     border-radius: 4px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-}
+}*/
 
 /* Window Class */
 .max-height {
@@ -213,12 +213,14 @@ button:active {
 	width: 40%;
 	float: left;
 	
+	padding: 32px;
 	padding-right: 24px;
 	
 	overflow-y: scroll;
 	
 	/* Style */
-	background-color: darkGray;
+	/*background-color: darkGray;*/
+	background-color: white;
 }
 
 .pane.right {
