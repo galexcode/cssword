@@ -61,7 +61,7 @@ textarea:focus , input:focus {
 }
 
 /* .button */
-.button {
+button {
         height: 32px;
         border: thin solid #ddd;
         background-color: #fff;
@@ -70,11 +70,11 @@ textarea:focus , input:focus {
         border-radius: 4px;
 }
 
-.button:hover {
+button:hover {
         border: thin solid #ccc;
 }
 
-.button:active {
+button:active {
         border: thin solid #bbb;
         box-shadow: 0px 0px 10px #bbb;
 }
@@ -628,8 +628,8 @@ window.onresize = onResize;
         <form id="file-form" name="file-form">
           	<label for="file-name"></label>
           	<input type="text" name="file-name" id="file-name" onFocus="input.select(-1);" onBlur="input.getHealthy();" />
-          	<input type="button" name="save-file" id="save-file" value="Save File" onClick="saveDocument();" />
-        	<input type="button" name="open-file" id="open-file" value="Open File" onClick="openDocument();" />
+          	<button name="save-file" id="save-file" onClick="saveDocument();">Save File</button>
+        	<button name="open-file" id="open-file" onClick="openDocument();">Open File</button>
             <span id="tools-output"></span>
         </form>
 	</div>
