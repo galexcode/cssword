@@ -194,7 +194,7 @@ callback = function(intent, inputName) {
 			if (input.selected == input.names[key]) continue;
 			
 			if (input.names[key] == 'paper-input') {
-				$.getElementsById('paper-frame').className = '.paper-container';
+				$.getElementById('paper-frame').className = '.paper-container';
 				//document.querySelector(".paper-container").style.WebKitBoxShadow = "0x 4px 4px #000;";
 			} else {
 				/* Input Box */
@@ -211,7 +211,7 @@ callback = function(intent, inputName) {
 		}
 		
 		if (inputName == 'paper-input') {
-			$.getElementsById('paper-frame').className = '.paper-container active';
+			$.getElementById('paper-frame').className = '.paper-container active';
 		} else if ($.getElementById(inputName)) {
 			var themeColor = ['indianRed', 'dodgerBlue'];
 			
