@@ -36,8 +36,73 @@ body {
 	margin: 0px;
 }
 
+/* Inputs/TextFields */
+textarea, input {
+	height: 28px;
+	border: thin solid #ddd;
+    border-radius: 2px;
+    background-color: #fff;
+    color: #444;
+    font: normal 16px auto Verdana, Arial, Helvetica, sans-serif;
+	padding-left: 8px;
+}
+
+textarea:disabled, input:disabled, textarea[readonly="readonly"], input[readonly="readonly"] {
+    background-color:#eee;
+}
+
+textarea:hover, input:hover {
+	border: thin solid #ccc;
+}
+
+textarea:focus , input:focus {
+	outline: none;
+	border: thin solid #9ecaed;
+	box-shadow: 0px 0px 10px #9ecaed;
+}
+
+/* .button */
+button {
+	cursor: pointer;
+border:1px solid #7d99ca; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 10px 10px 10px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+ background-color: #a5b8da; background-image: -webkit-gradient(linear, left top, left bottom, from(#a5b8da), to(#7089b3));
+ background-image: -webkit-linear-gradient(top, #a5b8da, #7089b3);
+ background-image: -moz-linear-gradient(top, #a5b8da, #7089b3);
+ background-image: -ms-linear-gradient(top, #a5b8da, #7089b3);
+ background-image: -o-linear-gradient(top, #a5b8da, #7089b3);
+ background-image: linear-gradient(to bottom, #a5b8da, #7089b3);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a5b8da, endColorstr=#7089b3);
+}
+
+button:hover{
+ border:1px solid #5d7fbc;
+ background-color: #819bcb; background-image: -webkit-gradient(linear, left top, left bottom, from(#819bcb), to(#536f9d));
+ background-image: -webkit-linear-gradient(top, #819bcb, #536f9d);
+ background-image: -moz-linear-gradient(top, #819bcb, #536f9d);
+ background-image: -ms-linear-gradient(top, #819bcb, #536f9d);
+ background-image: -o-linear-gradient(top, #819bcb, #536f9d);
+ background-image: linear-gradient(to bottom, #819bcb, #536f9d);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#819bcb, endColorstr=#536f9d);
+}
+
+/*button {
+	height: 32px;
+    border: thin solid #ddd;
+    background-color: #fff;
+    color: #666;
+    font: bold 14px auto Verdana, Arial, Helvetica, sans-serif;
+    border-radius: 4px;
+}
+
+button:hover {
+    border: thin solid #ccc;
+}
+
+button:active {
+    border: thin solid #bbb;
+    box-shadow: 0px 0px 10px #bbb;
+}*/
+
 /* Scroll bars */
-::-webkit-scrollbar {
+/*::-webkit-scrollbar {
     width: 16px;
 }
  
@@ -52,7 +117,7 @@ body {
 	opacity: 0.5;
     border-radius: 4px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-}
+}*/
 
 /* Window Class */
 .max-height {
@@ -97,6 +162,13 @@ body {
 
 	min-height: 120px;
 	font-family: monospace;
+
+	webkit-touch-callout: none;
+	webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .input.active {
@@ -108,7 +180,26 @@ body {
 }
 
 .input.active.dodgerBlue {
-	border-left: 8px solid dodgerBlue; 
+	border-left: 8px solid dodgerBlue;
+}
+
+.gist-highlight {
+    border-left: 3ex solid #eee;
+    position: relative;
+}
+
+.gist-highlight pre {
+    counter-reset: linenumbers;
+}
+
+.gist-highlight pre div:before {
+    color: #aaa;
+    content: counter(linenumbers);
+    counter-increment: linenumbers;
+    left: -3ex;
+    position: absolute;
+    text-align: right;
+    width: 2.5ex;
 }
 
 /* Panes */
@@ -123,19 +214,25 @@ body {
 	width: 40%;
 	float: left;
 	
-	padding-right: 24px;
+	padding: 0px 24px 0 24px 0;
 	
 	overflow-y: scroll;
 	
 	/* Style */
-	background-color: darkGray;
+	/*background-color: darkGray;*/
+	background-color: white;
 }
 
 .pane.right {
 	overflow: hidden;
+	height: 100%;
 	
 	/* Style */
 	background-color: #222;
+}
+
+.pane.right.active {
+	background-color: #333;	
 }
 
 /* Paper (WYSIWYG) */
@@ -166,6 +263,11 @@ body {
 	padding: 8px;
 }
 
+/* Toolbar */
+.tools {
+	padding-top: 32px;	
+}
+
 </style>
 <style id="parent-css" type="text/css">
 </style>
@@ -173,7 +275,6 @@ body {
 <script type="text/javascript" src="Classes/Ajax.js"></script>
 <script type="text/javascript" src="Classes/Input.js"></script>
 <script type="text/javascript" src="Classes/File.js"></script>
-<script type="text/javascript" src="Classes/Color.js"></script>
 <script type="text/javascript">
 $ = document; // shortcut
 input = null;
@@ -224,7 +325,7 @@ callback = function(intent, inputName) {
 		}
 	} 
 	else if (intent == input.CallbackIntent.SELECTED) {
-		for (var key in input.names) {
+		for (var key = 0; key < input.names.length; key++) {
 			if (input.selected == input.names[key]) continue;
 			
 			if (input.names[key] == 'paper-input') {
@@ -530,8 +631,8 @@ function onLoad() {
 	onResize();
 	
 	var disabledMouseDownDivs = ['paper-frame', 'html-input', 'css-input'];
-	for (var key in disabledMouseDownDivs) {
-		$.getElementById(key).onmousedown = function(event) {
+	for (var i = 0; i < disabledMouseDownDivs; i++) {
+		$.getElementById(disabledMouseDownDivs[i]).onmousedown = function(event) {
 			event.preventDefault();
 			return false;
 		}
@@ -551,12 +652,12 @@ window.onresize = onResize;
 </head>
 <body>
 <div id="left-pane" class="pane left max-height">
-	<div id="tools">
+	<div id="tools" class="tools">
         <form id="file-form" name="file-form">
           	<label for="file-name"></label>
-          	<input type="text" name="file-name" id="file-name" onFocus="input.select(-1);" onBlur="input.getHealthy();" />
-          	<input type="button" name="save-file" id="save-file" value="Save File" onClick="saveDocument();" />
-        	<input type="button" name="open-file" id="open-file" value="Open File" onClick="openDocument();" />
+          	<input type="text" name="file-name" id="file-name" onFocus="input.select(-1);" onBlur="input.getHealthy();" value="newFile" />
+          	<button type="button" name="save-file" id="save-file" onClick="saveDocument();">Save File</button>
+        	<button type="button" name="open-file" id="open-file" onClick="openDocument();">Open File</button>
             <span id="tools-output"></span>
         </form>
 	</div>
