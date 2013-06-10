@@ -73,8 +73,8 @@ File.Save = function (name, payload) {
 	
 	var fileObj = { "action"  		: File.Action.SAVE,
 					"file"	  		: name,
-					"html_payload"  : window.btoa(payload.html),
-					"css_payload"   : window.btoa(payload.css) };
+					"html_payload"  : payload.html,
+					"css_payload"   : payload.css };
 					
 	console.log("HTML Payload: " + payload.html);
 	
