@@ -91,9 +91,12 @@ body {
 	cursor: pointer;
 	font-weight: bold;
 
+	background-color: floralWhite;
 	border-left: 8px solid dimGray; 
 	color: dimGray;
-	background-color: floralWhite;
+
+	min-height: 120px;
+	font-family: monospace;
 }
 
 .input.active {
@@ -558,12 +561,12 @@ window.onresize = onResize;
         </form>
 	</div>
     <div id="html-input-header" class="input-header">&lt;/html&gt;</div>
-    <div id="html-input" class="input" style="min-height: 120px; background-color: #ccc; font-family:monospace;" onClick="input.select(0)"><div class="center"><h1>Page Title</h1></div>
+    <div id="html-input" class="input" onClick="input.select(0)"><div class="center"><h1>Page Title</h1></div>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus erat diam, molestie ut euismod ut, convallis vitae augue. Duis nulla dolor, gravida ac luctus in, malesuada sed diam.</p>
 <p>Proin porta iaculis dui, in fermentum lectus laoreet vel. Fusce a tincidunt justo. Vestibulum imperdiet sapien magna. Duis porttitor velit nec mauris convallis convallis. Sed blandit lectus in turpis molestie, ac ultricies enim mollis. Donec quis urna scelerisque, adipiscing sapien in, consequat leo. Suspendisse faucibus augue quam, eget tempus augue interdum non. Donec dignissim urna neque, malesuada suscipit lectus gravida in.</p></div>
 	<p></p>
     <div id="css-input-header" class="input-header">&lt;/css&gt;</div>
-    <div id="css-input" class="input" style="min-height:120px; background-color: #ccc; font-family:monospace;" onClick="input.select(1)">html {
+    <div id="css-input" class="input" onClick="input.select(1)">html {
 	background-color: white;    
 }
     
