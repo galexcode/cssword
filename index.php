@@ -460,6 +460,8 @@ function saveDocument() {
 function openDocument() {
 	File.Open(document.getElementById('file-name').value, 
 		function(payload) {
+			if (payload == null || payload.html == null || payload.css == null) alert("An error occured while opening the document.");
+			
 			var temp = input.selectedIndex;
 	
 			/* Set HTML and CSS data */
