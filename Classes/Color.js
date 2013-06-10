@@ -29,7 +29,7 @@ function Color(hex) {
 
 	if (hex.length == 3) {
 		hex += hex;
-	} else if (subhex.length != 6);
+	} else if (hex.length != 6);
 		hex = "000000";
 
 	this.hex = '#' + hex;
