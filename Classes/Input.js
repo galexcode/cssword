@@ -360,7 +360,7 @@ function Input (inputs, formatting, callback) {
 			else if (data[pos]) cursorLen += (this.allowsFormatting[i]) ? this.datas[i].clean()[this.datasPos[i]].cdiff() : this.datas[i][this.datasPos[i]].ediff();
 		
 			if (!this._isBlinking) {
-				var cursorColor = document.getElementById('paper-frame').backgroundColor;
+				var cursorColor = document.getElementById('paper-frame').style.backgroundColor;
 				var cursorBackColor = new Color(cursorColor).invertColor().hex;
 				console.log("Cursor: " + cursorColor + ", Bg: " + cursorBackColor);
 
