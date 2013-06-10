@@ -150,6 +150,7 @@ function parse() {
 		var cssStyle = input.data();
 		
 		cssStyle = cssStyle.replace(/body \{/g, '.paper {');
+		cssStyle = cssStyle.replace(/html \{/g, '.paper-container {');
 	
 		/* Modify CSS Style */
 		$.getElementById('parent-css').innerHTML = cssStyle;
@@ -526,7 +527,11 @@ window.onresize = onResize;
 <p>Proin porta iaculis dui, in fermentum lectus laoreet vel. Fusce a tincidunt justo. Vestibulum imperdiet sapien magna. Duis porttitor velit nec mauris convallis convallis. Sed blandit lectus in turpis molestie, ac ultricies enim mollis. Donec quis urna scelerisque, adipiscing sapien in, consequat leo. Suspendisse faucibus augue quam, eget tempus augue interdum non. Donec dignissim urna neque, malesuada suscipit lectus gravida in.</p></div>
 	<p></p>
     <div id="css-input-header" class="input-header">&lt;/css&gt;</div>
-    <div id="css-input" class="input" style="min-height:120px; background-color: #ccc; font-family:monospace;" onClick="input.select(1)">body {
+    <div id="css-input" class="input" style="min-height:120px; background-color: #ccc; font-family:monospace;" onClick="input.select(1)">html {
+	background-color: white;    
+}
+    
+body {
     font-family: Arial, Helvetica, sans-serif;
 	margin: 16px;  
 	font-size: 14px;
