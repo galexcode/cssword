@@ -213,8 +213,7 @@ button:active {
 	width: 40%;
 	float: left;
 	
-	padding: 32px;
-	padding-right: 24px;
+	padding: 0px 24px 0 24px 0;
 	
 	overflow-y: scroll;
 	
@@ -265,7 +264,7 @@ button:active {
 
 /* Toolbar */
 .tools {
-	padding-top: 8px;	
+	padding-top: 32px;	
 }
 
 </style>
