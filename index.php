@@ -36,6 +36,49 @@ body {
 	margin: 0px;
 }
 
+/* Inputs/TextFields */
+textarea, input {
+        border: thin solid #ddd;
+        border-radius: 2px;
+        background-color: #fff;
+        color: #444;
+        font: normal 14px auto Verdana, Arial, Helvetica, sans-serif;
+        padding: 4px;
+}
+
+textarea:disabled, input:disabled, textarea[readonly="readonly"], input[readonly="readonly"] {
+        background-color:#eee;
+}
+
+textarea:hover, input:hover {
+        border: thin solid #ccc;
+}
+
+textarea:focus , input:focus {
+        outline: none;
+        border: thin solid #9ecaed;
+        box-shadow: 0px 0px 10px #9ecaed;
+}
+
+/* .button */
+.button {
+        height: 32px;
+        border: thin solid #ddd;
+        background-color: #fff;
+        color: #666;
+        font: bold 14px auto Verdana, Arial, Helvetica, sans-serif;
+        border-radius: 4px;
+}
+
+.button:hover {
+        border: thin solid #ccc;
+}
+
+.button:active {
+        border: thin solid #bbb;
+        box-shadow: 0px 0px 10px #bbb;
+}
+
 /* Scroll bars */
 ::-webkit-scrollbar {
     width: 16px;
