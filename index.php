@@ -159,6 +159,7 @@ body {
 
 .pane.right {
 	overflow: hidden;
+	height: 100%;
 	
 	/* Style */
 	background-color: #222;
@@ -193,7 +194,7 @@ body {
 .paper {
 	/* Style */
 	text-align: left;
-	/*padding: 8px;*/
+	padding: 8px;
 }
 
 </style>
