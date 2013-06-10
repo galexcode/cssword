@@ -219,6 +219,8 @@ callback = function(intent, inputName) {
 }
 
 function onKeyDown(e) {
+	if (input.selectedIndex == -1) return true;
+	
 	/* Control Keys */
 	switch (e.keyCode) {
 		case 8: { /* Backspace */
@@ -399,6 +401,8 @@ function onKeyDown(e) {
 };
 
 function onKeyPress(e) {
+	if (input.selectedIndex == -1) return true;
+	
 	/* Textual Keys */
 	var char;
 	
