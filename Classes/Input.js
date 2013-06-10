@@ -360,9 +360,10 @@ function Input (inputs, formatting, callback) {
 			else if (data[pos]) cursorLen += (this.allowsFormatting[i]) ? this.datas[i].clean()[this.datasPos[i]].cdiff() : this.datas[i][this.datasPos[i]].ediff();
 		
 			if (!this._isBlinking) {
-				var cursorColor = document.getElementById('paper-frame').style.backgroundColor;
+				var cursorColor = document.getElementById('paper-frame').style.color;
 				var cursorBackColor = new Color(cursorColor).invertColor().hex;
-				console.log("Cursor: " + cursorColor + ", Bg: " + cursorBackColor);
+				console.log("Cursor: ", cursorColor);
+				console.log("Bg: " + cursorBackColor);
 
 				data = data.substr(0, pos) + data.substr(pos, cursorLen).safewrap('<span style="margin-left: -2px; margin-right: -2px; padding-left: 2px; padding-right: 2px; color: ' + cursorColor + '; background-color: ' + cursorBackColor + ';">$0</span>') + data.substr(pos + cursorLen);
 			} /*else if (hiddenSpace data[pos] == '\n' || data[pos] == '>')
