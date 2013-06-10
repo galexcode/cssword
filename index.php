@@ -164,6 +164,10 @@ body {
 	background-color: #222;
 }
 
+.pane.right.active {
+	background-color: #333;	
+}
+
 /* Paper (WYSIWYG) */
 .paper-frame {
 	width: 100%;
