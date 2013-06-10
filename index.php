@@ -125,7 +125,7 @@ body {
 }
 
 .paper-container.active {
-	box-shadow: 0 4px 4px #666;
+	box-shadow: 0 4px 4px #444;
 }
 
 .paper {
@@ -494,10 +494,10 @@ function onLoad() {
 	
 	/* Set paper-input to html-input */
 	input.setData(input.datas[input.names.indexOf('html-input')]);
-	input.select(2);
+	input.select(2, false);
 	
 	/* Select html-input */
-	input.select(0);
+	input.select(0, false);
 	
 	input.refreshAll();
 	
