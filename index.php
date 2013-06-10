@@ -44,7 +44,6 @@ textarea, input {
     background-color: #fff;
     color: #444;
     font: normal 14px auto Verdana, Arial, Helvetica, sans-serif;
-    padding: 4px;
 }
 
 textarea:disabled, input:disabled, textarea[readonly="readonly"], input[readonly="readonly"] {
