@@ -38,12 +38,13 @@ body {
 
 /* Inputs/TextFields */
 textarea, input {
-	height: 32px;
+	height: 28px;
 	border: thin solid #ddd;
     border-radius: 2px;
     background-color: #fff;
     color: #444;
-    font: normal 14px auto Verdana, Arial, Helvetica, sans-serif;
+    font: normal 16px auto Verdana, Arial, Helvetica, sans-serif;
+	padding-left: 8px;
 }
 
 textarea:disabled, input:disabled, textarea[readonly="readonly"], input[readonly="readonly"] {
@@ -62,6 +63,26 @@ textarea:focus , input:focus {
 
 /* .button */
 button {
+border:1px solid #7d99ca; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 10px 10px 10px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+ background-color: #a5b8da; background-image: -webkit-gradient(linear, left top, left bottom, from(#a5b8da), to(#7089b3));
+ background-image: -webkit-linear-gradient(top, #a5b8da, #7089b3);
+ background-image: -moz-linear-gradient(top, #a5b8da, #7089b3);
+ background-image: -ms-linear-gradient(top, #a5b8da, #7089b3);
+ background-image: -o-linear-gradient(top, #a5b8da, #7089b3);
+ background-image: linear-gradient(to bottom, #a5b8da, #7089b3);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a5b8da, endColorstr=#7089b3);
+}
+
+button:hover{
+ border:1px solid #5d7fbc;
+ background-color: #819bcb; background-image: -webkit-gradient(linear, left top, left bottom, from(#819bcb), to(#536f9d));
+ background-image: -webkit-linear-gradient(top, #819bcb, #536f9d);
+ background-image: -moz-linear-gradient(top, #819bcb, #536f9d);
+ background-image: -ms-linear-gradient(top, #819bcb, #536f9d);
+ background-image: -o-linear-gradient(top, #819bcb, #536f9d);
+ background-image: linear-gradient(to bottom, #819bcb, #536f9d);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#819bcb, endColorstr=#536f9d);
+}
+
+/*button {
 	height: 32px;
     border: thin solid #ddd;
     background-color: #fff;
@@ -77,7 +98,7 @@ button:hover {
 button:active {
     border: thin solid #bbb;
     box-shadow: 0px 0px 10px #bbb;
-}
+}*/
 
 /* Scroll bars */
 ::-webkit-scrollbar {
