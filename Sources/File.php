@@ -102,7 +102,7 @@ if (isset($file) && isset($action)) {
 					}
 					
 					/* Write the payload */
-					fwrite($fh, $_POST[$payload]);
+					fwrite($fh, stripslashes($_POST[$payload])); /* Remove magic quotes */
 					fclose($fh);
 				}
 				
