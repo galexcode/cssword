@@ -99,5 +99,7 @@ File.Open = function (name, callback) {
 		if (obj.css_payload != null) obj.css_payload = obj.css_payload;
 		
 		callback(new Payload(obj.html_payload, obj.css_payload));
+		
+		document.getElementById('tools-output').innerHTML = obj.message;
 	});
 }
