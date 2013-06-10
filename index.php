@@ -190,7 +190,7 @@ callback = function(intent, inputName) {
 			if (input.selected == input.names[key]) continue;
 			
 			if (input.names[key] == 'paper-input') {
-				$.getElementById('paper-container').style.boxShadow = '0 4px 4px #000;';
+				$.getElementById('paper-frame').style.boxShadow = '0 4px 4px #000;';
 			} else {
 				/* Input Box */
 				$.getElementById(input.names[key]).style.color = 'dimGray';
@@ -206,7 +206,7 @@ callback = function(intent, inputName) {
 		}
 		
 		if (inputName == 'paper-input') {
-			$.getElementById('paper-container').style.boxShadow = '0 4px 4px #fff;';
+			$.getElementById('paper-frame').style.boxShadow = '0 4px 4px #fff;';
 		} else if ($.getElementById(inputName)) {
 			var themeColor = ['indianRed', 'dodgerBlue'];
 			
