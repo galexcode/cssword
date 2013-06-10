@@ -38,45 +38,46 @@ body {
 
 /* Inputs/TextFields */
 textarea, input {
-        border: thin solid #ddd;
-        border-radius: 2px;
-        background-color: #fff;
-        color: #444;
-        font: normal 14px auto Verdana, Arial, Helvetica, sans-serif;
-        padding: 4px;
+	height: 32px;
+	border: thin solid #ddd;
+    border-radius: 2px;
+    background-color: #fff;
+    color: #444;
+    font: normal 14px auto Verdana, Arial, Helvetica, sans-serif;
+    padding: 4px;
 }
 
 textarea:disabled, input:disabled, textarea[readonly="readonly"], input[readonly="readonly"] {
-        background-color:#eee;
+    background-color:#eee;
 }
 
 textarea:hover, input:hover {
-        border: thin solid #ccc;
+	border: thin solid #ccc;
 }
 
 textarea:focus , input:focus {
-        outline: none;
-        border: thin solid #9ecaed;
-        box-shadow: 0px 0px 10px #9ecaed;
+	outline: none;
+	border: thin solid #9ecaed;
+	box-shadow: 0px 0px 10px #9ecaed;
 }
 
 /* .button */
 button {
-        height: 32px;
-        border: thin solid #ddd;
-        background-color: #fff;
-        color: #666;
-        font: bold 14px auto Verdana, Arial, Helvetica, sans-serif;
-        border-radius: 4px;
+	height: 32px;
+    border: thin solid #ddd;
+    background-color: #fff;
+    color: #666;
+    font: bold 14px auto Verdana, Arial, Helvetica, sans-serif;
+    border-radius: 4px;
 }
 
 button:hover {
-        border: thin solid #ccc;
+    border: thin solid #ccc;
 }
 
 button:active {
-        border: thin solid #bbb;
-        box-shadow: 0px 0px 10px #bbb;
+    border: thin solid #bbb;
+    box-shadow: 0px 0px 10px #bbb;
 }
 
 /* Scroll bars */
@@ -238,6 +239,11 @@ button:active {
 	/* Style */
 	text-align: left;
 	padding: 8px;
+}
+
+/* Toolbar */
+.tools {
+	padding-top: 8px;	
 }
 
 </style>
@@ -624,7 +630,7 @@ window.onresize = onResize;
 </head>
 <body>
 <div id="left-pane" class="pane left max-height">
-	<div id="tools">
+	<div id="tools" class="tools">
         <form id="file-form" name="file-form">
           	<label for="file-name"></label>
           	<input type="text" name="file-name" id="file-name" onFocus="input.select(-1);" onBlur="input.getHealthy();" />
