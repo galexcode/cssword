@@ -97,6 +97,13 @@ body {
 
 	min-height: 120px;
 	font-family: monospace;
+
+	webkit-touch-callout: none;
+	webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .input.active {
@@ -109,6 +116,26 @@ body {
 
 .input.active.dodgerBlue {
 	border-left: 8px solid dodgerBlue; 
+	
+}
+
+.gist-highlight {
+    border-left: 3ex solid #eee;
+    position: relative;
+}
+
+.gist-highlight pre {
+    counter-reset: linenumbers;
+}
+
+.gist-highlight pre div:before {
+    color: #aaa;
+    content: counter(linenumbers);
+    counter-increment: linenumbers;
+    left: -3ex;
+    position: absolute;
+    text-align: right;
+    width: 2.5ex;
 }
 
 /* Panes */
