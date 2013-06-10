@@ -76,11 +76,11 @@ body {
 }
 
 .input-header.active.indianRed {
-	color: 'indianRed';
+	color: indianRed;
 }
 
 .input-header.active.dodgerBlue {
-	color: 'dodgerBlue';
+	color: dodgerBlue;
 }
 
 .input {
@@ -91,21 +91,21 @@ body {
 	cursor: pointer;
 	font-weight: bold;
 
-	border-left: 8px solid 'dimGray'; 
-	color: 'dimGray';
-	background-color: 'floralWhite';
+	border-left: 8px solid dimGray; 
+	color: dimGray;
+	background-color: floralWhite;
 }
 
 .input.active {
-	color: 'black';
+	color: black;
 }
 
 .input.active.indianRed {
-	border-left: 8px solid 'indianRed'; 
+	border-left: 8px solid indianRed; 
 }
 
 .input.active.dodgerBlue {
-	border-left: 8px solid 'dodgerBlue'; 
+	border-left: 8px solid dodgerBlue; 
 }
 
 /* Panes */
@@ -233,7 +233,6 @@ callback = function(intent, inputName) {
 
 				/* Input Box Header */
 				$.getElementById(input.names[key] + '-header').className = 'input-header';
-				
 			}
 			
 			/* Remove blinking cursor */
