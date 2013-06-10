@@ -21,6 +21,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License 
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-###Minimum Requirements###
+###Development Environment###
+*This is the setup I am currently developing this project on:*
 PHP 5.3.4
 MySQL
+
+###Development Status###
+This project is currently in its early stages of development. As such, many things will change quickly and possibly drastically until its maturity.
