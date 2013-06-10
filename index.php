@@ -653,9 +653,9 @@ window.onresize = onResize;
 	<div id="tools" class="tools">
         <form id="file-form" name="file-form">
           	<label for="file-name"></label>
-          	<input type="text" name="file-name" id="file-name" onFocus="input.select(-1);" onBlur="input.getHealthy();" />
-          	<button name="save-file" id="save-file" onClick="saveDocument();">Save File</button>
-        	<button name="open-file" id="open-file" onClick="openDocument();">Open File</button>
+          	<input type="text" name="file-name" id="file-name" onFocus="input.select(-1);" onBlur="input.getHealthy();" value="newFile" />
+          	<button type="button" name="save-file" id="save-file" onClick="saveDocument();">Save File</button>
+        	<button type="button" name="open-file" id="open-file" onClick="openDocument();">Open File</button>
             <span id="tools-output"></span>
         </form>
 	</div>
