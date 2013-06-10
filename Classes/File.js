@@ -54,8 +54,6 @@ function File(obj, callback) {
 			getParams.push(key + '=' + obj[key]);
 	}
 	
-	console.log("POST Params: " + (postParams.length > 0) ? postParams.join('&') : null);
-	
 	/* Connect */
 	var self = this;
 	this.ajax = new Ajax(requestMethod, 'Sources/File.php?' + getParams.join('&'), (postParams.length > 0) ? postParams.join('&') : null, function(ajax) {

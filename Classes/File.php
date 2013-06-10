@@ -40,7 +40,7 @@ class File {
 	}
 	
 	function getPayloads() {
-		return array( 'html-payload', 'css-payload' );
+		return array( 'html_payload', 'css_payload' );
 	}
 	
 	function getPaths() {
