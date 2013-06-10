@@ -490,10 +490,10 @@ function onLoad() {
 	input.setData(input.datas[input.names.indexOf('html-input')]);
 	input.select(2);
 	
-	input.refreshAll();
-	
 	/* Select html-input */
 	input.select(0);
+	
+	input.refreshAll();
 	
 	onResize();
 	
