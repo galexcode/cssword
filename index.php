@@ -42,8 +42,8 @@ textarea, input {
         border-radius: 2px;
         background-color: #fff;
         color: #444;
-        font: normal 16px auto Verdana, Arial, Helvetica, sans-serif;
-        padding: 6px;
+        font: normal 14px auto Verdana, Arial, Helvetica, sans-serif;
+        padding: 4px;
 }
 
 textarea:disabled, input:disabled, textarea[readonly="readonly"], input[readonly="readonly"] {
@@ -60,21 +60,21 @@ textarea:focus , input:focus {
         box-shadow: 0px 0px 10px #9ecaed;
 }
 
-/* button */
-button {
-        height: 48px;
+/* .button */
+.button {
+        height: 32px;
         border: thin solid #ddd;
         background-color: #fff;
         color: #666;
-        font: bold 16px auto Verdana, Arial, Helvetica, sans-serif;
-        border-radius: 8px;
+        font: bold 14px auto Verdana, Arial, Helvetica, sans-serif;
+        border-radius: 4px;
 }
 
-button:hover {
+.button:hover {
         border: thin solid #ccc;
 }
 
-button:active {
+.button:active {
         border: thin solid #bbb;
         box-shadow: 0px 0px 10px #bbb;
 }
@@ -628,8 +628,8 @@ window.onresize = onResize;
         <form id="file-form" name="file-form">
           	<label for="file-name"></label>
           	<input type="text" name="file-name" id="file-name" onFocus="input.select(-1);" onBlur="input.getHealthy();" />
-          	<button name="save-file" id="save-file" value="Save File" onClick="saveDocument();" />
-        	<button name="open-file" id="open-file" value="Open File" onClick="openDocument();" />
+          	<input type="button" name="save-file" id="save-file" value="Save File" onClick="saveDocument();" />
+        	<input type="button" name="open-file" id="open-file" value="Open File" onClick="openDocument();" />
             <span id="tools-output"></span>
         </form>
 	</div>
