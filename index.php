@@ -125,7 +125,7 @@ body {
 }
 
 .paper-container.active {
-	box-shadow: 0 4px 4px #444;
+	box-shadow: 0 4px 4px #555;
 }
 
 .paper {
@@ -496,18 +496,20 @@ function onLoad() {
 	input.setData(input.datas[input.names.indexOf('html-input')]);
 	input.select(2, false);
 	
-	/* Select html-input */
-	input.select(0, false);
-	
-	input.refreshAll();
-	
 	onResize();
 	
-	$.getElementById('paper-frame').onmousedown = function(event)
-	{
-		event.preventDefault();
-		return false;
+	var disabledMouseDownDivs = ['paper-frame', 'html-input', 'css-input'];
+	for (var key in disabledMouseDownDivs) {
+		$.getElementById(key).onmousedown = function(event) {
+			event.preventDefault();
+			return false;
+		}
 	}
+	
+	/* Select html-input */
+	input.select(0, true);
+	
+	input.refreshAll(true);
 }
 
 window.onload = onLoad;
