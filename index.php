@@ -141,6 +141,7 @@ body {
 <script type="text/javascript" src="Classes/Ajax.js"></script>
 <script type="text/javascript" src="Classes/Input.js"></script>
 <script type="text/javascript" src="Classes/File.js"></script>
+<script type="text/javascript" src="Classes/Color.js"></script>
 <script type="text/javascript">
 $ = document; // shortcut
 input = null;
@@ -170,6 +171,7 @@ function setPaperData() {
 }
 
 callback = function(intent, inputName) {
+	
 	if (!input || !inputName) return;
 	
 	if (intent == input.CallbackIntent.REFRESHED) {
