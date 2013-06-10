@@ -76,7 +76,7 @@ if (isset($file) && isset($action)) {
 					}
 					
 					/* Get the payload */
-					$json[$payload] = base64_encode(fread($fh, filesize($path)));
+					$json[$payload] = fread($fh, filesize($path));
 					fclose($fh);
 				}
 				

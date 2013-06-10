@@ -95,8 +95,8 @@ File.Open = function (name, callback) {
 					"file"	  : name };
 	
 	new File(fileObj, function(obj) {
-		if (obj.html_payload != null) obj.html_payload = window.atob(obj.html_payload);
-		if (obj.css_payload != null) obj.css_payload = window.atob(obj.css_payload);
+		if (obj.html_payload != null) obj.html_payload = obj.html_payload;
+		if (obj.css_payload != null) obj.css_payload = obj.css_payload;
 		
 		callback(new Payload(obj.html_payload, obj.css_payload));
 	});
