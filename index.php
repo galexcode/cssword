@@ -115,8 +115,7 @@ body {
 }
 
 .input.active.dodgerBlue {
-	border-left: 8px solid dodgerBlue; 
-	
+	border-left: 8px solid dodgerBlue;
 }
 
 .gist-highlight {
@@ -200,7 +199,6 @@ body {
 <script type="text/javascript" src="Classes/Ajax.js"></script>
 <script type="text/javascript" src="Classes/Input.js"></script>
 <script type="text/javascript" src="Classes/File.js"></script>
-<script type="text/javascript" src="Classes/Color.js"></script>
 <script type="text/javascript">
 $ = document; // shortcut
 input = null;
@@ -251,7 +249,7 @@ callback = function(intent, inputName) {
 		}
 	} 
 	else if (intent == input.CallbackIntent.SELECTED) {
-		for (var key in input.names) {
+		for (var key = 0; key < input.names.length; key++) {
 			if (input.selected == input.names[key]) continue;
 			
 			if (input.names[key] == 'paper-input') {
@@ -557,8 +555,8 @@ function onLoad() {
 	onResize();
 	
 	var disabledMouseDownDivs = ['paper-frame', 'html-input', 'css-input'];
-	for (var key in disabledMouseDownDivs) {
-		$.getElementById(key).onmousedown = function(event) {
+	for (var i = 0; i < disabledMouseDownDivs; i++) {
+		$.getElementById(disabledMouseDownDivs[i]).onmousedown = function(event) {
 			event.preventDefault();
 			return false;
 		}
