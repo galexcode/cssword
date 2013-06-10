@@ -446,10 +446,10 @@ function saveDocument() {
 	
 	/* Get HTML and CSS data */
 	input.select(input.indexOf('html-input'), false);
-	var html = input.getData();
+	var html = input.data();
 	
 	input.select(input.indexOf('css-input'), false);
-	var css = input.getData();
+	var css = input.data();
 	
 	input.select(temp, false);
 	
