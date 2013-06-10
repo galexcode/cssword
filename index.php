@@ -124,6 +124,10 @@ body {
 	cursor: pointer;
 }
 
+.paper-container.active {
+	box-shadow: 0 4px 4px #fff;
+}
+
 .paper {
 	/* Style */
 	text-align: left;
@@ -190,7 +194,8 @@ callback = function(intent, inputName) {
 			if (input.selected == input.names[key]) continue;
 			
 			if (input.names[key] == 'paper-input') {
-				document.querySelector(".paper-container").style.boxShadow = "0x 4px 4px #000;";
+				$.getElementsById('paper-frame').className = '.paper-container';
+				//document.querySelector(".paper-container").style.WebKitBoxShadow = "0x 4px 4px #000;";
 			} else {
 				/* Input Box */
 				$.getElementById(input.names[key]).style.color = 'dimGray';
@@ -206,7 +211,7 @@ callback = function(intent, inputName) {
 		}
 		
 		if (inputName == 'paper-input') {
-			document.querySelector(".paper-container").style.boxShadow = "0x 4px 4px #fff;";
+			$.getElementsById('paper-frame').className = '.paper-container active';
 		} else if ($.getElementById(inputName)) {
 			var themeColor = ['indianRed', 'dodgerBlue'];
 			
