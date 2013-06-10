@@ -58,7 +58,7 @@ if (isset($file) && isset($action)) {
 	
 	switch ($action) {
 		case FileAction::Open: {
-				for ($i = 0; $i < count($paths); $i++)) {
+				for ($i = 0; $i < count($paths); $i++) {
 					$path = $paths[$i];
 					$payload = $payloads[$i];
 					
@@ -84,7 +84,7 @@ if (isset($file) && isset($action)) {
 			}
 			break;
 		case FileAction::Save: {
-				for ($i = 0; $i < count($paths); $i++)) {
+				for ($i = 0; $i < count($paths); $i++) {
 					$path = $paths[$i];
 					$payload = $payloads[$i];
 					
