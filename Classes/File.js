@@ -75,6 +75,8 @@ File.Save = function (name, payload) {
 					"file"	  		: name,
 					"html_payload"  : window.btoa(payload.html),
 					"css_payload"   : window.btoa(payload.css) };
+					
+	console.log("HTML Payload: " + payload.html);
 	
 	new File(fileObj, function(obj) {
 		console.log("Object: ", obj);
