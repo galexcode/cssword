@@ -1,5 +1,8 @@
 <?
 /*  css:Word
+ * 
+ *  index.php
+ *  @author katzenbaer
  *  
  *  Copyright (C) 2013  Terrence J. Katzenbaer (tkatzenbaer@lytenight.com)
  *
@@ -21,7 +24,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>css-word</title>
+<title>css:Word</title>
 <style id="super-css" type="text/css">
 /* Page */
 html {
@@ -33,8 +36,73 @@ body {
 	margin: 0px;
 }
 
+/* Inputs/TextFields */
+textarea, input {
+	height: 28px;
+	border: thin solid #ddd;
+    border-radius: 2px;
+    background-color: #fff;
+    color: #444;
+    font: normal 16px auto Verdana, Arial, Helvetica, sans-serif;
+	padding-left: 8px;
+}
+
+textarea:disabled, input:disabled, textarea[readonly="readonly"], input[readonly="readonly"] {
+    background-color:#eee;
+}
+
+textarea:hover, input:hover {
+	border: thin solid #ccc;
+}
+
+textarea:focus , input:focus {
+	outline: none;
+	border: thin solid #9ecaed;
+	box-shadow: 0px 0px 10px #9ecaed;
+}
+
+/* .button */
+button {
+	cursor: pointer;
+border:1px solid #7d99ca; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 10px 10px 10px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+ background-color: #a5b8da; background-image: -webkit-gradient(linear, left top, left bottom, from(#a5b8da), to(#7089b3));
+ background-image: -webkit-linear-gradient(top, #a5b8da, #7089b3);
+ background-image: -moz-linear-gradient(top, #a5b8da, #7089b3);
+ background-image: -ms-linear-gradient(top, #a5b8da, #7089b3);
+ background-image: -o-linear-gradient(top, #a5b8da, #7089b3);
+ background-image: linear-gradient(to bottom, #a5b8da, #7089b3);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a5b8da, endColorstr=#7089b3);
+}
+
+button:hover{
+ border:1px solid #5d7fbc;
+ background-color: #819bcb; background-image: -webkit-gradient(linear, left top, left bottom, from(#819bcb), to(#536f9d));
+ background-image: -webkit-linear-gradient(top, #819bcb, #536f9d);
+ background-image: -moz-linear-gradient(top, #819bcb, #536f9d);
+ background-image: -ms-linear-gradient(top, #819bcb, #536f9d);
+ background-image: -o-linear-gradient(top, #819bcb, #536f9d);
+ background-image: linear-gradient(to bottom, #819bcb, #536f9d);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#819bcb, endColorstr=#536f9d);
+}
+
+/*button {
+	height: 32px;
+    border: thin solid #ddd;
+    background-color: #fff;
+    color: #666;
+    font: bold 14px auto Verdana, Arial, Helvetica, sans-serif;
+    border-radius: 4px;
+}
+
+button:hover {
+    border: thin solid #ccc;
+}
+
+button:active {
+    border: thin solid #bbb;
+    box-shadow: 0px 0px 10px #bbb;
+}*/
+
 /* Scroll bars */
-::-webkit-scrollbar {
+/*::-webkit-scrollbar {
     width: 16px;
 }
  
@@ -49,7 +117,7 @@ body {
 	opacity: 0.5;
     border-radius: 4px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-}
+}*/
 
 /* Window Class */
 .max-height {
@@ -67,6 +135,19 @@ body {
 	color: gainsboro;
 	opacity:0.4;
 }
+
+.input-header.active {
+	
+}
+
+.input-header.active.indianRed {
+	color: indianRed;
+}
+
+.input-header.active.dodgerBlue {
+	color: dodgerBlue;
+}
+
 .input {
 	/* Some styles are changed dynamically */
 	padding: 8px;
@@ -74,6 +155,51 @@ body {
 	
 	cursor: pointer;
 	font-weight: bold;
+
+	background-color: floralWhite;
+	border-left: 8px solid dimGray; 
+	color: dimGray;
+
+	min-height: 120px;
+	font-family: monospace;
+
+	webkit-touch-callout: none;
+	webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.input.active {
+	color: black;
+}
+
+.input.active.indianRed {
+	border-left: 8px solid indianRed; 
+}
+
+.input.active.dodgerBlue {
+	border-left: 8px solid dodgerBlue;
+}
+
+.gist-highlight {
+    border-left: 3ex solid #eee;
+    position: relative;
+}
+
+.gist-highlight pre {
+    counter-reset: linenumbers;
+}
+
+.gist-highlight pre div:before {
+    color: #aaa;
+    content: counter(linenumbers);
+    counter-increment: linenumbers;
+    left: -3ex;
+    position: absolute;
+    text-align: right;
+    width: 2.5ex;
 }
 
 /* Panes */
@@ -88,19 +214,25 @@ body {
 	width: 40%;
 	float: left;
 	
-	padding-right: 24px;
+	padding: 0px 24px 0 24px 0;
 	
 	overflow-y: scroll;
 	
 	/* Style */
-	background-color: darkGray;
+	/*background-color: darkGray;*/
+	background-color: white;
 }
 
 .pane.right {
 	overflow: hidden;
+	height: 100%;
 	
 	/* Style */
-	background-color: #333;
+	background-color: #222;
+}
+
+.pane.right.active {
+	background-color: #333;	
 }
 
 /* Paper (WYSIWYG) */
@@ -121,360 +253,29 @@ body {
 	cursor: pointer;
 }
 
+.paper-container.active {
+	box-shadow: 0 4px 4px #555;
+}
+
 .paper {
 	/* Style */
 	text-align: left;
 	padding: 8px;
 }
 
+/* Toolbar */
+.tools {
+	padding-top: 32px;	
+}
+
 </style>
 <style id="parent-css" type="text/css">
 </style>
+<script type="text/javascript" src="Classes/Payload.js"></script>
+<script type="text/javascript" src="Classes/Ajax.js"></script>
+<script type="text/javascript" src="Classes/Input.js"></script>
+<script type="text/javascript" src="Classes/File.js"></script>
 <script type="text/javascript">
-/* Input Object */
-function Input (inputs, formatting, callback) {
-	if (inputs.length != formatting.length) {
-		console.log("A formatting must be specified for every input.");
-		return null;
-	}
-	
-	this.names = [];
-	for (var i = 0; i < inputs.length; i++) {
-		this.names.push(inputs[i]);
-	}
-	
-	this.datas = [];
-	this.datasPos = []; /* The offset position in the data. When formatting is allowed, this is the position after performing a clean on the data. */
-	this.allowsFormatting = [];
-	for (var i = 0; i < inputs.length; i++) {
-		this.allowsFormatting.push(formatting[i]);
-	}
-	
-	this.callback = callback;
-	
-	this.selectedIndex = 0;
-	
-	this.CallbackIntent = {
-		SELECTED : 0,
-		REFRESHED : 1,
-	};
-	
-	EscapeString = {
-		SPACE : '{com.lytenight.css-word.space}',
-		LT : '<',
-		GT : '>',
-		TAB : '\t',
-		NEWLINE : '\n', /* Has to be last, so '<br>' doesn't get overwritten by '&lt;' and '&gt;' */
-	};
-	
-	EscapeEquivalent = {
-		SPACE : ' ',
-		LT : '&lt;',
-		GT : '&gt;',
-		TAB : '&nbsp;&nbsp;&nbsp;&nbsp;',
-		NEWLINE : '<br>',
-	};
-	
-	this._isBlinking = false;
-	
-	/* String.safewrap(wrapper);
-	 * Wraps a 'wrapper' around the string.
-	 * The string is inserted wherever a $0 is present.
-	 * Spaces in the wrapper will be replaced with an escaped space.
-	 */
-	String.prototype.safewrap = function(wrapper) {
-		return wrapper.replace(/\s/g, EscapeString.SPACE).replace(/\$0/g, this);
-	};
-	
-	/* String.equivalent();
-	 * Creates and returns a new string made from replacing all escapes with their equivalent.
-	 */
-	String.prototype.equivalent = function() {
-		var str = this;
-		for (var key in EscapeString) {
-			str = str.replace(new RegExp(EscapeString[key], 'g'), EscapeEquivalent[key]);
-		}
-		return str;
-	};
-	
-	/* String.elength();
-	 * Returns the length of a string undergone the equivalent transformation.
-	 */
-	String.prototype.elength = function() {
-		return String.prototype.equivalent.call(this).length;
-	};
-	
-	/* String.ediff();
-	 * Returns the increase in length due to an equivalent transformation.
-	 */
-	String.prototype.ediff = function() {
-		return Number(String.prototype.elength.call(this)) - this.length;
-	};
-	
-	/* String.clean();
-	 * Creates and returns a new string made from stripping all HTML tags.
-	 */
-	String.prototype.clean = function() {
-		var str = this;
-		//str = str.replace(/(<([^>]+)>)/ig,'');
-		//str = str.replace(new RegExp('(<[^>]+>\n*<[^>]+>)', "ig"), ''); /* Add in spaces where text can potentially go. */
-		str = str.replace(new RegExp('(<([^>]+)>)', "ig"), ' '); /* Completely remove remaining tags. */
-		
-		/*var matches = this.match(new RegExp('<[^>]+>', "ig"));
-		
-		if (matches) {
-			var matchCount = matches.length;
-			for (var i = 0; i < matchCount; i++)
-				str += ' ';
-		}*/
-		
-		return str;
-	};
-	
-	/* String.clength();
-	 * Returns the length of a string undergone the clean transformation.
-	 */
-	String.prototype.clength = function() {
-		return String.prototype.clean.call(this).length;
-	};
-	
-	/* String.cdiff();
-	 * Returns the increase in length due to an clean transformation.
-	 */
-	String.prototype.cdiff = function() {
-		return Number(String.prototype.clength.call(this)) - this.length;
-	};
-	
-	/** Functions **/
-	this.count = function() {
-		return this.names.length;
-	};
-	this.pos = function() {
-		return this.datasPos[this.selectedIndex];	
-	}
-	
-	/** Changing input **/
-	/* selectInput(inputIndex, shouldNotify = true); */
-	this.select = function(i, shouldNotify) {
-		if (shouldNotify == null) shouldNotify = true;
-		
-		this.selectedIndex = i;
-		
-		/* Callback */
-		if (shouldNotify)
-			this.invokeCallback(this.CallbackIntent.SELECTED, i);
-	};
-	
-	/* selectedInput(); */
-	this.selected = function() {
-		return this.names[this.selectedIndex];
-	};
-	
-	this.indexOf = function(name) {
-		return this.names.indexOf(name);
-	};
-	
-	/* Changing data */
-	/* data(); */
-	this.data = function() {
-		return this.datas[this.selectedIndex];	
-	};
-	
-	/* setData(d); */
-	this.setData = function(d) {
-		if (this.allowsFormatting[this.selectedIndex]) {
-			//d = d.replace(/([^\s])</g, '$1 <')
-		}
-		this.datas[this.selectedIndex] = d;
-		this.datasPos[this.selectedIndex] = (this.allowsFormatting[this.selectedIndex]) ? d.clean().length : d.length;
-	};
-	
-	/* appendData(d); */
-	this.appendData = function(d) {
-		var pos = this.pos() + this.skip(0, this.pos());
-		
-		this.datas[this.selectedIndex] = this.data().substr(0, pos) + d + this.data().substr(pos);
-		
-		this.datasPos[this.selectedIndex] += (this.allowsFormatting[this.selectedIndex]) ? d.clean().length : d.length;
-		
-		return true;
-	};
-	
-	/* removeData(i); */
-	this.removeData = function(i) {
-		if (this.datas[this.selectedIndex].length < i)
-			i = this.datas[this.selectedIndex].length;
-		
-		if (this.pos() == 0)
-			return false;
-			
-		var pos = this.pos() + this.skip(0, this.pos());
-			
-		this.datas[this.selectedIndex] = this.data().substr(0, pos - i) + this.data().substr(pos);
-		this.datasPos[this.selectedIndex] -= i;
-		
-		return true;
-	};
-	
-	/** Navigating the data **/
-	/* skip(base, offset); 
-	 * Returns the number of characters belong to a tag when progressing 'i' characters either forward or backward.
-	 */
-	this.skip = function(base, offset) {
-			if (!this.allowsFormatting[this.selectedIndex]) return 0;
-			if (offset < 0) return 0;
-			
-			var skip = 0;
-			var i = 0;
-			while (base + skip < this.data().length && base < offset) {
-				if (this.data()[base + skip + i] == '<') {
-					i = 1;
-					
-					while(this.data()[base + skip + i++] != '>'); /* loop until the tag is closed */
-					
-					skip += i - 1;
-					i = 0;
-				} else
-					base++;
-			}
-			
-			if (this.data()[base + skip] == '>')
-				skip--;
-			
-			/*if (this.data()[base + skip] == '<')
-				return this.skip(base, offset + 1);
-			else*/
-				return skip;
-	}
-	
-	/* move(i); */
-	this.move = function(i) {
-		var data = null;
-		
-		/* Formatting Allowed */
-		if (this.allowsFormatting[this.selectedIndex])
-			data = this.data().clean();
-		else
-			data = this.data();
-		
-		/* Boundary checking */
-		if (this.pos() + i < 0)
-			i = 0 - this.pos();
-		else if (this.pos() + i > data.length)
-			i = data.length - this.pos();
-			
-		if (i == 0) return false;
-		
-		/* If there's a tag ahead of us and we're moving one space, let's make some space */
-		if (this.allowsFormatting[this.selectedIndex]) {
-			if (i == 1 && this.data()[this.pos() + 1] == '<') {
-				var data = this.data().substr(0, this.pos() + 1) + ' ' + this.data().substr(this.pos() + 1);
-				this.setData(data);
-			}
-		}
-		
-		this.datasPos[this.selectedIndex] += i;
-		return true;
-	};
-	
-	/* seek(i); */
-	this.seek = function(i) {
-		var diff = i - this.pos();
-		
-		return this.move(diff);
-	};
-	
-	/** Propagating data changes **/
-	/* refreshSpecificInput(inputIndex, shouldNotify = true); */
-	this.refreshSpecific = function(i, shouldNotify) {
-		if (shouldNotify == null) shouldNotify = true;
-		
-		var hiddenSpace = '';
-		
-		var data = this.datas[i];
-		var dataLength = data.length;
-		var pos = this.datasPos[i] + data.substr(0, this.datasPos[i]).ediff();
-		
-		if (this.allowsFormatting[i]) {
-			 dataLength = data.clean().length;
-			 pos = this.datasPos[i] + this.skip(0, this.datasPos[i]);
-		} else
-			data = data.equivalent();
-		
-		/* hiddenSpace inserted at current location */
-		if (this.selectedIndex == i) {
-			if (this.datasPos[i] >= dataLength || data[pos] == '\n' || data[pos] == '<') {
-				hiddenSpace = '&nbsp;';
-				data = data.substr(0, pos) + hiddenSpace + data.substr(pos);
-			}
-		
-			var cursorLen = 1;
-			
-			if (hiddenSpace != '') cursorLen = hiddenSpace.length;
-			else if (data[pos]) cursorLen += (this.allowsFormatting[i]) ? this.datas[i].clean()[this.datasPos[i]].cdiff() : this.datas[i][this.datasPos[i]].ediff();
-		
-			if (!this._isBlinking)
-				data = data.substr(0, pos) + data.substr(pos, cursorLen).safewrap('<span style="margin-left: -2px; margin-right: -2px; padding-left: 2px; padding-right: 2px; background-color: lightBlue;">$0</span>') + data.substr(pos + cursorLen);
-			/*else if (hiddenSpace data[pos] == '\n' || data[pos] == '>')
-				data = data.substr(0, pos) + ' ' + data.substr(pos);*/
-		}
-			
-		document.getElementById(this.names[i]).innerHTML = data.replace(new RegExp(EscapeString.SPACE, 'g'), ' ');
-		
-		/* Callback */
-		if (shouldNotify) {
-			this.invokeCallback(this.CallbackIntent.REFRESHED, i);
-		}
-	};
-	
-	/* refresh(shouldNotify = true); */
-	this.refresh = function(shouldNotify) {
-		if (shouldNotify == null) shouldNotify = true;
-		
-		this.refreshSpecific(this.selectedIndex, shouldNotify);
-	};
-	
-	/* refreshAllInputs(shouldNotify = true); */
-	this.refreshAll = function(shouldNotify) {
-		if (shouldNotify == null) shouldNotify = true;
-		
-		for (var i = 0; i < this.names.length; i++)
-			this.refreshSpecific(i, shouldNotify);	
-	};
-	
-	/** Callbacks **/
-	/* setCallback(func);
-	 * Callbacks must conform to callback(Input.CallbackIntent, String inputName);
-	 */
-	this.setCallback = function(func) {
-		this.callback = func;
-	};
-	
-	/* invokeCallback(intent, i); */
-	this.invokeCallback = function(intent, i) {
-		if (this.callback)
-			this.callback(intent, this.names[i]);
-	};
-	
-	/** Initialize **/
-	for (var i = 0; i < this.count(); i++) {
-		if (document.getElementById(this.names[i]) == null) {
-			alert("Input Object created prematurely. Input elements are null.");
-			break;
-		}
-		
-		this.select(i);
-		this.setData(String(document.getElementById(this.names[i]).innerHTML.replace('    ', '\t')));
-	}
-	
-	/* Blinker */
-	blinker = function (callback) {
-		callback._isBlinking = !callback._isBlinking;
-		callback.refresh(false);
-	}
-	setInterval(blinker, 500, this);
-}
-
 $ = document; // shortcut
 input = null;
 
@@ -487,6 +288,7 @@ function parse() {
 		var cssStyle = input.data();
 		
 		cssStyle = cssStyle.replace(/body \{/g, '.paper {');
+		cssStyle = cssStyle.replace(/html \{/g, '.paper-container {');
 	
 		/* Modify CSS Style */
 		$.getElementById('parent-css').innerHTML = cssStyle;
@@ -502,6 +304,7 @@ function setPaperData() {
 }
 
 callback = function(intent, inputName) {
+	
 	if (!input || !inputName) return;
 	
 	if (intent == input.CallbackIntent.REFRESHED) {
@@ -522,19 +325,18 @@ callback = function(intent, inputName) {
 		}
 	} 
 	else if (intent == input.CallbackIntent.SELECTED) {
-		for (var key in input.names) {
+		for (var key = 0; key < input.names.length; key++) {
 			if (input.selected == input.names[key]) continue;
 			
 			if (input.names[key] == 'paper-input') {
-				$.getElementById(input.names[key]).style.opacity = 0.6;
+				$.getElementById('paper-frame').className = 'paper-container';
+				$.getElementById('right-pane').className= 'pane right';
 			} else {
 				/* Input Box */
-				$.getElementById(input.names[key]).style.color = 'dimGray';
-				$.getElementById(input.names[key]).style.backgroundColor = 'floralWhite';
-				$.getElementById(input.names[key]).style.borderLeft = '8px solid gainsboro';
-				
+				$.getElementById(input.names[key]).className = 'input';
+
 				/* Input Box Header */
-				$.getElementById(input.names[key] + '-header').style.color = 'gainsboro';
+				$.getElementById(input.names[key] + '-header').className = 'input-header';
 			}
 			
 			/* Remove blinking cursor */
@@ -542,20 +344,22 @@ callback = function(intent, inputName) {
 		}
 		
 		if (inputName == 'paper-input') {
-			$.getElementById(inputName).style.opacity = 1.0;
-		} else {
+			$.getElementById('paper-frame').className = 'paper-container active';
+			$.getElementById('right-pane').className = 'pane right active';
+		} else if ($.getElementById(inputName)) {
 			var themeColor = ['indianRed', 'dodgerBlue'];
-			
-			$.getElementById(inputName).style.color = 'black';
-			$.getElementById(inputName).style.borderLeft = '8px solid ' + themeColor[input.selectedIndex];
-			
+			/* Input Box */
+			$.getElementById(inputName).className = 'input active ' + themeColor[input.selectedIndex];
+
 			/* Input Box Header */
-			$.getElementById(inputName + '-header').style.color = themeColor[input.selectedIndex];
+			$.getElementById(inputName + '-header').className = 'input-header active ' + themeColor[input.selectedIndex];
 		}
 	}
 }
 
 function onKeyDown(e) {
+	if (input.selectedIndex == -1) return true;
+	
 	/* Control Keys */
 	switch (e.keyCode) {
 		case 8: { /* Backspace */
@@ -736,6 +540,8 @@ function onKeyDown(e) {
 };
 
 function onKeyPress(e) {
+	if (input.selectedIndex == -1) return true;
+	
 	/* Textual Keys */
 	var char;
 	
@@ -778,25 +584,64 @@ onResize = function(e) {
 	console.log('8.5" x 11" : Height: ' + paperHeight + 'px, Width: ' + paperWidth + 'px');
 }
 
+function saveDocument() {
+	var temp = input.selectedIndex;
+	
+	/* Get HTML and CSS data */
+	input.select(input.indexOf('html-input'), false);
+	var html = input.data();
+	
+	input.select(input.indexOf('css-input'), false);
+	var css = input.data();
+	
+	input.select(temp, false);
+	
+	var payload = new Payload(html, css);
+	File.Save(document.getElementById('file-name').value, payload);
+}
+
+function openDocument() {
+	File.Open(document.getElementById('file-name').value, 
+		function(payload) {
+			if (payload == null || payload.html == null || payload.css == null) alert("An error occured while opening the document.");
+			
+			var temp = input.selectedIndex;
+	
+			/* Set HTML and CSS data */
+			input.select(input.indexOf('html-input'), false);
+			var html = input.setData(payload.html);
+			
+			input.select(input.indexOf('css-input'), false);
+			var css = input.setData(payload.css);
+			
+			input.select(temp, false);
+			
+			input.refreshAll();
+		}
+	);	
+}
+
 function onLoad() {
 	input = new Input(['html-input', 'css-input', 'paper-input'], [false, false, true], callback);
 	
 	/* Set paper-input to html-input */
 	input.setData(input.datas[input.names.indexOf('html-input')]);
-	input.select(2);
-	
-	input.refreshAll();
-	
-	/* Select html-input */
-	input.select(0);
+	input.select(2, false);
 	
 	onResize();
 	
-	$.getElementById('paper-frame').onmousedown = function(event)
-	{
-		event.preventDefault();
-		return false;
+	var disabledMouseDownDivs = ['paper-frame', 'html-input', 'css-input'];
+	for (var i = 0; i < disabledMouseDownDivs; i++) {
+		$.getElementById(disabledMouseDownDivs[i]).onmousedown = function(event) {
+			event.preventDefault();
+			return false;
+		}
 	}
+	
+	/* Select html-input */
+	input.select(0, true);
+	
+	input.refreshAll(true);
 }
 
 window.onload = onLoad;
@@ -807,13 +652,26 @@ window.onresize = onResize;
 </head>
 <body>
 <div id="left-pane" class="pane left max-height">
+	<div id="tools" class="tools">
+        <form id="file-form" name="file-form">
+          	<label for="file-name"></label>
+          	<input type="text" name="file-name" id="file-name" onFocus="input.select(-1);" onBlur="input.getHealthy();" value="newFile" />
+          	<button type="button" name="save-file" id="save-file" onClick="saveDocument();">Save File</button>
+        	<button type="button" name="open-file" id="open-file" onClick="openDocument();">Open File</button>
+            <span id="tools-output"></span>
+        </form>
+	</div>
     <div id="html-input-header" class="input-header">&lt;/html&gt;</div>
-    <div id="html-input" class="input" style="min-height: 120px; background-color: #ccc; font-family:monospace;" onClick="input.select(0)"><div class="center"><h1>Page Title</h1></div>
+    <div id="html-input" class="input" onClick="input.select(0)"><div class="center"><h1>Page Title</h1></div>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus erat diam, molestie ut euismod ut, convallis vitae augue. Duis nulla dolor, gravida ac luctus in, malesuada sed diam.</p>
 <p>Proin porta iaculis dui, in fermentum lectus laoreet vel. Fusce a tincidunt justo. Vestibulum imperdiet sapien magna. Duis porttitor velit nec mauris convallis convallis. Sed blandit lectus in turpis molestie, ac ultricies enim mollis. Donec quis urna scelerisque, adipiscing sapien in, consequat leo. Suspendisse faucibus augue quam, eget tempus augue interdum non. Donec dignissim urna neque, malesuada suscipit lectus gravida in.</p></div>
 	<p></p>
     <div id="css-input-header" class="input-header">&lt;/css&gt;</div>
-    <div id="css-input" class="input" style="min-height:120px; background-color: #ccc; font-family:monospace;" onClick="input.select(1)">body {
+    <div id="css-input" class="input" onClick="input.select(1)">html {
+	background-color: white;    
+}
+    
+body {
     font-family: Arial, Helvetica, sans-serif;
 	margin: 16px;  
 	font-size: 14px;
