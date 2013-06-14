@@ -1,5 +1,5 @@
 /**
- *  Editor.js
+ *  UnitTests.js 
  *  @author katzenbaer
  *
  *  css:Word
@@ -19,16 +19,14 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-function Editor(name, buffer) {
-	var initial_text = "<pre><div><span style=\"color:blue\">&lt;Sup&gt;</span>content</div><div>How are you?</div><div>Nm u?</div></pre>";
-	this.buffer = buffer || new TextBuffer(initial_text);
-
-	this.element = document.getElementById(name);
-	this.element.className = "editor";
-	this.display();
-
-	this.display = function() {
-		this.element.innerHTML = this.buffer.htmlValue();
+function UnitAssert(assertion, purpose) {
+	if (assertion) { // is true
+		var msg = purpose + "... Success<br>";
+		document.write(msg);
+		console.log(msg);
+	} else { // is false
+		document.write(purpose + "... <span style=\"font-weight: bold; color: red;\">Failure</span><br>");
+		console.assert(assertion, "DID NOT " + purpose.toLowerCase()); 
 	}
 }
 

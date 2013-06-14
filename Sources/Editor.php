@@ -1,5 +1,6 @@
+<?
 /**
- *  Editor.js
+ *  Editor.php
  *  @author katzenbaer
  *
  *  css:Word
@@ -17,18 +18,13 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
 */
 
-function Editor(name, buffer) {
-	var initial_text = "<pre><div><span style=\"color:blue\">&lt;Sup&gt;</span>content</div><div>How are you?</div><div>Nm u?</div></pre>";
-	this.buffer = buffer || new TextBuffer(initial_text);
-
-	this.element = document.getElementById(name);
-	this.element.className = "editor";
-	this.display();
-
-	this.display = function() {
-		this.element.innerHTML = this.buffer.htmlValue();
-	}
-}
+echo <<<HTML_INCLUDE
+<script type="text/javascript" src="Classes/Buffer.js"></script>
+<script type="text/javascript" src="Classes/TextBuffer.js"></script>
+<script type="text/javascript" src="Classes/Editor.js"></script>
+<link rel="stylesheet" type="text/css" href="Styles/Editor.css">
+HTML_INCLUDE;
 

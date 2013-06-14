@@ -19,7 +19,57 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-function Buffer() {
+function Buffer(type) {
+	this.type = type || "none";
 
+	/**
+	 * Moves the internal counter to the absolute position.
+	 * @return The new internal counter position. 
+	 */
+	this.skip = function(n) { return 0; };
+
+	/**
+	 * Moves the internal counter to the end of the buffer.
+	 * @return The new internal counter position. 
+	 */
+	this.skipend = function(n) { return 0; };
+
+	/**
+	 * Moves the internal counter relative to position
+	 * @return The position changed in the counter.
+	 */
+	this.seek= function(n) { return 0; };
+
+	/**
+	 * Appends data starting from the internal counter position;
+	 * @return Length of data successfully appended.
+	 */
+	this.append = function(n) { return 0; };
+
+	/**
+	 * Insert data at position.
+	 * @return Length of data successfully inserted.
+	 */
+	this.insert = function(i, n) { return 0; };
+
+	/**
+	 * Remove n-size data before internal counter position.
+	 * @return Length of data successfully removed.
+	 */
+	this.remove = function(i, n) { return 0; };
+
+	/**
+	 * Delete n-size data at position.
+	 * @return Length of data successfully deleted.
+	 */
+	this.delete = function(i, n) { return 0; };
+
+	/**
+	 * Creates an html-friendly representation of the buffer.
+	 * @return HTML string
+	 */
+	this.htmlValue = function() {
+		return "This is a buffer.";
+	};
 }
 

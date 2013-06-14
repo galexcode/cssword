@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="Classes/Editor.js"></script>
+<? require_once('Sources/Editor.php'); ?>
 <script type="text/javascript">
 var editor1;
 function onLoad() {
