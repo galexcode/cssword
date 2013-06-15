@@ -25,12 +25,19 @@ function TextBuffer(buf) {
 	this.p = this.buf.length;
 	
 	/**
+	 * Returns the string escaped nicely for html output
+	 */
+	String.prototype.escape = function() {
+		return this.replace(/\t/g, '    ').replace(/ /g, '&nbsp;');
+	};
+
+	/**
 	 * Moves p to the absolute position.
 	 * @return The new internal counter position. 
 	 */
 	this.skip = function(i) {
 		if (i < 0) i = 0;
-		else if (i > buf.length) i = buf.length;
+		else if (i > this.buf.length) i = this.buf.length;
 
 		this.p = i;
 		return i; 

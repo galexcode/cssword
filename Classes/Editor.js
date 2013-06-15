@@ -22,36 +22,86 @@
 function Editor(name, buffer) {
 	this.buffer = buffer || new TextBuffer("");
 
-	this.frame = document.getElementById(name);
-	this.frame.className = 'editor-frame';
+	/* Create Editor Input */
+	this.editorInput = document.createElement('textarea');
+	this.editorInput.className = 'editor-input';
+	var editor = this;
+	this.editorInput.onkeyup = function() {
+		editor.buffer.set(this.value);
+		editor.buffer.skip(editor.editorInput.selectionStart);
+		editor.display();
+	};
+	this.editorInput.onkeypress = this.editorInput.onkeyup;
 
-	/* Toolbar */
-	this.bar = document.createElement('div');
-	this.bar.className = 'editor-bar top';
-	this.frame.appendChild(this.bar);
+	/* Setup Editor Frame */
+	this.editorFrame = document.getElementById(name);
+	this.editorFrame.className = 'editor-frame';
 
-	/* Main */
-	this.main = document.createElement('div');
-	this.main.className = 'editor-main';
-	this.frame.appendChild(this.main);
+	/* Add Toolbar to Editor Frame */
+	this.editorTools = document.createElement('div');
+	this.editorTools.className = 'editor-bar top';
+	this.editorFrame.appendChild(this.editorTools);
 
-	// Setup frame
-	var frame = "<div class=\"editor-side\"></div><div class=\"editor-content\"></div>";
-	this.main.innerHTML = frame;
+	/* Add Main Frame to Editor Frame */
+	this.editorMain = document.createElement('div');
+	this.editorMain.className = 'editor-main';
+	this.editorFrame.appendChild(this.editorMain);
 
-	this.contents = ["<span style=\"color:blue\">&lt;Sup&gt;</span> content", "How are you?", "Nm u?"];
+	// Setup Main Frame
+	this.editorTray = document.createElement('div');
+	this.editorTray.className = 'editor-tray';
+	this.editorMain.appendChild(this.editorTray);
 
+	this.editorView = document.createElement('div');
+	this.editorView.className = 'editor-view';
+	this.editorView.onclick = function() {
+		console.log("Input focused.");
+		editor.editorInput.focus();
+	}
+	this.editorMain.appendChild(this.editorView);
+	this.editorMain.appendChild(this.editorInput);
+
+	/* On Focus Changes */
+	this.editorInput.onfocus = function () {
+		editor.editorMain.className = 'editor-main focused';
+	}
+	this.editorInput.onblur = function () {
+		editor.editorMain.className = 'editor-main';
+	}
+
+	/* Display */
 	this.display = function() {
-		var gutters = this.main.getElementsByClassName("editor-side");
-		for (var i = 0; i < gutters.length; i++) {
-			for (j = 0; j < this.contents.length; j++)
-				gutters[i].innerHTML += "<div class=\"editor-side-line\"></div>";
-		}
+		var contents = this.buffer.htmlValue().split('\n'); 
 
-		var contents = this.main.getElementsByClassName("editor-content");
-		for (var i = 0; i < contents.length; i++) {
-			for (j = 0; j < this.contents.length; j++)
-				contents[i].innerHTML += "<div class=\"editor-content-line\">" + this.contents[j] + "</div>";
+		this.editorTray.innerHTML = "";
+		this.editorView.innerHTML = "";
+
+		var offset = 0;
+		for (i = 0; i < contents.length; i++) {
+			var trayLine = document.createElement('div');
+			trayLine.className = 'editor-tray-line';
+			this.editorTray.appendChild(trayLine);
+
+			var viewLine = document.createElement('div');
+			viewLine.className = 'editor-view-line';
+			if (offset <= this.buffer.p &&
+			    this.buffer.p <= offset + contents[i].length) {
+				/* This is our current line */
+				var line_offset = this.buffer.p - offset;
+
+				var cursor = null;
+				if (line_offset == contents[i].length)
+					cursor = "<span style=\"border-left: 2px solid gray;\">&nbsp;</span>";
+				else
+					cursor = "<span style=\"border-left: 2px solid gray;\">" + contents[i].substr(line_offset, 1).escape() + "</span>" + contents[i].substr(line_offset + 1).escape();
+				viewLine.innerHTML = contents[i].substr(0, line_offset).escape() + cursor;
+			} else {
+				/* Other Lines */
+				offset += contents[i].length;
+				if (contents[i].length == 0) contents[i] = ' ';
+				viewLine.innerHTML = contents[i].escape();
+			}
+			this.editorView.appendChild(viewLine);
 		}
 	}
 	this.display();
