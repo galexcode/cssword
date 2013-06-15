@@ -1,6 +1,6 @@
 <?
 /**
- *  index.php
+ *  TextBuffer.php
  *  @author katzenbaer
  *
  *  css:Word
@@ -34,37 +34,166 @@
 <!-- Javascript Unit Tests -->
 var obj = null;
 
-obj = new TextBuffer();
-UnitAssert(obj.htmlValue() == "", "Initialize to an empty string");
-
 /* initialization */
+document.write("<h4>Test 1: Initialization</h4>");
+obj = new TextBuffer();
+UnitAssert(obj.buf == "", "<b>Initialize to an empty string</b>");
+
 obj = new TextBuffer("foo");
-UnitAssert(obj.htmlValue() == "foo", "Initialize to 'foo'");
-UnitAssert(obj.p == "foo".length, "Initialize p to length of 'foo' (3)");
+UnitAssert(obj.buf == "foo", "<b>Initialize to 'foo'</b>");
+UnitAssert(obj.p == "foo".length, "Set p to length of 'foo' (3)");
 
-/* modifying data */
-UnitAssert(obj.append("bar") == "bar".length, "Return length of 'bar'"); // append bar
-UnitAssert(obj.htmlValue() == "foobar", "Append 'bar' to 'foo'");
-UnitAssert(obj.p == "foobar".length, "Increment p when appending.");
+document.write("<h4>Test 2: htmlValue</h4>"); // htmlValue
+obj = new TextBuffer();
+UnitAssert(obj.htmlValue() == "", "<b>Get htmlValue for buffer created with no params</b>");
 
-UnitAssert(obj.seek(-"bar".length) == -"bar".length, "Return -'bar'.length"); // seek between foo and bar
-UnitAssert(obj.p == ("foobar".length - "bar".length), "Seek -'bar'.length");
+obj = new TextBuffer("foo");
+UnitAssert(obj.htmlValue() == "foo", "<b>Get htmlValue for 'foo'</b>");
 
-UnitAssert(obj.append("foo") == "foo".length, "Return 'foo'.length"); // append bar again
-UnitAssert(obj.htmlValue() == "foofoobar", "Append 'foo' between 'foo' and 'bar'");
-
-UnitAssert(obj.skip(2) == 2, "Return 2"); // set p to 0
-UnitAssert(obj.p == 2, "Set p to 2");
-
-UnitAssert(obj.skip(0) == 0, "Return 0"); // set p to 0
+/* set data */
+document.write("<h4>Test 3: set</h4>"); // set
+obj = new TextBuffer("foobar");
+UnitAssert(obj.set() == 0, "<b>Set with no params</b>");
+UnitAssert(obj.buf = "", "Set buf to empty string");
 UnitAssert(obj.p == 0, "Set p to 0");
 
-UnitAssert(obj.append("doe") == "doe".length, "Return 'doe'.length"); // insert doe at index 0
-UnitAssert(obj.htmlValue() == "doefoofoobar", "Append 'doe' when p = 0");
-UnitAssert(obj.p = 'doe'.length, "Increment p when appending");
+obj = new TextBuffer("foobar");
+UnitAssert(obj.set("") == 0, "<b>Set with empty string and return length</b>"); 
 
-UnitAssert(obj.insert(5, "fi") == "fi".length, "Return 'fi'.length"); // insert fi at index 5
-UnitAssert(obj.htmlValue() == "doefofiofoobar", "Insert fi at index 5");
+obj = new TextBuffer("foobar");
+UnitAssert(obj.set("foo") == 3, "<b>Set to 'foo' and return length</b>");
+UnitAssert(obj.buf == "foo", "Set buf 'foo'");
+UnitAssert(obj.p == 3, "Set p to 3");
+
+document.write("<h4>Test 4: seek</h4>"); // seek
+obj = new TextBuffer("foobar");
+UnitAssert(obj.seek(-3) == 3, "Seek between 'foo' and 'bar' in 'foobar' starting at end");
+UnitAssert(obj.p == 3, "Set p to 3");
+
+obj = new TextBuffer("foobar");
+UnitAssert(obj.seek(1) == 0, "Try to seek past end, but should return 0");
+UnitAssert(obj.p == 6, "Keep p the same");
+
+obj = new TextBuffer("foobar");
+UnitAssert(obj.seek(-7) == -6, "Try to seek past beginning, but should return -6");
+UnitAssert(obj.p == 0, "Set p to 0");
+
+document.write("<h4>Test 5: skip</h4>"); // skip
+obj = new TextBuffer("foobar");
+UnitAssert(obj.skip(0) == 0, "Return 0 after skipping to 0");
+UnitAssert(obj.p == 0, "Set p to 0");
+
+obj = new TextBuffer("foobar");
+UnitAssert(obj.skip(4) == 4, "Return 4 after skipping to 4");
+UnitAssert(obj.p == 4, "Set p to 4");
+
+obj = new TextBuffer("foobar");
+UnitAssert(obj.skip(6) == 6, "Return 6 after skipping to 6");
+UnitAssert(obj.p == 6, "Set p to 6");
+
+obj = new TextBuffer("foobar");
+UnitAssert(obj.skip(-1) == 0, "Return 0 after skipping to -1");
+UnitAssert(obj.p == 0, "Set p to 0");
+
+obj = new TextBuffer("foobar");
+UnitAssert(obj.skip(7) == 6, "Return 6 after skipping to 7");
+UnitAssert(obj.p == 6, "Set p to 6");
+
+document.write("<h4>Test 6: skipend</h4>"); // skipend
+obj = new TextBuffer("foobar");
+UnitAssert(obj.skipend() == 6, "Skip to end and return 6");
+UnitAssert(obj.p == 6, "Set p to 6");
+
+obj = new TextBuffer("");
+UnitAssert(obj.skipend() == 0, "Skip to end on empty string and return 0");
+UnitAssert(obj.p == 0, "Set p to 0");
+
+document.write("<h4>Test 7: append</h4>"); // append
+obj = new TextBuffer("foobar");
+UnitAssert(obj.append("bad") == 3, "Append 'bad' and return 3");
+UnitAssert(obj.buf == "foobarbad", "Set buf to 'foobarbad'");
+UnitAssert(obj.p == 9, "Set p to 9");
+
+obj = new TextBuffer("");
+UnitAssert(obj.append("bad") == 3, "Append 'bad' to empty string and return 3");
+UnitAssert(obj.buf == "bad", "Set buf to 'bad'");
+UnitAssert(obj.p == 9, "Set p to 3");
+
+obj = new TextBuffer("foobar");
+obj.p = 3;
+UnitAssert(obj.append("bad") == 3, "Append 'bad' when p = 3 and return 3");
+UnitAssert(obj.buf == "foobadbar", "Set buf to 'foobadbar'");
+UnitAssert(obj.p == 9, "Set p to 9");
+
+document.write("<h4>Test 8: remove</h4>"); // remove
+obj = new TextBuffer("foobar");
+UnitAssert(obj.remove(3) == 3, "Remove 3 from the end");
+UnitAssert(obj.buf == "foo", "Set buf to 'foo'");
+UnitAssert(obj.p == 3, "Set p to 3");
+
+obj = new TextBuffer("foobar");
+UnitAssert(obj.remove(7) == 6, "Remove 7 from the end and return 6");
+UnitAssert(obj.buf == "", "Set buf to empty string");
+UnitAssert(obj.p == 0, "Set p to 0");
+
+obj = new TextBuffer("foobar");
+UnitAssert(obj.remove(0) == 0, "Remove 0");
+UnitAssert(obj.buf == "foobar", "Keep buf the same");
+UnitAssert(obj.p == 6, "Keep p the same");
+
+obj = new TextBuffer("foobar");
+obj.p = 0;
+UnitAssert(obj.remove(-2) == -2, "Remove -2 at index 0");
+UnitAssert(obj.buf == "obar", "Set buf to 'obar'");
+UnitAssert(obj.p == 0, "Keep p the same");
+
+obj = new TextBuffer("foobar");
+obj.p = 0;
+UnitAssert(obj.remove(-1) == 0, "Remove -1 at end");
+UnitAssert(obj.buf == "foobar", "Keep buf the same");
+UnitAssert(obj.p == 6, "Keep p the same");
+
+document.write("<h4>Test 9: delete</h4>"); // delete
+obj = new TextBuffer("foobar");
+UnitAssert(obj.delete(1) == 0, "Delete 1 from the end");
+UnitAssert(obj.buf == "foobar", "Keep buf the same");
+UnitAssert(obj.p == 6, "Keep p the same");
+
+obj = new TextBuffer("foobar");
+obj.p = 0;
+UnitAssert(obj.delete(1) == 1, "Delete 1 from the beginning");
+UnitAssert(obj.buf == "oobar", "Set buf to 'oobar'");
+UnitAssert(obj.p == 0, "Keep p the same");
+
+obj = new TextBuffer("foobar");
+obj.p = 3;
+UnitAssert(obj.delete(3) == 3, "Delete 3 after 'foo'");
+UnitAssert(obj.buf == "foo", "Set buf to 'foo'");
+UnitAssert(obj.p == 0, "Keep p the same");
+
+obj = new TextBuffer("foobar");
+obj.p = 3;
+UnitAssert(obj.delete(4) == 3, "Delete 4 after 'foo', but return 3");
+UnitAssert(obj.buf == "foo", "Set buf to 'foo'");
+UnitAssert(obj.p == 0, "Keep p the same");
+
+obj = new TextBuffer("foobar");
+obj.p = 3;
+UnitAssert(obj.delete(-3) == -3, "Delete 3 before 'bar'");
+UnitAssert(obj.buf == "bar", "Set buf to 'bar'");
+UnitAssert(obj.p == 0, "Keep p the same");
+
+document.write("<h4>Test 10: insert</h4>"); // insert
+obj = new TextBuffer("foobar");
+obj.p = 3;
+UnitAssert(obj.insert('bad') == 3, "Insert 'bad' after 'foo'");
+UnitAssert(obj.buf == "foobadbar", "Set buf to 'foobadbar'");
+UnitAssert(obj.p == 3, "Keep p the same");
+
+obj = new TextBuffer("foobar");
+UnitAssert(obj.insert('bad') == 3, "Insert 'bad' at the end");
+UnitAssert(obj.buf == "foobarbad", "Set buf to 'foobarbad'");
+UnitAssert(obj.p == 6, "Keep p the same");
 </script></p>
 </body>
 </html>

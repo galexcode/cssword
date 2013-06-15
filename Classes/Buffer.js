@@ -23,46 +23,53 @@ function Buffer(type) {
 	this.type = type || "none";
 
 	/**
-	 * Moves the internal counter to the absolute position.
+	 * Moves p to the absolute position.
 	 * @return The new internal counter position. 
 	 */
-	this.skip = function(n) { return 0; };
+	this.skip = function(i) { return 0; };
 
 	/**
-	 * Moves the internal counter to the end of the buffer.
+	 * Moves p to the end of the buffer.
 	 * @return The new internal counter position. 
 	 */
-	this.skipend = function(n) { return 0; };
+	this.skipend = function() { return 0; };
 
 	/**
-	 * Moves the internal counter relative to position
+	 * Moves p relative to p
 	 * @return The position changed in the counter.
 	 */
-	this.seek= function(n) { return 0; };
+	this.seek = function(i) { return 0; };
+	
+	/**
+	 * Sets the buffer to the input data and sets p to
+	 * the end of the buffer.
+	 * @return Length of data set.
+	 */
+	this.set = function(n) { return 0; };
 
 	/**
-	 * Appends data starting from the internal counter position;
+	 * Appends data starting at p and increments p.
 	 * @return Length of data successfully appended.
 	 */
 	this.append = function(n) { return 0; };
 
 	/**
-	 * Insert data at position.
+	 * Insert data at p without changing p.
 	 * @return Length of data successfully inserted.
 	 */
-	this.insert = function(i, n) { return 0; };
+	this.insert = function(n) { return 0; };
 
 	/**
-	 * Remove n-size data before internal counter position.
+	 * Remove data before p while changing p.
 	 * @return Length of data successfully removed.
 	 */
-	this.remove = function(i, n) { return 0; };
+	this.remove = function(i) { return 0; };
 
 	/**
-	 * Delete n-size data at position.
+	 * Delete after after p without changing p.
 	 * @return Length of data successfully deleted.
 	 */
-	this.delete = function(i, n) { return 0; };
+	this.delete = function(i) { return 0; };
 
 	/**
 	 * Creates an html-friendly representation of the buffer.

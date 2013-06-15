@@ -23,12 +23,12 @@ function TextBuffer(buf) {
 	Buffer.call("text"); // Calling inherited object
 	this.buf = buf || "";
 	this.p = this.buf.length;
-
+	
 	/**
-	 * Moves the internal counter to the absolute position.
+	 * Moves p to the absolute position.
 	 * @return The new internal counter position. 
 	 */
-	this.skip = function(n) { 
+	this.skip = function(i) {
 		if (n < 0) n = 0;
 		else if (n > buf.length) n = buf.length;
 
@@ -37,19 +37,36 @@ function TextBuffer(buf) {
 	};
 
 	/**
-	 * Moves the internal counter relative to position.
+	 * Moves p to the end of the buffer.
+	 * @return The new internal counter position. 
+	 */
+	this.skipend = function() {
+		return 0;
+	};
+
+	/**
+	 * Moves p relative to p
 	 * @return The position changed in the counter.
 	 */
-	this.seek= function(n) {
+	this.seek = function(i) {
 		if (this.p + n < 0) n = -this.p;
 		else if (this.p + n > buf.length) n = buf.length - this.p;
 
 		this.p += n;
 		return n;
 	};
+	
+	/**
+	 * Sets the buffer to the input data and sets p to
+	 * the end of the buffer.
+	 * @return Length of data set.
+	 */
+	this.set = function(n) {
+		return 0;
+	};
 
 	/**
-	 * Appends data starting from the internal counter position.
+	 * Appends data starting at p and increments p.
 	 * @return Length of data successfully appended.
 	 */
 	this.append = function(n) {
@@ -59,12 +76,28 @@ function TextBuffer(buf) {
 	};
 
 	/**
-	 * Insert data at internal counter position.
-	 * @return Length of data successfully appended.
+	 * Insert data at p without changing p.
+	 * @return Length of data successfully inserted.
 	 */
-	this.insert = function(i, n) {
+	this.insert = function(n) {
 		this.buf = this.buf.substr(0, i) + n + this.buf.substr(i);
 		return n.length;
+	};
+
+	/**
+	 * Remove data before p while changing p.
+	 * @return Length of data successfully removed.
+	 */
+	this.remove = function(i) {
+		return 0;
+	};
+
+	/**
+	 * Delete after after p without changing p.
+	 * @return Length of data successfully deleted.
+	 */
+	this.delete = function(i) {
+		return 0;
 	};
 
 	/**
