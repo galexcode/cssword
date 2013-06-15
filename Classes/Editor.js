@@ -88,6 +88,7 @@ function Editor(name, buffer) {
 			if (offset <= this.buffer.p &&
 			    this.buffer.p <= offset + contents[i].length) {
 				/* This is our current line */
+				console.log(offset, this.buffer.p, offset + contents[i].length);
 				viewLine.className += ' active';
 				var line_offset = this.buffer.p - offset;
 
@@ -98,12 +99,13 @@ function Editor(name, buffer) {
 					cursor = "<span style=\"border-left: 2px solid gray;\">" + contents[i].substr(line_offset, 1).escape() + "</span>" + contents[i].substr(line_offset + 1).escape();
 				content = contents[i].substr(0, line_offset).escape() + cursor;
 			} else {
-				/* Other Lines */
-				offset += contents[i].length + 1;
 				if (contents[i].length == 0) contents[i] = ' ';
 				content = contents[i].escape();
 			}
-				viewLine.innerHTML = content; 
+			/* Other Lines */
+			offset += contents[i].length + 1;
+
+			viewLine.innerHTML = content; 
 
 			this.editorView.appendChild(viewLine);
 		}
