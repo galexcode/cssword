@@ -29,11 +29,11 @@ function TextBuffer(buf) {
 	 * @return The new internal counter position. 
 	 */
 	this.skip = function(i) {
-		if (n < 0) n = 0;
-		else if (n > buf.length) n = buf.length;
+		if (i < 0) i = 0;
+		else if (i > buf.length) i = buf.length;
 
-		this.p = n;
-		return n; 
+		this.p = i;
+		return i; 
 	};
 
 	/**
@@ -41,7 +41,8 @@ function TextBuffer(buf) {
 	 * @return The new internal counter position. 
 	 */
 	this.skipend = function() {
-		return 0;
+		this.p = this.buf.length;
+		return this.p;
 	};
 
 	/**
@@ -49,11 +50,11 @@ function TextBuffer(buf) {
 	 * @return The position changed in the counter.
 	 */
 	this.seek = function(i) {
-		if (this.p + n < 0) n = -this.p;
-		else if (this.p + n > buf.length) n = buf.length - this.p;
+		if (this.p + i < 0) i = -this.p;
+		else if (this.p + i > buf.length) i = buf.length - this.p;
 
-		this.p += n;
-		return n;
+		this.p += i;
+		return i;
 	};
 	
 	/**
@@ -62,7 +63,9 @@ function TextBuffer(buf) {
 	 * @return Length of data set.
 	 */
 	this.set = function(n) {
-		return 0;
+		this.buf = n || "";
+		this.p = this.buf.length;
+		return this.p;
 	};
 
 	/**
@@ -70,9 +73,10 @@ function TextBuffer(buf) {
 	 * @return Length of data successfully appended.
 	 */
 	this.append = function(n) {
+		var n = n || "";
 		this.buf = this.buf.substr(0, this.p) + n + this.buf.substr(this.p);
 		this.p += n.length;
-		return n.length;
+		return Math.abs(n.length);
 	};
 
 	/**
@@ -80,8 +84,9 @@ function TextBuffer(buf) {
 	 * @return Length of data successfully inserted.
 	 */
 	this.insert = function(n) {
-		this.buf = this.buf.substr(0, i) + n + this.buf.substr(i);
-		return n.length;
+		var n = n || "";
+		this.buf = this.buf.substr(0, this.p) + n + this.buf.substr(this.p);
+		return Math.abs(n.length);
 	};
 
 	/**
@@ -89,15 +94,38 @@ function TextBuffer(buf) {
 	 * @return Length of data successfully removed.
 	 */
 	this.remove = function(i) {
-		return 0;
+		var i = i || 0;
+
+		if (this.p - i < 0) i = this.p;
+		else if (this.p - i > this.buf.length) i = this.p - this.buf.length;
+
+		if (i < 0) {
+			i *= -1;
+			this.buf = this.buf.substr(0, this.p) + this.buf.substr(this.p + i);
+		} else {
+			this.buf = this.buf.substr(0, this.p - i) + this.buf.substr(this.p);
+			this.p = this.p - i;
+		}
+		return i;
 	};
 
 	/**
-	 * Delete after after p without changing p.
+	 * Delete data after p without changing p.
 	 * @return Length of data successfully deleted.
 	 */
 	this.delete = function(i) {
-		return 0;
+		var i = i || 0;
+
+		if (this.p + i < 0) i = -this.p;
+		else if (this.p + i > this.buf.length) i = this.buf.length - this.p;
+
+		if (i > 0) {
+			this.buf = this.buf.substr(0, this.p) + this.buf.substr(this.p + i);
+		} else {
+			i *= -1;
+			this.buf = this.buf.substr(0, this.p - i) + this.buf.substr(this.p);
+		}
+		return i;
 	};
 
 	/**

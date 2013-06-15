@@ -54,7 +54,7 @@ UnitAssert(obj.htmlValue() == "foo", "<b>Get htmlValue for 'foo'</b>");
 document.write("<h4>Test 3: set</h4>"); // set
 obj = new TextBuffer("foobar");
 UnitAssert(obj.set() == 0, "<b>Set with no params</b>");
-UnitAssert(obj.buf = "", "Set buf to empty string");
+UnitAssert(obj.buf == "", "Set buf to empty string");
 UnitAssert(obj.p == 0, "Set p to 0");
 
 obj = new TextBuffer("foobar");
@@ -67,132 +67,151 @@ UnitAssert(obj.p == 3, "Set p to 3");
 
 document.write("<h4>Test 4: seek</h4>"); // seek
 obj = new TextBuffer("foobar");
-UnitAssert(obj.seek(-3) == 3, "Seek between 'foo' and 'bar' in 'foobar' starting at end");
+UnitAssert(obj.seek(-3) == -3, "<b>Seek between 'foo' and 'bar' in 'foobar' starting at end</b>");
 UnitAssert(obj.p == 3, "Set p to 3");
 
 obj = new TextBuffer("foobar");
-UnitAssert(obj.seek(1) == 0, "Try to seek past end, but should return 0");
+UnitAssert(obj.seek(1) == 0, "<b>Try to seek past end, but should return 0</b>");
 UnitAssert(obj.p == 6, "Keep p the same");
 
 obj = new TextBuffer("foobar");
-UnitAssert(obj.seek(-7) == -6, "Try to seek past beginning, but should return -6");
+UnitAssert(obj.seek(-7) == -6, "<b>Try to seek past beginning, but should return -6</b>");
 UnitAssert(obj.p == 0, "Set p to 0");
 
 document.write("<h4>Test 5: skip</h4>"); // skip
 obj = new TextBuffer("foobar");
-UnitAssert(obj.skip(0) == 0, "Return 0 after skipping to 0");
+UnitAssert(obj.skip(0) == 0, "<b>Return 0 after skipping to 0</b>");
 UnitAssert(obj.p == 0, "Set p to 0");
 
 obj = new TextBuffer("foobar");
-UnitAssert(obj.skip(4) == 4, "Return 4 after skipping to 4");
+UnitAssert(obj.skip(4) == 4, "<b>Return 4 after skipping to 4</b>");
 UnitAssert(obj.p == 4, "Set p to 4");
 
 obj = new TextBuffer("foobar");
-UnitAssert(obj.skip(6) == 6, "Return 6 after skipping to 6");
+UnitAssert(obj.skip(6) == 6, "<b>Return 6 after skipping to 6</b>");
 UnitAssert(obj.p == 6, "Set p to 6");
 
 obj = new TextBuffer("foobar");
-UnitAssert(obj.skip(-1) == 0, "Return 0 after skipping to -1");
+UnitAssert(obj.skip(-1) == 0, "<b>Return 0 after skipping to -1</b>");
 UnitAssert(obj.p == 0, "Set p to 0");
 
 obj = new TextBuffer("foobar");
-UnitAssert(obj.skip(7) == 6, "Return 6 after skipping to 7");
+UnitAssert(obj.skip(7) == 6, "<b>Return 6 after skipping to 7</b>");
 UnitAssert(obj.p == 6, "Set p to 6");
 
 document.write("<h4>Test 6: skipend</h4>"); // skipend
 obj = new TextBuffer("foobar");
-UnitAssert(obj.skipend() == 6, "Skip to end and return 6");
+UnitAssert(obj.skipend() == 6, "<b>Skip to end and return 6</b>");
 UnitAssert(obj.p == 6, "Set p to 6");
 
 obj = new TextBuffer("");
-UnitAssert(obj.skipend() == 0, "Skip to end on empty string and return 0");
+UnitAssert(obj.skipend() == 0, "<b>Skip to end on empty string and return 0</b>");
 UnitAssert(obj.p == 0, "Set p to 0");
 
 document.write("<h4>Test 7: append</h4>"); // append
 obj = new TextBuffer("foobar");
-UnitAssert(obj.append("bad") == 3, "Append 'bad' and return 3");
+UnitAssert(obj.append("bad") == 3, "<b>Append 'bad' and return 3</b>");
 UnitAssert(obj.buf == "foobarbad", "Set buf to 'foobarbad'");
 UnitAssert(obj.p == 9, "Set p to 9");
 
 obj = new TextBuffer("");
-UnitAssert(obj.append("bad") == 3, "Append 'bad' to empty string and return 3");
+UnitAssert(obj.append("bad") == 3, "<b>Append 'bad' to empty string and return 3</b>");
 UnitAssert(obj.buf == "bad", "Set buf to 'bad'");
-UnitAssert(obj.p == 9, "Set p to 3");
+UnitAssert(obj.p == 3, "Set p to 3");
 
 obj = new TextBuffer("foobar");
 obj.p = 3;
-UnitAssert(obj.append("bad") == 3, "Append 'bad' when p = 3 and return 3");
+UnitAssert(obj.append("bad") == 3, "<b>Append 'bad' when p = 3 and return 3</b>");
 UnitAssert(obj.buf == "foobadbar", "Set buf to 'foobadbar'");
-UnitAssert(obj.p == 9, "Set p to 9");
+UnitAssert(obj.p == 6, "Set p to 6");
+
+obj = new TextBuffer("foobar");
+UnitAssert(obj.append("") == 0, "<b>Append empty string</b>");
+UnitAssert(obj.buf == "foobar", "Keep buf the same");
+UnitAssert(obj.p == 6, "Keep p the same");
+
+obj = new TextBuffer("foobar");
+UnitAssert(obj.append() == 0, "<b>Append with no params</b>");
+UnitAssert(obj.buf == "foobar", "Keep buf the same");
+UnitAssert(obj.p == 6, "Keep p the same");
 
 document.write("<h4>Test 8: remove</h4>"); // remove
 obj = new TextBuffer("foobar");
-UnitAssert(obj.remove(3) == 3, "Remove 3 from the end");
+UnitAssert(obj.remove(3) == 3, "<b>Remove 3 from the end</b>");
 UnitAssert(obj.buf == "foo", "Set buf to 'foo'");
 UnitAssert(obj.p == 3, "Set p to 3");
 
 obj = new TextBuffer("foobar");
-UnitAssert(obj.remove(7) == 6, "Remove 7 from the end and return 6");
+UnitAssert(obj.remove(7) == 6, "<b>Remove 7 from the end and return 6</b>");
 UnitAssert(obj.buf == "", "Set buf to empty string");
 UnitAssert(obj.p == 0, "Set p to 0");
 
 obj = new TextBuffer("foobar");
-UnitAssert(obj.remove(0) == 0, "Remove 0");
+UnitAssert(obj.remove(0) == 0, "<b>Remove 0</b>");
 UnitAssert(obj.buf == "foobar", "Keep buf the same");
 UnitAssert(obj.p == 6, "Keep p the same");
 
 obj = new TextBuffer("foobar");
 obj.p = 0;
-UnitAssert(obj.remove(-2) == -2, "Remove -2 at index 0");
+UnitAssert(obj.remove(-2) == 2, "<b>Remove -2 at index 0</b>");
 UnitAssert(obj.buf == "obar", "Set buf to 'obar'");
 UnitAssert(obj.p == 0, "Keep p the same");
 
 obj = new TextBuffer("foobar");
-obj.p = 0;
-UnitAssert(obj.remove(-1) == 0, "Remove -1 at end");
+UnitAssert(obj.remove(-1) == 0, "<b>Remove -1 at end</b>");
 UnitAssert(obj.buf == "foobar", "Keep buf the same");
 UnitAssert(obj.p == 6, "Keep p the same");
 
 document.write("<h4>Test 9: delete</h4>"); // delete
 obj = new TextBuffer("foobar");
-UnitAssert(obj.delete(1) == 0, "Delete 1 from the end");
+UnitAssert(obj.delete(1) == 0, "<b>Delete 1 from the end</b>");
 UnitAssert(obj.buf == "foobar", "Keep buf the same");
 UnitAssert(obj.p == 6, "Keep p the same");
 
 obj = new TextBuffer("foobar");
 obj.p = 0;
-UnitAssert(obj.delete(1) == 1, "Delete 1 from the beginning");
+UnitAssert(obj.delete(1) == 1, "<b>Delete 1 from the beginning</b>");
 UnitAssert(obj.buf == "oobar", "Set buf to 'oobar'");
 UnitAssert(obj.p == 0, "Keep p the same");
 
 obj = new TextBuffer("foobar");
 obj.p = 3;
-UnitAssert(obj.delete(3) == 3, "Delete 3 after 'foo'");
+UnitAssert(obj.delete(3) == 3, "<b>Delete 3 after 'foo'</b>");
 UnitAssert(obj.buf == "foo", "Set buf to 'foo'");
-UnitAssert(obj.p == 0, "Keep p the same");
+UnitAssert(obj.p == 3, "Keep p the same");
 
 obj = new TextBuffer("foobar");
 obj.p = 3;
-UnitAssert(obj.delete(4) == 3, "Delete 4 after 'foo', but return 3");
+UnitAssert(obj.delete(4) == 3, "<b>Delete 4 after 'foo', but return 3</b>");
 UnitAssert(obj.buf == "foo", "Set buf to 'foo'");
-UnitAssert(obj.p == 0, "Keep p the same");
+UnitAssert(obj.p == 3, "Keep p the same");
 
 obj = new TextBuffer("foobar");
 obj.p = 3;
-UnitAssert(obj.delete(-3) == -3, "Delete 3 before 'bar'");
+UnitAssert(obj.delete(-3) == 3, "<b>Delete 3 before 'bar'</b>");
 UnitAssert(obj.buf == "bar", "Set buf to 'bar'");
-UnitAssert(obj.p == 0, "Keep p the same");
+UnitAssert(obj.p == 3, "Keep p the same");
 
 document.write("<h4>Test 10: insert</h4>"); // insert
 obj = new TextBuffer("foobar");
 obj.p = 3;
-UnitAssert(obj.insert('bad') == 3, "Insert 'bad' after 'foo'");
+UnitAssert(obj.insert('bad') == 3, "<b>Insert 'bad' after 'foo'</b>");
 UnitAssert(obj.buf == "foobadbar", "Set buf to 'foobadbar'");
 UnitAssert(obj.p == 3, "Keep p the same");
 
 obj = new TextBuffer("foobar");
-UnitAssert(obj.insert('bad') == 3, "Insert 'bad' at the end");
+UnitAssert(obj.insert('bad') == 3, "<b>Insert 'bad' at the end</b>");
 UnitAssert(obj.buf == "foobarbad", "Set buf to 'foobarbad'");
+UnitAssert(obj.p == 6, "Keep p the same");
+
+obj = new TextBuffer("foobar");
+UnitAssert(obj.insert('') == 0, "<b>Insert empty string at the end</b>");
+UnitAssert(obj.buf == "foobar", "Keep buf the same");
+UnitAssert(obj.p == 6, "Keep p the same");
+
+obj = new TextBuffer("foobar");
+UnitAssert(obj.insert() == 0, "<b>Insert with no params at the end</b>");
+UnitAssert(obj.buf == "foobar", "Keep buf the same");
 UnitAssert(obj.p == 6, "Keep p the same");
 </script></p>
 </body>

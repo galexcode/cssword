@@ -66,7 +66,7 @@ function Buffer(type) {
 	this.remove = function(i) { return 0; };
 
 	/**
-	 * Delete after after p without changing p.
+	 * Delete data after p without changing p.
 	 * @return Length of data successfully deleted.
 	 */
 	this.delete = function(i) { return 0; };
