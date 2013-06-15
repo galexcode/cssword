@@ -84,9 +84,11 @@ function Editor(name, buffer) {
 
 			var viewLine = document.createElement('div');
 			viewLine.className = 'editor-view-line';
+			var content = "";
 			if (offset <= this.buffer.p &&
 			    this.buffer.p <= offset + contents[i].length) {
 				/* This is our current line */
+				viewLine.className += ' active';
 				var line_offset = this.buffer.p - offset;
 
 				var cursor = null;
@@ -94,14 +96,24 @@ function Editor(name, buffer) {
 					cursor = "<span style=\"border-left: 2px solid gray;\">&nbsp;</span>";
 				else
 					cursor = "<span style=\"border-left: 2px solid gray;\">" + contents[i].substr(line_offset, 1).escape() + "</span>" + contents[i].substr(line_offset + 1).escape();
-				viewLine.innerHTML = contents[i].substr(0, line_offset).escape() + cursor;
+				content = contents[i].substr(0, line_offset).escape() + cursor;
 			} else {
 				/* Other Lines */
-				offset += contents[i].length;
+				offset += contents[i].length + 1;
 				if (contents[i].length == 0) contents[i] = ' ';
-				viewLine.innerHTML = contents[i].escape();
+				content = contents[i].escape();
 			}
+				viewLine.innerHTML = content; 
+
 			this.editorView.appendChild(viewLine);
+		}
+
+		/* Scroll to the active line */
+		var activeLine = this.editorView.getElementsByClassName('editor-view-line active')[0];
+		if (activeLine) {
+			console.log("top:", activeLine.offsetTop);
+			this.editorMain.scrollTop = activeLine.offsetTop;
+			this.editorInput.style.top = activeLine.offsetTop + "px";
 		}
 	}
 	this.display();
