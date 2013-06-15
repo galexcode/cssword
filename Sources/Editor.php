@@ -25,6 +25,6 @@ echo <<<HTML_INCLUDE
 <script type="text/javascript" src="Classes/Buffer.js"></script>
 <script type="text/javascript" src="Classes/TextBuffer.js"></script>
 <script type="text/javascript" src="Classes/Editor.js"></script>
-<link rel="stylesheet" type="text/css" href="Styles/Editor.css">
+<link rel="stylesheet" type="text/css" href="Styles/Editor.css">\n
 HTML_INCLUDE;
 

@@ -20,15 +20,40 @@
 */
 
 function Editor(name, buffer) {
-	var initial_text = "<pre><div><span style=\"color:blue\">&lt;Sup&gt;</span>content</div><div>How are you?</div><div>Nm u?</div></pre>";
-	this.buffer = buffer || new TextBuffer(initial_text);
+	this.buffer = buffer || new TextBuffer("");
 
-	this.element = document.getElementById(name);
-	this.element.className = "editor";
-	this.display();
+	this.frame = document.getElementById(name);
+	this.frame.className = 'editor-frame';
+
+	/* Toolbar */
+	this.bar = document.createElement('div');
+	this.bar.className = 'editor-bar top';
+	this.frame.appendChild(this.bar);
+
+	/* Main */
+	this.main = document.createElement('div');
+	this.main.className = 'editor-main';
+	this.frame.appendChild(this.main);
+
+	// Setup frame
+	var frame = "<div class=\"editor-side\"></div><div class=\"editor-content\"></div>";
+	this.main.innerHTML = frame;
+
+	this.contents = ["<span style=\"color:blue\">&lt;Sup&gt;</span> content", "How are you?", "Nm u?"];
 
 	this.display = function() {
-		this.element.innerHTML = this.buffer.htmlValue();
+		var gutters = this.main.getElementsByClassName("editor-side");
+		for (var i = 0; i < gutters.length; i++) {
+			for (j = 0; j < this.contents.length; j++)
+				gutters[i].innerHTML += "<div class=\"editor-side-line\"></div>";
+		}
+
+		var contents = this.main.getElementsByClassName("editor-content");
+		for (var i = 0; i < contents.length; i++) {
+			for (j = 0; j < this.contents.length; j++)
+				contents[i].innerHTML += "<div class=\"editor-content-line\">" + this.contents[j] + "</div>";
+		}
 	}
+	this.display();
 }
 

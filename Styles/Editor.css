@@ -19,32 +19,62 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-.editor {
-	background-color: floralWhite;
-	height: 96px;
-	border-left: 3ex solid #eee;
-	padding-left: 8px;
-	position: relative;
+.editor-frame {
+	border: 5px solid #f0f0f0;
+	border-radius: 2px;
 }
- 
-.editor pre {
-	counter-reset: linenumbers;
+
+.editor-bar {
+	background-color: #fcfcfc;
+	height: 32px;
+
+	border: 1px solid #cfcfcf;
 }
- 
-.editor pre div:before {
-	color: #888;
+
+.editor-bar.top {
+	border-bottom: 0px;
+}
+
+.editor-main {
+	background-color: white;
 	font-weight: bold;
-	content: counter(linenumbers);
-	counter-increment: linenumbers;
-	left: -3ex;
-	position: absolute;
+	color: black;
+
+	border: 1px solid #cfcfcf;
+
+	font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+	font-size: 12px;
+
+	height: 96px;
+}
+
+.editor-side {
+	float: left;
+	width: 32px;
+	height: 96px;
+	padding-right: 14px;
+	margin-right: 8px;
+	background-color: #e8e8e8;
+
 	text-align: right;
-	width: 2.5ex;
+
+	counter-reset: linenumbers;
+
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+
+.editor-side div:before {
+	width: 100%;
+	color: #aaa;
+	content: counter(linenumbers);
+	counter-increment: linenumbers;
+}
+
+.editor-content {
 }
 
