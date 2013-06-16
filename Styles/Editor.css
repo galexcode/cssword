@@ -64,72 +64,12 @@
 }
 
 .editor-main {
-	position: relative;
-	height: 96px;
-
-	background-color: white;
-	color: black;
-
 	border: 1px solid #cfcfcf;
-
-	font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
-	font-size: 12px;
-
-	overflow-x: hidden;
-	overflow-y: scroll;
+	height: 100%;
 }
 
 .editor-main.focused {
 	border-top: 1px solid indianRed;
-}
-
-.editor-tray {
-	float: left;
-	width: 42px;
-	min-height: 100%;
-	/*padding-right: 14px;*/
-	margin-right: 8px;
-	background-color: #e8e8e8;
-
-	text-align: right;
-
-	counter-reset: linenumbers;
-
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-
-.editor-tray div:before {
-	width: 100%;
-	color: #aaa;
-	content: counter(linenumbers);
-	counter-increment: linenumbers;
-}
-
-.editor-view-line {
-	word-wrap: break-word;
-}
-
-.editor-tray-line {
-	padding-right: 14px;
-}
-
-.editor-view-line, .editor-tray-line, .editor-tray-empty {
-	min-height: 16px;
-	line-height: 16px;
-	white-space: pre;
-}
-
-.editor-view-line.active, .editor-tray-line.active {
-	background-color: rgba(0,0,255,0.1);		
-}
-
-.editor-view {
-	min-height: 100%;
 }
 
 ::selection {
@@ -139,32 +79,5 @@
 ::-moz-selection {
 	color: white; 
 	background-color: rgba(255, 0, 0, 0.5);
-}
-
-.editor-input {
-	position: absolute;
-	height: 16px;
-	line-height: 16px;
-	padding: 0;
-	border: 0;
-	outline: 0;
-	background: transparent;
-	color: transparent;
-	resize: none;
-
-	overflow: hidden;
-
-	font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
-	font-size: 12px;
-
-	white-space: pre;
-	word-wrap: break-word;
-}
-
-.editor-cursor {
-	position: absolute;
-	width: 0px;
-	height: 16px;
-	border-right: 1px solid black;
 }
 
