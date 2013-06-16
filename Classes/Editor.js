@@ -33,28 +33,9 @@ function getStyle(oElm, strCssRule){
 	return strValue;
 }
 
-function Editor(name, buffer) {
+function Editor(name, height, buffer) {
 	this.buffer = buffer || new TextBuffer("");
-
-	/* Create Editor Input */
-	this.editorInput = document.createElement('textarea');
-	this.editorInput.className = 'editor-input';
-	this.editorInput.wrap = 'off';
-	this.editorInputListener = function() {
-		var i = this.editorInput.selectionStart;
-		this.buffer.set(this.editorInput.value);
-		this.buffer.skip(i);
-		this.display();
-	}.bind(this);
-	this.editorInput.addEventListener('keyup', this.editorInputListener);
-	this.editorInput.addEventListener('keypress', this.editorInputListener);
-	this.editorInput.addEventListener('keydown', this.editorInputListener);
-	this.editorInput.addEventListener('keydown', function(e) {
-	if (e.keyCode == 8 || e.keyCode == 13) /* Backspace or Enter */ {
-		this.editorInputListener();
-		return false;
-	}
-}.bind(this));
+	this.height = height || 96;
 
 	/* Setup Editor Frame */
 	this.editorFrame = document.getElementById(name);
@@ -69,8 +50,9 @@ function Editor(name, buffer) {
 	/* Add Main Frame to Editor Frame */
 	this.editorMain = document.createElement('div');
 	this.editorMain.className = 'editor-main';
+	this.editorMain.style.height = this.height + 'px';
 	this.editorMain.addEventListener('scroll', function() {
-		this.scrollActive();
+		//this.scrollActive();
 	}.bind(this));
 	this.editorFrame.appendChild(this.editorMain);
 
@@ -91,12 +73,48 @@ function Editor(name, buffer) {
 
 	this.editorView = document.createElement('div');
 	this.editorView.className = 'editor-view';
+	this.editorMain.appendChild(this.editorView);
+
+	/* Some Global Variables */
+	var char_width = 7;
+	var char_height = 16;
+
+	var trayWidth = this.editorTray.clientWidth + parseFloat(getStyle(this.editorTray, 'margin-right'), 10);
+	var max_col = Math.floor((this.editorMain.clientWidth - trayWidth) / char_width);
+	var max_row = Math.floor(this.editorMain.clientHeight / char_height);
+
+	/* Create Editor Input */
+	this.editorInput = document.createElement('textarea');
+	this.editorInput.className = 'editor-input';
+	this.editorInput.wrap = 'off';
+	this.editorInput.spellcheck = false;
+	this.editorInput.style.width = max_col * char_width + 'px';
+	this.editorInputListener = function() {
+		var i = this.editorInput.selectionStart;
+		this.buffer.set(this.editorInput.value);
+		this.buffer.skip(i);
+		this.display();
+	}.bind(this);
+	this.editorInput.addEventListener('keyup', this.editorInputListener);
+	this.editorInput.addEventListener('keypress', this.editorInputListener);
+	this.editorInput.addEventListener('keydown', this.editorInputListener);
+	this.editorInput.addEventListener('keydown', function(e) {
+	if (e.keyCode == 8 || e.keyCode == 13) /* Backspace or Enter */ {
+		this.editorInputListener();
+		return false;
+	}
+}.bind(this));
+
 	this.editorView.onclick = function() {
 		console.log("Input focused.");
 		this.editorInput.focus();
 	}.bind(this);
-	this.editorMain.appendChild(this.editorView);
 	this.editorMain.appendChild(this.editorInput);
+
+	/* Create Cursor */
+	this.editorCursor = document.createElement('div');
+	this.editorCursor.className = 'editor-cursor';
+	this.editorMain.appendChild(this.editorCursor);
 
 	/* On Focus Changes */
 	this.editorInput.onfocus = function () {
@@ -109,6 +127,8 @@ function Editor(name, buffer) {
 	/* Display */
 	this.display = function() {
 		var _scrollTop = this.editorMain.scrollTop;
+
+		/* Split lines by linebreak */
 		var contents = this.buffer.htmlValue().split('\n'); 
 
 		this.editorTray.innerHTML = "";
@@ -118,14 +138,10 @@ function Editor(name, buffer) {
 		for (i = 0; i < contents.length; i++) {
 			var viewLine = document.createElement('div');
 			viewLine.className = 'editor-view-line';
-			var content = "";
 			if (offset <= this.buffer.p &&
 			    this.buffer.p <= offset + contents[i].length) {
 				viewLine.className += ' active';
 			}
-
-			/* Other Lines */
-			offset += contents[i].length + 1;
 
 			viewLine.innerHTML = contents[i].escape();
 
@@ -133,20 +149,22 @@ function Editor(name, buffer) {
 
 			var trayLine = document.createElement('div');
 			trayLine.className = 'editor-tray-line';
+			if (offset <= this.buffer.p &&
+			    this.buffer.p <= offset + contents[i].length) {
+				trayLine.className += ' active';
+			}
 			trayLine.style.height = viewLine.clientHeight + 'px';
 			this.editorTray.appendChild(trayLine);
+
+			/* Other Lines */
+			offset += contents[i].length + 1;
+
 		}
 		this.editorMain.scrollTop = _scrollTop;
 		this.scrollActive();
 	}
 
 	this.scrollActive = function() {
-		var char_width = 7;
-		var char_height = 16;
-
-		var trayWidth = this.editorTray.clientWidth + parseFloat(getStyle(this.editorTray, 'margin-right'), 10);
-		var max_col = Math.floor((this.editorMain.clientWidth - trayWidth) / char_width);
-		var max_row = Math.floor(this.editorMain.clientHeight / char_height);
 
 		/* Split word-wrapped lines into their own line */
 		var raw_divs = this.editorView.getElementsByClassName('editor-view-line');
@@ -181,15 +199,6 @@ function Editor(name, buffer) {
 		/* Scroll to the active line */
 		this.editorStatus.innerHTML = 'Line: ' + (row + 1) + ', Col: ' + col;
 
-		/* Get Cursor Position */
-		/* Get initial offset */
-		_left = col * char_width;
-		_top = row * char_height;
-
-		/* Add tray offset */
-		_left += trayWidth;
-
-		/* Position Cursor */
 		/* Find visible minline and maxline */
 		var minline = Math.floor(this.editorMain.scrollTop / 16) + 1;
 		var maxline = (minline - 1)+ Math.floor(this.editorMain.clientHeight / 16);
@@ -202,8 +211,22 @@ function Editor(name, buffer) {
 			this.editorMain.scrollTop = firstRow * char_height;
 		}
 
+		/* Get Cursor Position */
+		if (col == max_col) {
+			col = 0;
+			row++;
+		}
+
+		_left = col * char_width;
+		_top = row * char_height;
+
+		/* Position Cursor */
+		this.editorCursor.style.top = _top + 'px';
+		this.editorCursor.style.left = _left + trayWidth + 'px';
+
+		/* Position Input */
 		this.editorInput.style.top = _top + 'px';
-		this.editorInput.style.left = _left + 'px';
+		this.editorInput.style.left = trayWidth + 'px';
 	};
 	this.display();
 	/* Focus */
