@@ -132,6 +132,16 @@ function Editor(name, height, buffer) {
 			case 40: /* Down */
 				this.editorInputListener();
 				return false;
+			case 9: /* Tab */
+				var str = this.editorInput.value;
+				var index = this.editorInput.selectionStart;
+				this.editorInput.value = str.substr(0, index) + '    ' + str.substr(index);
+				index += 4;
+				this.editorInput.setSelectionRange(index, index);
+				if (e.preventDefault) {
+					e.preventDefault();	
+				}
+				return false;
 			default:
 				return true;
 		}
