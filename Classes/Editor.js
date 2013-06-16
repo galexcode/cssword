@@ -108,13 +108,6 @@ function Editor(name, height, buffer) {
 }.bind(this));
 	this.editorInput.addEventListener('keypress', function(e) {
 		switch (e.keyCode) {
-			case 8: /* Backspace */
-			case 13: /* Enter */
-			case 37: /* Left */
-			case 38: /* Up */
-			case 39: /* Right */
-			case 40: /* Down */
-				return false;
 			default:
 				this.editorInputListener();
 				return true;
