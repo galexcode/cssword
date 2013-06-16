@@ -187,32 +187,30 @@ button:hover{
             <span id="tools-output"></span>
         </form>
 	</div>
-    <!-- HTML Input -->
-    <div class="editor-frame">
+	<!-- HTML Input -->
+	<div class="editor-frame">
 		<div class="editor-bar top"><span>Test HTML File</span></div>
 		<div class="editor-main">
-    		<div id="html-input-header" class="input-header">&lt;/html&gt;</div>
-            <div id="editor1"><div class="center"><h1>Page Title</h1></div>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus erat diam, molestie ut euismod ut, convallis vitae augue. Duis nulla dolor, gravida ac luctus in, malesuada sed diam.</p>
-<p>Proin porta iaculis dui, in fermentum lectus laoreet vel. Fusce a tincidunt justo. Vestibulum imperdiet sapien magna. Duis porttitor velit nec mauris convallis convallis. Sed blandit lectus in turpis molestie, ac ultricies enim mollis. Donec quis urna scelerisque, adipiscing sapien in, consequat leo. Suspendisse faucibus augue quam, eget tempus augue interdum non. Donec dignissim urna neque, malesuada suscipit lectus gravida in.</p>
-            </div>
-        </div>
-        <div class="editor-bar bottom status"><span>Opened.</span></div>
-    </div>
-    <script>
-        var editor1 = ace.edit("editor1");
-        editor1.setTheme("ace/theme/tomorrow");
-        editor1.getSession().setMode("ace/mode/html");
-        editor1.getSession().on('change', function(e) {
-            console.log(editor1.getValue());
-        });
-    </script>
-    <!-- CSS Input -->
-    <div class="editor-frame">
+			<div id="editor1">&lt;div class="center"&gt;&lt;h1&gt;Page Title&lt;/h1&gt;&lt;/div&gt;
+	&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus erat diam, molestie ut euismod ut, convallis vitae augue. Duis nulla dolor, gravida ac luctus in, malesuada sed diam.&lt;/p&gt;
+	&lt;p&gt;Proin porta iaculis dui, in fermentum lectus laoreet vel. Fusce a tincidunt justo. Vestibulum imperdiet sapien magna. Duis porttitor velit nec mauris convallis convallis. Sed blandit lectus in turpis molestie, ac ultricies enim mollis. Donec quis urna scelerisque, adipiscing sapien in, consequat leo. Suspendisse faucibus augue quam, eget tempus augue interdum non. Donec dignissim urna neque, malesuada suscipit lectus gravida in.&lt;/p&gt;
+			</div>
+			<script>
+				var editor1 = ace.edit("editor1");
+				editor1.setTheme("ace/theme/tomorrow");
+				editor1.getSession().setMode("ace/mode/html");
+				editor1.getSession().on('change', function(e) {
+					console.log(editor1.getValue());
+				});
+			</script>
+		</div>
+		<div class="editor-bar bottom status"><span>Opened.</span></div>
+	</div>
+	<!-- CSS Input -->
+	<div class="editor-frame">
 		<div class="editor-bar top"><span>Test CSS File</span></div>
 		<div class="editor-main">
-    		<div id="css-input-header" class="input-header">&lt;/css&gt;</div>
-            <div id="editor2">html {
+			<div id="editor2">html {
 	background-color: white;    
 }
     
@@ -229,18 +227,18 @@ p:first-line {
 .center {
 	text-align: center;
 }
-            </div>
-        </div>
-        <div class="editor-bar bottom status"><span>Opened.</span></div>
-    </div>
-    <script>
-        var editor2 = ace.edit("editor2");
-        editor2.setTheme("ace/theme/tomorrow");
-        editor2.getSession().setMode("ace/mode/css");
-        editor2.getSession().on('change', function(e) {
-            console.log(editor2.getValue());
-        });
-    </script>
+			</div>
+			<script>
+				var editor2 = ace.edit("editor2");
+				editor2.setTheme("ace/theme/tomorrow");
+				editor2.getSession().setMode("ace/mode/css");
+				editor2.getSession().on('change', function(e) {
+					console.log(editor2.getValue());
+				});
+			</script>
+		</div>
+		<div class="editor-bar bottom status"><span>Opened.</span></div>
+	</div>
 	<div style="height:32px"></div>
 </div>
 <div id="right-pane" class="pane right max-height">
