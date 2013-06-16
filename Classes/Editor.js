@@ -95,15 +95,30 @@ function Editor(name, height, buffer) {
 		this.buffer.skip(i);
 		this.display();
 	}.bind(this);
-	this.editorInput.addEventListener('keyup', this.editorInputListener);
-	this.editorInput.addEventListener('keypress', this.editorInputListener);
-	this.editorInput.addEventListener('keydown', this.editorInputListener);
-	this.editorInput.addEventListener('keydown', function(e) {
-	if (e.keyCode == 8 || e.keyCode == 13) /* Backspace or Enter */ {
-		this.editorInputListener();
-		return false;
-	}
+	this.editorInput.addEventListener('keyup', function(e) {
+		switch (e.keyCode) {
+			case 33: /* Page Up*/
+				return false;				
+			case 34: /* Page Down */
+				return false;
+			default:
+				this.editorInputListener();
+				return true;
+		}
 }.bind(this));
+	this.editorInput.addEventListener('keypress', this.editorInputListener);
+	this.editorInput.addEventListener('paste', this.editorInputListener);
+	/*this.editorInput.addEventListener('input', this.editorInputListener);*/
+	this.editorInput.addEventListener('keydown', function(e) {
+		switch (e.keyCode) {
+			case 8: /* Backspace */
+			case 13: /* Enter */
+				this.editorInputListener();
+				return false;
+			default:
+				return true;
+		}
+	}.bind(this));
 
 	this.editorView.onclick = function() {
 		console.log("Input focused.");
