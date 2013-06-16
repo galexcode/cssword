@@ -28,7 +28,9 @@ function TextBuffer(buf) {
 	 * Returns the string escaped nicely for html output
 	 */
 	String.prototype.escape = function() {
-		return this.replace(/\t/g, '    ').replace(/ /g, '&nbsp;');
+		var r = this.replace(/</g, '&lt;');
+		r = r.replace(/>/g, '&gt;');
+		return r;
 	};
 
 	/**
