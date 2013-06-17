@@ -54,11 +54,11 @@
 	</div>
 </div>
 <div id="right-pane" class="pane right max-height">
-	<div class="paper-frame">
-        <div id="paper-frame" class="paper-container">
-            <div id="paper" class="paper"></div>
-        </div>
-    </div>
+	<div class="paper-canvas">
+		<div id="paper-container" class="paper-container">
+			<div id="paper-frame" class="paper-frame"><div id="paper" class="paper"></div></div>
+		</div>
+	</div>
 </div>
 </body>
 </html>

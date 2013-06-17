@@ -19,25 +19,30 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-.paper-frame {
+.paper-canvas {
 	width: 100%;
-	
-	text-align: center;
 
 	padding-top: 16px;
 	margin-bottom: 16px;
 }
 
 .paper-container {
+	/*overflow: hidden;*/
+	position: relative;
 	background-color: #fff;
 	margin: 0 auto;
+}
+
+.paper-frame {
+	position: absolute;
+	background-color: #fff;
 	
 	box-shadow: 0 4px 4px #000;
 	
-	cursor: pointer;
+	cursor: text;
 }
 
-.paper-container.active {
+.paper-frame.active {
 	box-shadow: 0 4px 4px #555;
 }
 
