@@ -88,8 +88,9 @@ function Tools(name) {
 	/* Filename Textfield */
 	this.filename = document.createElement('input');
 	this.filename.id = 'tools-filename';
-	this.filename.className = 'input';
+	this.filename.className = 'input tools-input';
 	this.filename.type = 'text';
+	this.filename.placeholder = 'File name';
 	this.element.appendChild(this.filename);
 
 	/* Save Button */
