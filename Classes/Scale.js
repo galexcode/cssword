@@ -1,7 +1,7 @@
-/**
- *  Paper.css
+/**  
+ *  Scale.js
  *  @author katzenbaer
- *
+ *  
  *  css:Word
  *  Copyright (C) 2013  Terrence J. Katzenbaer (tkatzenbaer@lytenight.com)
  *
@@ -19,42 +19,14 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-.paper-frame {
-	width: 100%;
-	height: 100%;
-	
-	text-align: center;
+function Scale(obj) {
+	this.obj = obj;
 
-	padding-top: 16px;
-	padding-bottom: 16px;
+	this.pointToPixel = function(p) {
+		return (p / 72) * (obj.paperHeight / obj.height);
+	};
+
+	this.inchToPixel = function(i) {
+		return i * (obj.paperHeight / obj.height);
+	};
 }
-
-.paper-container {
-	background-color: #fff;
-	margin: 0 auto;
-	
-	box-shadow: 0 4px 4px #000;
-	
-	cursor: pointer;
-}
-
-.paper-container.active {
-	box-shadow: 0 4px 4px #555;
-}
-
-/* Default Styles */
-.paper {
-	margin: 0;
-	padding: 0;
-	word-spacing: 0;
-	white-space: pre-wrap;
-
-	font-family: Arial, Helvetica, sans-serif;
-	text-align: left;
-}
-
-p {
-	text-indent: 3em;
-	line-height: 115%;
-}
-
