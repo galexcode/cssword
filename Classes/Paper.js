@@ -25,14 +25,14 @@ function Paper(name, width, height) {
 	this.margin = 16;
 	this.width = width || 8.5;
 	this.height = height || 11;
-	this.renderHeight = 1280;
-	this.renderWidth = this.renderHeight * (this.width / this.height);
+	this.renderWidth = 1000;
+	this.renderHeight = this.renderWidth * (this.height / this.width);
 
 	this.container = document.getElementById('paper-container');
 	this.paper = document.getElementById('paper-frame');
 	this.element = document.getElementById(name);
 
-	this.zoom = 0.65;
+	this.zoom = 0.9;
 	this.setZoom = function(zoom) {
 		this.zoom = zoom;
 		this.resize();
@@ -122,7 +122,7 @@ function Paper(name, width, height) {
 		}
 		
 		/* Resize paper-container to aspect-ratio */
-		var screenWidth = document.getElementById('right-pane').clientWidth * this.zoom;
+		var screenWidth = (document.getElementById('right-pane').clientWidth - 24) * this.zoom;
 		/* screen height = screen width * (paper height / paper width) */
 		var screenHeight = screenWidth * (this.height / this.width);
 		

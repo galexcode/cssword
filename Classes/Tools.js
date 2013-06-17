@@ -110,10 +110,36 @@ function Tools(name) {
 	this.open.className = 'button';
 	this.open.type = 'button';
 	this.open.onclick = function() {
+		console.log('boom');
 		this.openDocument();
 	}.bind(this);
 	this.open.innerHTML = 'Open File';
 	this.element.appendChild(this.open);
+
+	/* Zoom List */
+	var zoomSpan = document.createElement('span');
+	zoomSpan.innerHTML = 'Zoom:';
+	zoomSpan.style.fontFamily = 'Arial, Helvetica, sans-serif';
+ 	zoomSpan.style.fontSize = '14px';
+	zoomSpan.style.fontWeight = 'bold';
+ 	zoomSpan.style.marginLeft = '32px';
+ 	zoomSpan.style.verticalAlign = 'middle';
+	this.element.appendChild(zoomSpan);
+
+	this.zoom = document.createElement('select');
+	this.zoom.className = 'input';
+	this.zoom.style.height = '24px';
+	for (var i = 0; i <= 100; i += 10) {
+		var zoomOption = document.createElement('option');
+		zoomOption.innerHTML = i + '%';
+		zoomOption.value = i;
+		if (i == 90) zoomOption.selected = 'true';
+		this.zoom.appendChild(zoomOption);
+	}
+	this.zoom.onchange = function() {
+		window.paper.setZoom(this.zoom.value/100);
+	}.bind(this);
+	this.element.appendChild(this.zoom);
 
 	/* Output */
 	this.output = document.createElement('div');
