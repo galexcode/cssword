@@ -21,12 +21,11 @@
 
 .paper-frame {
 	width: 100%;
-	height: 100%;
 	
 	text-align: center;
 
 	padding-top: 16px;
-	padding-bottom: 16px;
+	margin-bottom: 16px;
 }
 
 .paper-container {

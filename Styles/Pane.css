@@ -41,9 +41,10 @@
 }
 
 .pane.right {
-	overflow: hidden;
 	height: 100%;
 	
+	overflow-y: auto;
+
 	/* Style */
 	background-color: #222;
 }

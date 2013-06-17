@@ -22,6 +22,7 @@
 function Paper(name, width, height) {
 	if (!name) return;
 	this.scale = new Scale(this);
+	this.zoom = 0.65;
 	this.margin = 16;
 	this.width = width || 8.5;
 	this.height = height || 11;
@@ -91,11 +92,14 @@ function Paper(name, width, height) {
 			}
 		}
 		
-		/* Resize paper to aspect-ratio */
-		this.setPaperHeight(screenHeight - this.margin * 2);
+		var screenWidth = document.getElementById('right-pane').clientWidth;
 		
-		/* width = (width / height) * actual height */
-		this.setPaperWidth(this.width * this.paperHeight / this.height);
+		/* Resize paper to aspect-ratio */
+		this.setPaperWidth(screenWidth * this.zoom);
+
+		/* screen width = (paper width / paper height) * screen height */
+		/* screen height = screen width * (paper height / paper width) */
+		this.setPaperHeight(screenWidth * (this.height / this.width) * this.zoom);
 		
 		console.log('8.5" x 11" : Width: ' + this.paperWidth + 'px, Height: ' + this.paperHeight + 'px');
 		console.log('Refreshing css...');
