@@ -20,12 +20,13 @@
 */
 
 .editor-frame {
-	border: 5px solid #f0f0f0;
+	border: 1px solid #ccc;
 	border-radius: 2px;
+	margin-top: 8px;
+	margin-bottom: 8px;
 }
 
 .editor-bar {
-	border: 1px solid #cfcfcf;
 	background-color: #fcfcfc;
 	height: 32px;
 }
@@ -41,11 +42,9 @@
 }
 
 .editor-bar.top {
-	border-bottom: 0px;
 }
 
 .editor-bar.bottom {
-	border-top: 0px;
 }
 
 .editor-bar.bottom.status {
@@ -64,12 +63,20 @@
 }
 
 .editor-main {
-	border: 1px solid #cfcfcf;
+	border-top: 4px solid #cfcfcf;
 	height: 100%;
 }
 
-.editor-main.focused {
-	border-top: 1px solid indianRed;
+.editor-main.focus {
+	border-top: 4px solid orange;
+}
+
+.editor-main.focus.red {
+	border-top: 4px solid indianRed;
+}
+
+.editor-main.focus.blue {
+	border-top: 4px solid dodgerBlue;
 }
 
 ::selection {

@@ -1,6 +1,6 @@
 <?
 /**
- *  Ace.php
+ *  Editor.php
  *  @author katzenbaer
  *
  *  css:Word
@@ -22,7 +22,16 @@
 */
 
 echo <<<HTML_INCLUDE
-<link rel="stylesheet" href="Styles/Editor.css" type="text/css">
-<script src="Ace/ace.js" type="text/javascript" charset="utf-8"></script>\n
+<link href="Styles/Pane.css" type="text/css" rel="stylesheet">
+<link href="Styles/Paper.css" type="text/css" rel="stylesheet">
+<link href="Styles/Input.css" type="text/css" rel="stylesheet">
+<link href="Styles/Editor.css" type="text/css" rel="stylesheet">
+<script src="Ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="Classes/Ajax.js" type="text/javascript" charset="utf-8"></script>
+<script src="Classes/Payload.js" type="text/javascript" charset="utf-8"></script>
+<script src="Classes/File.js" type="text/javascript" charset="utf-8"></script>
+<script src="Classes/Paper.js" type="text/javascript" charset="utf-8"></script>
+<script src="Classes/Editor.js" type="text/javascript" charset="utf-8"></script>
+
 HTML_INCLUDE;
 

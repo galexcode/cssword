@@ -75,11 +75,8 @@ File.Save = function (name, payload) {
 					"file"	  		: name,
 					"html_payload"  : payload.html,
 					"css_payload"   : payload.css };
-					
-	console.log("HTML Payload: " + payload.html);
 	
 	new File(fileObj, function(obj) {
-		console.log("Object: ", obj);
 		document.getElementById('tools-output').innerHTML = obj.message;
 	});
 }
@@ -98,8 +95,8 @@ File.Open = function (name, callback) {
 		if (obj.html_payload != null) obj.html_payload = obj.html_payload;
 		if (obj.css_payload != null) obj.css_payload = obj.css_payload;
 		
-		callback(new Payload(obj.html_payload, obj.css_payload));
-		
-		document.getElementById('tools-output').innerHTML = obj.message;
+		if (callback(new Payload(obj.html_payload, obj.css_payload)) != false) {
+			document.getElementById('tools-output').innerHTML = obj.message;
+		}
 	});
 }

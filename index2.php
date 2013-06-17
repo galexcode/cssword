@@ -284,14 +284,6 @@ function parse() {
 		var oIndex = input.selectedIndex;
 		input.select(input.indexOf('css-input'));
 		
-		/* Apply changes */
-		var cssStyle = input.data();
-		
-		cssStyle = cssStyle.replace(/body \{/g, '.paper {');
-		cssStyle = cssStyle.replace(/html \{/g, '.paper-container {');
-	
-		/* Modify CSS Style */
-		$.getElementById('parent-css').innerHTML = cssStyle;
 		
 		input.select(oIndex);
 	}
