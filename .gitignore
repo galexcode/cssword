@@ -1,0 +1,4 @@
+/temp/*.html.part
+/temp/*.css.part
+!/temp/newFile.html.part
+!/temp/newFile.css.part

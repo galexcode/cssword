@@ -1,8 +1,8 @@
-/*  css:Word
- * 
+/**
  *  Payload.js
  *  @author katzenbaer
- *  
+ *
+ *  css:Word
  *  Copyright (C) 2013  Terrence J. Katzenbaer (tkatzenbaer@lytenight.com)
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,8 @@
 */
 
 /* Payload Object */
-function Payload(html, css) {
+function Payload(name, html, css) {
+	this.name = name;
 	this.html = html;
 	this.css = css;
 }

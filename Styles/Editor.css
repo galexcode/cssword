@@ -1,0 +1,89 @@
+/**
+ *  Editor.css
+ *  @author katzenbaer
+ *
+ *  css:Word
+ *  Copyright (C) 2013  Terrence J. Katzenbaer (tkatzenbaer@lytenight.com)
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+.editor-frame {
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	
+	box-shadow: 0 2px 4px 0px #ccc;
+}
+
+.editor-bar {
+	padding: 2px;
+	padding-left: 8px;
+
+	background-color: #fcfcfc;
+
+	height: 32px;
+
+	font: 13.34px Helvetica, arial, freesans, clean, sans-serif;
+	font-weight: bold;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+	color: #333;
+}
+
+.editor-bar.top {
+	height: 32px;
+	line-height: 32px;
+}
+
+.editor-bar.bottom {
+}
+
+.editor-bar.bottom.status {
+	background-color: #ddd;
+
+	height: 24px;
+	line-height: 24px;
+
+	font-weight: normal;
+	text-shadow: none; 
+	color: #6e6e6e;
+}
+
+.editor-main {
+	border-top: 4px solid #cfcfcf;
+	height: 100%;
+}
+
+.editor-main.focus {
+	border-top: 4px solid orange;
+}
+
+.editor-main.focus.red {
+	border-top: 4px solid indianRed;
+}
+
+.editor-main.focus.blue {
+	border-top: 4px solid dodgerBlue;
+}
+
+::selection {
+	color: white; 
+	background-color: rgba(255, 0, 0, 0.5);
+}
+::-moz-selection {
+	color: white; 
+	background-color: rgba(255, 0, 0, 0.5);
+}
+

@@ -1,0 +1,63 @@
+/**
+ *  Paper.css
+ *  @author katzenbaer
+ *
+ *  css:Word
+ *  Copyright (C) 2013  Terrence J. Katzenbaer (tkatzenbaer@lytenight.com)
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+.paper-canvas {
+	width: 100%;
+
+	padding-top: 16px;
+	margin-bottom: 16px;
+}
+
+.paper-container {
+	/*overflow: hidden;*/
+	position: relative;
+	background-color: #fff;
+	margin: 0 auto;
+}
+
+.paper-frame {
+	position: absolute;
+	background-color: #fff;
+	
+	box-shadow: 0 4px 4px #000;
+	
+	cursor: text;
+}
+
+.paper-frame.active {
+	box-shadow: 0 4px 4px #555;
+}
+
+/* Default Styles */
+.paper {
+	margin: 0;
+	padding: 0;
+	word-spacing: 0;
+
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: left;
+}
+
+p {
+	text-indent: 3em;
+	line-height: 115%;
+}
+
