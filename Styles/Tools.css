@@ -1,5 +1,5 @@
 /**
- *  Paper.css
+ *  Tools.css
  *  @author katzenbaer
  *
  *  css:Word
@@ -18,32 +18,4 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-.paper-frame {
-	width: 100%;
-	height: 100%;
-	
-	text-align: center;
-}
-
-.paper-container {
-	background-color: #fff;
-	margin: 0 auto;
-	
-	margin-top: 16px;
-	box-shadow: 0 4px 4px #000;
-	
-	cursor: pointer;
-}
-
-.paper-container.active {
-	box-shadow: 0 4px 4px #555;
-}
-
-.paper {
-	/* Style */
-	text-align: left;
-	margin: 0px;
-	padding: 0px;
-}
 

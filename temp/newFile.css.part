@@ -1,0 +1,18 @@
+html {
+	background-color: white;	
+}
+    
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 16px;
+	padding: 0px;
+	font-size: 14px;
+}
+
+p:first-line {
+	margin-left: 4px;
+}
+
+.center {
+	text-align: center;
+}
