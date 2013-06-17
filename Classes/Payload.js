@@ -20,7 +20,8 @@
 */
 
 /* Payload Object */
-function Payload(html, css) {
+function Payload(name, html, css) {
+	this.name = name;
 	this.html = html;
 	this.css = css;
 }

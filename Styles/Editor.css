@@ -27,13 +27,12 @@
 }
 
 .editor-bar {
-	background-color: #fcfcfc;
-	height: 32px;
-}
+	padding: 2px;
+	padding-left: 8px;
 
-.editor-bar span {
-	display: inline-block;
-	padding: 8px;
+	background-color: #fcfcfc;
+
+	height: 32px;
 
 	font: 13.34px Helvetica, arial, freesans, clean, sans-serif;
 	font-weight: bold;
@@ -42,6 +41,8 @@
 }
 
 .editor-bar.top {
+	height: 32px;
+	line-height: 32px;
 }
 
 .editor-bar.bottom {
@@ -49,16 +50,12 @@
 
 .editor-bar.bottom.status {
 	background-color: #ddd;
-	height: 24px;
-}
 
-.editor-bar.bottom.status span {
-	padding: 4px;
-	padding-left: 8px;
+	height: 24px;
+	line-height: 24px;
 
 	font-weight: normal;
 	text-shadow: none; 
-
 	color: #6e6e6e;
 }
 

@@ -44,8 +44,8 @@ body {
 		if (fileName != 'newFile') {
 			var html = html_editor.editor.getValue();
 			var css = css_editor.editor.getValue();
-			var payload = new Payload(html, css);
-			File.Save(fileName, payload);
+			var payload = new Payload(fileName, html, css);
+			File.Save(payload);
 		} else {
 			var error = document.createElement('span');
 			error.style.color = 'red';
@@ -57,8 +57,14 @@ body {
 		}	
 	}
 
-	function openDocument(filename) {
+	function openDocument(filename, pushState) {
 		var filename = filename || document.getElementById('file-name').value || 'newFile';
+		/* Push the state so we can backtrack */
+		if (pushState != false) {
+			window.history.pushState({'file':filename}, '', '?file=' + filename);
+		}
+
+		/* Call File.js API */
 		File.Open(filename, 
 			function(payload) {
 				if (payload == null || payload.html == null || payload.css == null) {
@@ -75,18 +81,35 @@ body {
 					html_editor.editor.setValue(payload.html);
 					css_editor.editor.setValue(payload.css);
 
+					/* Go to beginning */
 					html_editor.editor.gotoLine(0, 0);
 					css_editor.editor.gotoLine(0, 0);
+
+					/* Set titles */
+					html_editor.setTitle(payload.name + '<span style="color: indianRed">:html</span>');
+					css_editor.setTitle(payload.name + '<span style="color: dodgerBlue">:css</span>');
+
+					/* Focus HTML Editor */
+					html_editor.editor.focus();
 				}
 			}
 		);	
 	}
 
-	window.onload = function() {
-		paper = new Paper('paper');
-		html_editor = new Editor('html_editor', 'tomorrow_night_eighties', 'html', 'red', paper.setHTML);
-		css_editor = new Editor('css_editor', 'tomorrow_night_eighties', 'css', 'blue', paper.setCSS);
-		openDocument();
+	window.onpopstate = function(e) {
+		if (e.state && e.state.file) { /* State object exists */
+			console.log('State object exists! Loading', e.state.file);
+			openDocument(e.state.file, false);
+			document.getElementById('file-name').value = e.state.file;
+		} else {
+			console.log('No state object exists...');
+
+			paper = new Paper('paper');
+			html_editor = new Editor('html_editor', 'tomorrow_night_eighties', 'html', 'red', paper.setHTML);
+			css_editor = new Editor('css_editor', 'tomorrow_night_eighties', 'css', 'blue', paper.setCSS);
+			var defaultName = '<? echo trim($_GET['file']); ?>';
+			openDocument(defaultName, false);
+		}
 	};
 </script>
 </head>
@@ -94,7 +117,7 @@ body {
 <div id="left-pane" class="pane left max-height">
 	<div id="tools" class="tools">
         <form id="file-form" name="file-form">
-		<input class="input" type="text" name="file-name" id="file-name" value="newFile" />
+		<input class="input" type="text" name="file-name" id="file-name" value="" />
 		<button class="button" type="button" name="save-file" id="save-file" onClick="saveDocument();">Save File</button>
 		<button class="button" type="button" name="open-file" id="open-file" onClick="openDocument();">Open File</button>
 		<div id="tools-output" class="tools-output"></div>
@@ -102,17 +125,16 @@ body {
 	</div>
 	<!-- HTML Input -->
 	<div class="editor-frame">
-		<div class="editor-bar top"><span>Test HTML File</span></div>
+		<div id="html_editor-title" class="editor-bar top">Test HTML File</div>
 		<div id="html_editor" class="editor-main"></div>
-		<div class="editor-bar bottom status"><span>Opened.</span></div>
+		<div class="editor-bar bottom status">Opened.</div>
 	</div>
 	<!-- CSS Input -->
 	<div class="editor-frame">
-		<div class="editor-bar top"><span>Test CSS File</span></div>
+		<div id="css_editor-title" class="editor-bar top">Test CSS File</div>
 		<div id="css_editor" class="editor-main"></div>
-		<div class="editor-bar bottom status"><span>Opened.</span></div>
+		<div class="editor-bar bottom status">Opened.</div>
 	</div>
-	<div style="height:32px"></div>
 </div>
 <div id="right-pane" class="pane right max-height">
 	<div class="paper-frame">

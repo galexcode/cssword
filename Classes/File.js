@@ -68,13 +68,13 @@ function File(obj, callback) {
 /**
  * File.Save(elementId, payload);
  */
-File.Save = function (name, payload) {
+File.Save = function(payload) {
 	if (payload == null) return;
 	
-	var fileObj = { "action"  		: File.Action.SAVE,
-					"file"	  		: name,
-					"html_payload"  : payload.html,
-					"css_payload"   : payload.css };
+	var fileObj = { "action"  	: File.Action.SAVE,
+			"file"	  	: payload.name,
+			"html_payload"  : payload.html,
+			"css_payload"   : payload.css };
 	
 	new File(fileObj, function(obj) {
 		document.getElementById('tools-output').innerHTML = obj.message;
@@ -89,13 +89,13 @@ File.Open = function (name, callback) {
 	if (callback == null) return;
 	
 	var fileObj = { "action"  : File.Action.OPEN,
-					"file"	  : name };
+			"file"	  : name };
 	
 	new File(fileObj, function(obj) {
 		if (obj.html_payload != null) obj.html_payload = obj.html_payload;
 		if (obj.css_payload != null) obj.css_payload = obj.css_payload;
 		
-		if (callback(new Payload(obj.html_payload, obj.css_payload)) != false) {
+		if (callback(new Payload(obj.file, obj.html_payload, obj.css_payload)) != false) {
 			document.getElementById('tools-output').innerHTML = obj.message;
 		}
 	});

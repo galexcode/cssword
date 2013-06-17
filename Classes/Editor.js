@@ -21,17 +21,27 @@
 
 function Editor(name, theme, mode, color, callback) {
 	if (!name) return;
+	this.name = name;
 	this.theme = theme || 'tomorrow';
 	this.mode = mode || 'html';
 	this.color = color || '';
-	this.callback = callback || function() { console.log(this, "has no callback"); }.bind(this);
+	this.callback = callback || function() { console.log(this.name, "has no callback"); }.bind(this);
 
+	this.titleElement = document.getElementById(name + '-title');
 	this.element = document.getElementById(name);
 	this.editor = ace.edit(name);
 	this.editor.setTheme('ace/theme/' + this.theme);
 	this.editor.getSession().setMode('ace/mode/' + this.mode);
 	this.editor.getSession().setUseWrapMode(true);
 	this.editor.setFontSize(14);
+
+	/* Functions */
+	this.setTitle = function(name) {
+		if (this.titleElement)
+			this.titleElement.innerHTML = name;
+		else
+			console.log(this.name, "has no title element");
+	}
 
 	/* Event Handlers */
 	this.editor.getSession().on('change', function(e) {
