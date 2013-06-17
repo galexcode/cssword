@@ -27,6 +27,9 @@ function Tools(name) {
 	this.saveDocument = function(name) {
 		var filename = name || this.filename.value || 'newFile';
 
+		/* Push History State */
+		window.history.pushState({'file':filename}, '', '?file=' + filename);
+
 		/* Get HTML and CSS data */
 		if (filename != 'newFile') {
 			var html = window.html_editor.editor.getValue();
@@ -74,6 +77,9 @@ function Tools(name) {
 					/* Set titles */
 					window.html_editor.setTitle(payload.name + '<span style="color: indianRed">:html</span>');
 					window.css_editor.setTitle(payload.name + '<span style="color: dodgerBlue">:css</span>');
+
+					/* Set Filename if not default */
+					if (payload.name != 'newFile') window.tools.filename.value = payload.name;
 
 					/* Focus HTML Editor */
 					window.html_editor.editor.focus();

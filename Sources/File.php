@@ -106,7 +106,8 @@ if (isset($file) && isset($action)) {
 					fclose($fh);
 				}
 				
-				$json['message'] = "Saved <b>{$file->name}</b>";
+				date_default_timezone_set('America/Chicago');
+				$json['message'] = "Saved <b>{$file->name}</b> at " . date('g:i:sa \o\n M jS, Y', time()) . '(America/Chicago)';
 			}
 			break;
 		default: {
