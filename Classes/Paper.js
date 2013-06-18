@@ -128,7 +128,7 @@ function Paper(name, page, width, height) {
 		this.canvas.style.height = this.paperHeight + 'px';
 		this.canvas.style.width = this.paperWidth + 'px';
 		this.container.style.height = this.paperHeight + 'px';
-		this.container.style.width = this.paperWidth + 'px';
+		this.container.style.height = this.paperHeight + 'px';
 		this.render.style.width = this.renderWidth + 'px';
 		this.render.style.height = this.renderHeight + 'px';
 
@@ -154,7 +154,7 @@ function Paper(name, page, width, height) {
 			this.render.style.transformOrigin = origin;
 		}
 
-		this.frame.scrollLeft = this.page * this.render.clientWidth;
+		this.frame.scrollLeft = this.page * this.frame.getBoundingClientRect().width;
 		console.log("paper width, page width", this.render.scrollWidth, this.renderWidth);
 	}
 
@@ -181,15 +181,13 @@ function Paper(name, page, width, height) {
 		}
 		
 		/* Resize paper-container to aspect-ratio */
-		var screenWidth = (document.getElementById('right-pane').clientWidth - 24) * this.zoom;
+		var screenWidth = document.getElementById('right-pane').getBoundingClientRect().width * this.zoom;
 		/* screen height = screen width * (paper height / paper width) */
 		var screenHeight = screenWidth * (this.height / this.width);
 		
 		this.setPaperSize(screenWidth, screenHeight);
 		
 		console.log('8.5" x 11" : Width: ' + this.paperWidth + 'px, Height: ' + this.paperHeight + 'px');
-
-		this.canvas.style.fontSize = this.fontSize * this.zoom + 'px';
 	}
 	window.addEventListener('resize', this.resize.bind(this));
 	this.resize();
