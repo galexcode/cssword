@@ -1,6 +1,6 @@
 css:Word
 =====================================
-A CSS/HTML-based Word Processor for the Web-inclined.
+The Web's Word Processor baby
 -------------------------------------
 
 This software is licensed under GNU General Public License v3.  
