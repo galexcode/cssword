@@ -143,7 +143,7 @@ function Tools(name) {
 		this.zoom.appendChild(zoomOption);
 	}
 	this.zoom.onchange = function() {
-		window.paper.setZoom(this.zoom.value/100);
+		window.setZoom(this.zoom.value/100);
 	}.bind(this);
 	this.element.appendChild(this.zoom);
 

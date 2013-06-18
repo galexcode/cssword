@@ -23,10 +23,10 @@ function Scale(obj) {
 	this.obj = obj;
 
 	this.pointToPixel = function(p) {
-		return (p / 72) * (obj.renderHeight / obj.height);
+		return (p / 72) * (obj.renderWidth / obj.width);
 	};
 
 	this.inchToPixel = function(i) {
-		return i * (obj.renderHeight / obj.height);
+		return i * (obj.renderWidth / obj.width);
 	};
 }

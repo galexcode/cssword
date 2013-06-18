@@ -14,12 +14,28 @@
 	var paper = null;
 	var tools = null, html_editor = null, css_editor = null;
 
+	function setZoom(z) {
+		paper.setZoom(z);
+		paper2.setZoom(z);
+	}
+
+	function setHTML(h) {
+		paper.setHTML(h);
+		paper2.setHTML(h);
+	}
+
+	function setCSS(c) {
+		paper.setCSS(c);
+		paper2.setCSS(c);
+	}
+
 	window.onload = function() {
 		paper = new Paper('paper');
+		paper2 = new Paper('paper2', 1);
 
 		tools = new Tools('tools');
-		html_editor = new Editor('html_editor', 'tomorrow_night_eighties', 'html', 'red', paper.setHTML);
-		css_editor = new Editor('css_editor', 'tomorrow_night_eighties', 'css', 'blue', paper.setCSS);
+		html_editor = new Editor('html_editor', 'tomorrow_night_eighties', 'html', 'red', setHTML);
+		css_editor = new Editor('css_editor', 'tomorrow_night_eighties', 'css', 'blue', setCSS);
 	};
 
 	window.onpopstate = function(e) {
@@ -56,7 +72,20 @@
 <div id="right-pane" class="pane right max-height">
 	<div class="paper-canvas">
 		<div id="paper-container" class="paper-container">
-			<div id="paper-frame" class="paper-frame"><div id="paper" class="paper"></div></div>
+			<div id="paper-frame" class="paper-frame">
+				<div id="paper-render">
+					<div id="paper" class="paper"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="paper-canvas">
+		<div id="paper2-container" class="paper-container">
+			<div id="paper2-frame" class="paper-frame">
+				<div id="paper2-render">
+					<div id="paper2" class="paper"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

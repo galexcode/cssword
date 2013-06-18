@@ -1,10 +1,10 @@
 html {
 	background-color: white;	
+	padding: 0.5in;
 }
     
 body {
 	font-family: Arial, Helvetica, sans-serif;
-	padding: 0.5in;
 	font-size: 12pt;
 }
 

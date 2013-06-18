@@ -21,29 +21,31 @@
 
 .paper-canvas {
 	width: 100%;
-
-	padding-top: 16px;
-	margin-bottom: 16px;
 }
 
 .paper-container {
-	/*overflow: hidden;*/
-	position: relative;
-	background-color: #fff;
+	overflow: hidden;
+
 	margin: 0 auto;
+	margin-top: 16px;
+	margin-bottom: 16px;
+
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+
+	box-shadow: 0 4px 4px #000;
 }
 
 .paper-frame {
-	position: absolute;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
 	background-color: #fff;
-	
-	box-shadow: 0 4px 4px #000;
+
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 	
 	cursor: text;
-}
-
-.paper-frame.active {
-	box-shadow: 0 4px 4px #555;
 }
 
 /* Default Styles */
@@ -54,6 +56,9 @@
 
 	font-family: Arial, Helvetica, sans-serif;
 	text-align: left;
+
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 p {

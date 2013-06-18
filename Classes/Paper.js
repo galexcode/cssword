@@ -19,7 +19,27 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-function Paper(name, width, height) {
+function getStyleBySelector( selector )
+{
+	var sheetList = document.styleSheets;
+	var ruleList;
+	var i, j;
+
+	/* look through stylesheets in reverse order that
+	  they appear in the document */
+	for (i=sheetList.length-1; i >= 0; i--)
+	{
+		ruleList = sheetList[i].cssRules;
+		for (j=0; j<ruleList.length; j++)
+		{
+			if (ruleList[j].type == CSSRule.STYLE_RULE && ruleList[j].selectorText == selector)
+				return ruleList[j].style;
+		}
+	}
+	return null;
+}
+
+function Paper(name, page, width, height) {
 	if (!name) return;
 	this.scale = new Scale(this);
 	this.margin = 16;
@@ -27,24 +47,26 @@ function Paper(name, width, height) {
 	this.height = height || 11;
 	this.renderWidth = 1000;
 	this.renderHeight = this.renderWidth * (this.height / this.width);
+	this.page = page || 0;
 
-	this.container = document.getElementById('paper-container');
-	this.paper = document.getElementById('paper-frame');
+	this.container = document.getElementById(name + '-container');
+	this.render = document.getElementById(name + '-render');
+	this.frame = document.getElementById(name + '-frame');
 	this.element = document.getElementById(name);
 
 	this.zoom = 0.9;
 	this.setZoom = function(zoom) {
 		this.zoom = zoom;
 		this.resize();
+		this.container.scrollLeft = this.page * this.renderWidth;
 	};
 
-	this.css = '';
+	this.marginVertical = 0;
+	this.marginHorizontal = 0;
 	this.setCSS = function(css) {
-		this.css = css;
-
 		/* Apply transformations */
-		css = css.replace(/body \{/g, '.paper {');
-		css = css.replace(/html \{/g, '.paper-frame {');
+		css = css.replace(/html \{/g, '.paper-container {');
+		css = css.replace(/body \{/g, '.paper-frame {');
 
 		/* Convert all points to pixels */
 		var points = css.match(/[\d\.]+\s*(pt|in)/gi);
@@ -68,42 +90,72 @@ function Paper(name, width, height) {
 	
 		/* Modify CSS Style */
 		document.getElementById('parent-css').innerHTML = css;
+
+		var cssFrame = getStyleBySelector('.paper-frame');
+		this.marginVertical = this.marginHorizontal = 0;
+		for (var i = 0; i < cssFrame.length; i++) {
+			switch (cssFrame[i]) {
+				case 'margin-top':
+					this.marginVertical += parseFloat(cssFrame.marginTop);
+					break;
+				case 'margin-bottom':
+					this.marginVertical += parseFloat(cssFrame.marginBottom);
+					break;
+				case 'margin-left':
+					this.marginHorizontal += parseFloat(cssFrame.marginLeft);
+					break;
+				case 'margin-right':
+					this.marginHorizontal += parseFloat(cssFrame.marginRight);
+					break;
+			}
+		}
+
+		this.renderPaper();
 	}.bind(this);
 
 	this.setHTML = function(html) {
-		this.element.innerHTML = html.replace(/\n/g, '');	
+		this.element.innerHTML = '<div>' + html.replace(/\n/g, '') + '</div>';
 	}.bind(this);
 
 	this.paperHeight = 0;
 	this.paperWidth = 0;
+	this.renderPaper = function() {
+		this.container.style.height = this.paperHeight + 'px';
+		this.container.style.width = this.paperWidth + 'px';
+		this.render.style.width = this.renderWidth + 'px';
+		this.render.style.height = this.renderHeight + 'px';
+
+		var scale = 'scale(' + this.frame.getBoundingClientRect().width / this.renderWidth + ')';
+		var origin = 'left top';
+		if (this.render.style.webkitTransform != null) {
+			this.render.style.webkitColumnWidth = this.renderWidth + 'px';
+			this.render.style.webkitColumnGap = '0px';
+			//this.element.style.webkitColumnGap = this.paddingHorizontal + 'px';
+			this.render.style.webkitTransform = scale;
+			this.render.style.webkitTransformOrigin = origin;
+		} else if (this.render.style.MozTransform != null) {
+			this.render.style.MozTransform = scale;
+			this.render.style.MozTransformOrigin = origin;
+		} else if (this.render.style.msTransform != null) {
+			this.render.style.msTransform = scale;
+			this.render.style.msTransformOrigin = origin;
+		} else if (this.render.style.OTransform != null) {
+			this.render.style.OTransform = scale;
+			this.render.style.OTransformOrigin = origin;
+		} else if (this.render.style.transform != null) {
+			this.render.style.transform = scale;
+			this.render.style.transformOrigin = origin;
+		}
+
+		this.frame.scrollLeft = this.page * this.render.clientWidth;
+		console.log("paper width, page width", this.render.scrollWidth, this.renderWidth);
+	}
+
 	this.setPaperSize = function(w, h) {
 		this.paperWidth = w;
 		this.paperHeight = h;
 
-		this.container.style.height = h + 'px';
-		this.container.style.width = w + 'px';
-
-		this.paper.style.height = this.renderHeight + 'px';
-		this.paper.style.width = this.renderWidth + 'px';
-
-		var scale = 'scale(' + h / this.renderHeight + ')';
-		if (this.paper.style.webkitTransform != null) {
-			this.paper.style.webkitTransform = scale;
-			this.paper.style.webkitTransformOrigin = 'top left';
-		} else if (this.paper.style.MozTransform != null) {
-			this.paper.style.MozTransform = scale;
-			this.paper.style.MozTransformOrigin = 'top left';
-		} else if (this.paper.style.msTransform != null) {
-			this.paper.style.msTransform = scale;
-			this.paper.style.msTransformOrigin = 'top left';
-		} else if (this.paper.style.OTransform != null) {
-			this.paper.style.OTransform = scale;
-			this.paper.style.OTransformOrigin = 'top left';
-		} else if (this.paper.style.transform != null) {
-			this.paper.style.transform = scale;
-			this.paper.style.transformOrigin = 'top left';
-		}
-
+		this.renderPaper();
 	};
 
 	this.resize = function() {
