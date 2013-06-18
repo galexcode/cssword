@@ -3,8 +3,8 @@ css:Word
 A CSS/HTML-based Word Processor for the Web-inclined.
 -------------------------------------
 
-This software is licensed under GNU General Public License v3.
-This software includes Ace, which is licensed under the BSD License.
+This software is licensed under GNU General Public License v3.  
+This software includes Ace, which is licensed under the BSD License.  
 Please see the included LICENSE.md for full details.  
 
 Copyright (C) 2013  Terrence J. Katzenbaer (tkatzenbaer@lytenight.com)  
