@@ -70,7 +70,7 @@
 	</div>
 </div>
 <div id="right-pane" class="pane right max-height">
-	<div class="paper-canvas">
+	<div id="paper-canvas" class="paper-canvas">
 		<div id="paper-container" class="paper-container">
 			<div id="paper-frame" class="paper-frame">
 				<div id="paper-render">
@@ -79,7 +79,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="paper-canvas">
+	<div id="paper2-canvas" class="paper-canvas">
 		<div id="paper2-container" class="paper-container">
 			<div id="paper2-frame" class="paper-frame">
 				<div id="paper2-render">

@@ -49,10 +49,11 @@ function Paper(name, page, width, height) {
 	this.renderHeight = this.renderWidth * (this.height / this.width);
 	this.page = page || 0;
 
-	this.container = document.getElementById(name + '-container');
+	this.canvas = document.getElementById(name + '-canvas');
+	this.container = document.getElementById(name + '-container'); /* User editable */
 	this.render = document.getElementById(name + '-render');
-	this.frame = document.getElementById(name + '-frame');
-	this.element = document.getElementById(name);
+	this.frame = document.getElementById(name + '-frame'); /* User editable */
+	this.element = document.getElementById(name); /* User editable */
 
 	this.zoom = 0.9;
 	this.setZoom = function(zoom) {
@@ -61,6 +62,7 @@ function Paper(name, page, width, height) {
 		this.container.scrollLeft = this.page * this.renderWidth;
 	};
 
+	this.fontSize = 12;
 	this.marginVertical = 0;
 	this.marginHorizontal = 0;
 	this.setCSS = function(css) {
@@ -107,6 +109,9 @@ function Paper(name, page, width, height) {
 				case 'margin-right':
 					this.marginHorizontal += parseFloat(cssFrame.marginRight);
 					break;
+				case 'font-size':
+					this.fontSize = parseFloat(cssFrame.fontSize);
+					break;
 			}
 		}
 
@@ -120,12 +125,14 @@ function Paper(name, page, width, height) {
 	this.paperHeight = 0;
 	this.paperWidth = 0;
 	this.renderPaper = function() {
+		this.canvas.style.height = this.paperHeight + 'px';
+		this.canvas.style.width = this.paperWidth + 'px';
 		this.container.style.height = this.paperHeight + 'px';
 		this.container.style.width = this.paperWidth + 'px';
 		this.render.style.width = this.renderWidth + 'px';
 		this.render.style.height = this.renderHeight + 'px';
 
-		var scale = 'scale(' + this.frame.getBoundingClientRect().width / this.renderWidth + ')';
+		var scale = 'scale(' + (this.frame.getBoundingClientRect().width) / (this.renderWidth) + ')';
 		var origin = 'left top';
 		if (this.render.style.webkitTransform != null) {
 			this.render.style.webkitColumnWidth = this.renderWidth + 'px';
@@ -181,6 +188,8 @@ function Paper(name, page, width, height) {
 		this.setPaperSize(screenWidth, screenHeight);
 		
 		console.log('8.5" x 11" : Width: ' + this.paperWidth + 'px, Height: ' + this.paperHeight + 'px');
+
+		this.canvas.style.fontSize = this.fontSize * this.zoom + 'px';
 	}
 	window.addEventListener('resize', this.resize.bind(this));
 	this.resize();
