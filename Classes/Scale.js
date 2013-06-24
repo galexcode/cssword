@@ -21,6 +21,8 @@
 
 function Scale(obj) {
 	this.obj = obj;
+	this.container = new Object();
+	this.frame = new Object();
 
 	this.pointToPixel = function(p) {
 		return (p / 72) * (obj.renderWidth / obj.width);
@@ -29,4 +31,32 @@ function Scale(obj) {
 	this.inchToPixel = function(i) {
 		return i * (obj.renderWidth / obj.width);
 	};
+
+	/**
+	 * TODO Complete Implementation
+	 */
+	this.frame.toInch = function(val, unit) {
+		console.log('converting',val,unit,'to inch');
+		return val;
+	};
+	/**
+	 * Container is independent of margins
+	 */
+	this.container.toInch = function(val, unit) {
+		return val;
+	};
+
+	/**
+	 * TODO Make toPixel function for pt to px
+	 */
+	this.frame.toPixel = function(val, unit) {
+		return val;
+	};
+	/**
+	 * Container is independent of margins
+	 */
+	this.container.toPixel = function(val, unit) {
+		return val;
+	};
 }
+

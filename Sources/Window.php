@@ -33,6 +33,8 @@ echo <<<HTML_INCLUDE
 <script src="Classes/Payload.js" type="text/javascript" charset="utf-8"></script>
 <script src="Classes/File.js" type="text/javascript" charset="utf-8"></script>
 <script src="Classes/Scale.js" type="text/javascript" charset="utf-8"></script>
+<script src="Classes/CssMaster.js" type="text/javascript" charset="utf-8"></script>
+<script src="Classes/CssProperty.js" type="text/javascript" charset="utf-8"></script>
 <script src="Classes/Paper.js" type="text/javascript" charset="utf-8"></script>
 <script src="Classes/Tools.js" type="text/javascript" charset="utf-8"></script>
 <script src="Classes/Editor.js" type="text/javascript" charset="utf-8"></script>
