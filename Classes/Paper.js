@@ -51,10 +51,10 @@ function Paper(name, page, width, height) {
 	if (!name) return;
 	this.scale = new Scale(this);
 	this.margin = 16;
-	this.width = width || 8.5;
-	this.height = height || 11;
+	this.paperWidth = width || 8.5;
+	this.paperHeight = height || 11;
 	this.renderWidth = 1000;
-	this.renderHeight = this.renderWidth * (this.height / this.width);
+	this.renderHeight = this.renderWidth * (this.paperHeight / this.paperWidth);
 	this.page = page || 0;
 
 	this.canvas = document.getElementById(name + '-canvas');
@@ -248,7 +248,7 @@ function Paper(name, page, width, height) {
 		/* Resize paper-container to aspect-ratio */
 		var screenWidth = document.getElementById('right-pane').getBoundingClientRect().width * this.zoom;
 		/* screen height = screen width * (paper height / paper width) */
-		var screenHeight = screenWidth * (this.height / this.width);
+		var screenHeight = screenWidth * (this.paperHeight / this.paperWidth);
 		
 		this.setPaperSize(screenWidth, screenHeight);
 		

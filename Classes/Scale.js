@@ -25,11 +25,11 @@ function Scale(obj) {
 	this.frame = new Object();
 
 	this.pointToPixel = function(p) {
-		return (p / 72) * (obj.renderWidth / obj.width);
+		return (p / 72) * (obj.renderWidth / obj.paperWidth);
 	};
 
 	this.inchToPixel = function(i) {
-		return i * (obj.renderWidth / obj.width);
+		return i * (obj.renderWidth / obj.paperWidth);
 	};
 
 	/**
