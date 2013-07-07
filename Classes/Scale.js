@@ -56,7 +56,16 @@ function Scale(obj) {
 	 * Container is independent of margins
 	 */
 	this.container.toPixel = function(val, unit) {
-		return val;
+        switch (unit) {
+            case 'pt':
+                return (val / 72) * (obj.renderWidth / obj.paperWidth);
+            case 'in':
+                return val * (obj.renderWidth / obj.paperWidth);
+            default: {
+                console.log("Undefined unit", unit, "in container.toPixel()");
+                return val;
+            }
+        }
 	};
 }
 
